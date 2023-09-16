@@ -1,0 +1,10 @@
+﻿[*.{cs,vb}]
+
+# IDE0044: 읽기 전용 한정자 추가
+dotnet_diagnostic.IDE0044.severity = silent
+
+# IDE0059: 불필요한 값 할당
+dotnet_diagnostic.IDE0059.severity = silent
+
+# IDE0018: 인라인 변수 선언
+dotnet_diagnostic.IDE0018.severity = silent

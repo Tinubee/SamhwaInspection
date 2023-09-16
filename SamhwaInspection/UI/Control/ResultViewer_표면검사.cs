@@ -1,0 +1,231 @@
+﻿using DevExpress.XtraEditors;
+using SamhwaInspection.Schemas;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using OpenCvSharp;
+using IvLibs.Graphics;
+using DevExpress.XtraGrid.Views.Grid;
+using System.Windows.Media.Media3D;
+using System.ComponentModel.Design;
+using DevExpress.XtraBars.ViewInfo;
+using System.IO;
+using VM.Core;
+using ImageSourceModuleCs;
+
+using VM.PlatformSDKCS;
+using GraphicsSetModuleCs;
+
+using OpenCvSharp.ML;
+using System.Runtime.InteropServices;
+using DevExpress.Drawing.Internal.Fonts.Interop;
+using static VMControls.WPF.ModuleResultView;
+using DevExpress.XtraRichEdit.Model;
+using static SamhwaInspection.MainForm;
+using MvCamCtrl.NET;
+using OpenCvSharp.Extensions;
+using System.Drawing.Imaging;
+using DevExpress.CodeParser.Diagnostics;
+
+namespace SamhwaInspection.UI.Control
+{
+    public partial class ResultViewer_표면검사 : DevExpress.XtraEditors.XtraUserControl
+    {
+        public ResultViewer_표면검사()
+        {
+            InitializeComponent();
+        }
+
+        private CameraType 카메라1 = CameraType.Camera1;
+
+        public Bitmap tempBitmap;
+        public Mat Page1Image;
+        public Mat Page2Image;
+        public Mat mergedImage;
+
+        //public Rect roi1, roi2, roi3, roi4, roiAlign;
+        public Rect[] roi = new Rect[4];
+        public Rect roiAlign;
+
+        //public Mat splitImage1, splitImage2, splitImage3, splitImage4;
+        public Mat[] splitImage = new Mat[4];
+        public Mat masterModeImage = new Mat();
+
+        public Int32 height_cam, width_cam;
+
+        public 검사면 검사면;
+
+        public void Init(검사면 검사면)
+        {
+            this.검사면 = 검사면;
+            //Viewer와 Tool 연결
+            if (검사면 == 검사면.앞면)
+            {
+                vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 0);
+                vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 1);
+                vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 2);
+                vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 3);
+                vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 4);
+                vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 5);
+                카메라그랩활성화(1);
+            }
+            else
+            {
+                vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 0);
+                vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 1);
+                vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 2);
+                vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 3);
+                vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
+                vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
+                카메라그랩활성화(2);
+            }
+         
+            #region 검사결과 설정
+            this.myGridView1.OptionsBehavior.Editable = false;
+            this.myGridView1.OptionsView.ShowAutoFilterRow = false;
+            this.myGridView1.OptionsView.ShowFooter = false;
+            this.myGridView1.CustomDrawCell += MyGridView1_CustomDrawCell;
+            this.검사목록BindingSource.DataSource = Global.모델자료.선택모델.검사목록;
+            #endregion
+        }
+
+        public void 카메라그랩활성화(int 카메라번호)
+        {
+            int nRet = 0;
+            Global.Grabbing[카메라번호] = false;
+            Task.Run(() => { ReceiveTaskProcess(Global.Cam[카메라번호], 카메라번호); });
+
+            nRet = Global.Cam[카메라번호].StartGrabbing();
+            if (CErrorDefine.MV_OK != nRet)
+            {
+                Debug.WriteLine($"{Global.Cam[카메라번호]}Start Grabbing Fail! {nRet}");
+            }
+        }
+
+        private void MyGridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            //if (e.Column.FieldName != this.col판정.FieldName && e.Column.FieldName != this.col측정.FieldName) return;
+            GridView view = sender as GridView;
+            if (view == null) return;
+            검사정보 정보 = view.GetRow(e.RowHandle) as 검사정보;
+            if (정보 == null) return;
+            e.Appearance.ForeColor = 환경설정.ResultColor(정보.판정);
+        }
+
+        private void DataSourceBind()
+        {
+            if (Global.모델자료.선택모델 == null)
+            {
+                //this.viewer1.Canvas.ClearGraphics();
+                //this.viewer2.Canvas.ClearGraphics();
+                this.myGridControl1.DataSource = null;
+                return;
+            }
+            this.myGridControl1.DataSource = Global.모델자료.선택모델.검사목록;
+            this.myGridControl1.RefreshDataSource();
+            Debug.WriteLine("데이터리프레시완료");
+        }
+
+        public void ReceiveTaskProcess(CCamera cam, int index)
+        {
+            CFrameout pcFrameInfo = new CFrameout();
+            CDisplayFrameInfo pcDisplayInfo = new CDisplayFrameInfo();
+            CPixelConvertParam pcConvertParam = new CPixelConvertParam();
+            Object BufForDriverLock = new Object();
+            CImage m_pcImgForDriver;        // 이미지 정보
+            CFrameSpecInfo m_pcImgSpecInfo; // 이미지 워터마크 정보
+            int nRet = CErrorDefine.MV_OK;
+
+            while (Global.Grabbing[index])
+            {
+                nRet = cam.GetImageBuffer(ref pcFrameInfo, 1000);
+
+                if (nRet == CErrorDefine.MV_OK)
+                {
+                    lock (BufForDriverLock)
+                    {
+                        m_pcImgForDriver = pcFrameInfo.Image.Clone() as CImage;
+                        m_pcImgSpecInfo = pcFrameInfo.FrameSpec;
+
+                        pcConvertParam.InImage = pcFrameInfo.Image;
+                        if (PixelFormat.Format8bppIndexed == Global.Bitmap[index].PixelFormat)
+                        {
+                            pcConvertParam.OutImage.PixelType = MvGvspPixelType.PixelType_Gvsp_Mono8;
+                            cam.ConvertPixelType(ref pcConvertParam);
+                        }
+                        else
+                        {
+                            pcConvertParam.OutImage.PixelType = MvGvspPixelType.PixelType_Gvsp_BGR8_Packed;
+                            cam.ConvertPixelType(ref pcConvertParam);
+                        }
+                        BitmapData m_pcBitmapData = Global.Bitmap[index].LockBits(new Rectangle(0, 0, pcConvertParam.InImage.Width, pcConvertParam.InImage.Height), ImageLockMode.ReadWrite, Global.Bitmap[index].PixelFormat);
+                        Marshal.Copy(pcConvertParam.OutImage.ImageData, 0, m_pcBitmapData.Scan0, (Int32)pcConvertParam.OutImage.ImageData.Length);
+                        Global.Bitmap[index].UnlockBits(m_pcBitmapData);
+                    }
+
+                    cam.DisplayOneFrame(ref pcDisplayInfo);
+                    cam.FreeImageBuffer(ref pcFrameInfo);
+
+                    Mat mat = BitmapConverter.ToMat(Global.Bitmap[index]);
+                    bool result = false;
+                    Flow구분 구분 = this.검사면 == 검사면.앞면 ? Flow구분.표면검사앞 : Flow구분.표면검사뒤;
+                    result = Global.비전마스터구동.GetItem(구분).표면검사(mat);
+                    Global.Grabbing[index] = false;
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+
+        private void 결과정보생성(Mat img1, bool result)
+        {
+            //검사결과 결과 = new 검사결과(Global.모델자료.선택모델.검사목록);
+            //Debug.WriteLine($"{결과.최종결과}", 결과.최종결과);
+            //Debug.WriteLine($"{결과.검사일시}", 결과.검사일시);
+            //Debug.WriteLine($"{결과.모델번호}", 결과.모델번호);
+
+
+            if (result)
+            {
+                Global.환경설정.현재결과상태 = 결과구분.OK;
+                Global.환경설정.양품갯수 += 1;
+                //Global.신호제어.SendResultSignal(true);
+                if (Global.환경설정.사진저장OK)
+                {
+                    img1.SaveImage(Path.Combine(Global.환경설정.OK이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
+                }
+            }
+            else
+            {
+                Global.환경설정.현재결과상태 = 결과구분.NG;
+                Global.환경설정.불량갯수 += 1;
+                //Global.신호제어.SendResultSignal(false);
+                if (Global.환경설정.사진저장NG)
+                {
+                    img1.SaveImage(Path.Combine(Global.환경설정.NG이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
+                }
+            }
+
+            // 검사자료 GridView DataSource에 추가(DB에서 읽어와서 표시하기에는 검사 -> 저장 -> select 하는 시간이 길어서 이전 검사결과까지만 읽어지므로 해당 코드 추가)
+
+
+            //여기 DB업로드
+            //결과.AddToDb();
+
+            //Global.검사자료.AddResult(결과);
+            Global.환경설정.결과갱신요청();
+            //Global.검사자료.AddResult(결과);
+            //결과 = null;
+        }
+    }
+}
