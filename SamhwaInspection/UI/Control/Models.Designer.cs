@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Models));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.vmMainViewControl_Render1 = new SamhwaInspection.UI.VMMainViewControl_Render();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
@@ -72,10 +71,13 @@
             this.b수동검사 = new DevExpress.XtraEditors.SimpleButton();
             this.b마스터로드 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.b카메라촬영 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.e카메라선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -90,14 +92,10 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.xtraSaveFileDialog1 = new DevExpress.XtraEditors.XtraSaveFileDialog(this.components);
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.b카메라촬영 = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
-            this.splitContainerControl1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
             this.splitContainerControl1.Panel2.SuspendLayout();
             this.splitContainerControl1.SuspendLayout();
@@ -129,6 +127,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e카메라선택.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
@@ -138,8 +138,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -158,26 +156,13 @@
             this.splitContainerControl1.Location = new System.Drawing.Point(2, 2);
             this.splitContainerControl1.Name = "splitContainerControl1";
             // 
-            // splitContainerControl1.Panel1
-            // 
-            this.splitContainerControl1.Panel1.Controls.Add(this.vmMainViewControl_Render1);
-            // 
             // splitContainerControl1.Panel2
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.xtraTabControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1839, 852);
-            this.splitContainerControl1.SplitterPosition = 1173;
+            this.splitContainerControl1.SplitterPosition = 1043;
             this.splitContainerControl1.TabIndex = 4;
-            // 
-            // vmMainViewControl_Render1
-            // 
-            this.vmMainViewControl_Render1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vmMainViewControl_Render1.Location = new System.Drawing.Point(0, 0);
-            this.vmMainViewControl_Render1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.vmMainViewControl_Render1.Name = "vmMainViewControl_Render1";
-            this.vmMainViewControl_Render1.Size = new System.Drawing.Size(1173, 852);
-            this.vmMainViewControl_Render1.TabIndex = 0;
             // 
             // xtraTabControl1
             // 
@@ -185,7 +170,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(656, 852);
+            this.xtraTabControl1.Size = new System.Drawing.Size(786, 852);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -197,7 +182,7 @@
             this.xtraTabPage1.Controls.Add(this.panelControl1);
             this.xtraTabPage1.Controls.Add(this.layoutControl2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(654, 821);
+            this.xtraTabPage1.Size = new System.Drawing.Size(784, 821);
             this.xtraTabPage1.Text = "모델티칭";
             // 
             // layoutControl3
@@ -209,7 +194,7 @@
             this.layoutControl3.Name = "layoutControl3";
             this.layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1033, 400, 650, 400);
             this.layoutControl3.Root = this.layoutControlGroup2;
-            this.layoutControl3.Size = new System.Drawing.Size(654, 745);
+            this.layoutControl3.Size = new System.Drawing.Size(784, 745);
             this.layoutControl3.TabIndex = 5;
             this.layoutControl3.Text = "layoutControl3";
             // 
@@ -218,7 +203,7 @@
             this.groupControl4.Controls.Add(this.propertyGridControl1);
             this.groupControl4.Location = new System.Drawing.Point(2, 500);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(650, 243);
+            this.groupControl4.Size = new System.Drawing.Size(780, 243);
             this.groupControl4.TabIndex = 7;
             this.groupControl4.Text = "항목설정";
             // 
@@ -230,7 +215,7 @@
             this.propertyGridControl1.MenuManager = this.barManager1;
             this.propertyGridControl1.Name = "propertyGridControl1";
             this.propertyGridControl1.OptionsView.AllowReadOnlyRowAppearance = DevExpress.Utils.DefaultBoolean.True;
-            this.propertyGridControl1.Size = new System.Drawing.Size(646, 214);
+            this.propertyGridControl1.Size = new System.Drawing.Size(776, 214);
             this.propertyGridControl1.TabIndex = 0;
             this.propertyGridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.False;
             // 
@@ -298,7 +283,7 @@
             this.groupControl3.Controls.Add(this.GridControl1);
             this.groupControl3.Location = new System.Drawing.Point(2, 2);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(650, 494);
+            this.groupControl3.Size = new System.Drawing.Size(780, 494);
             this.groupControl3.TabIndex = 6;
             this.groupControl3.Text = "검사항목";
             // 
@@ -310,7 +295,7 @@
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.MenuManager = this.barManager1;
             this.GridControl1.Name = "GridControl1";
-            this.GridControl1.Size = new System.Drawing.Size(646, 465);
+            this.GridControl1.Size = new System.Drawing.Size(776, 465);
             this.GridControl1.TabIndex = 0;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -491,7 +476,7 @@
             this.layoutControlItem7});
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(654, 745);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(784, 745);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem6
@@ -499,7 +484,7 @@
             this.layoutControlItem6.Control = this.groupControl3;
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(654, 498);
+            this.layoutControlItem6.Size = new System.Drawing.Size(784, 498);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
@@ -508,7 +493,7 @@
             this.layoutControlItem7.Control = this.groupControl4;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 498);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(654, 247);
+            this.layoutControlItem7.Size = new System.Drawing.Size(784, 247);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
@@ -523,7 +508,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl1.Location = new System.Drawing.Point(0, 786);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(654, 35);
+            this.panelControl1.Size = new System.Drawing.Size(784, 35);
             this.panelControl1.TabIndex = 4;
             // 
             // b마스터저장
@@ -544,7 +529,7 @@
             this.b편집모드.Appearance.Options.UseFont = true;
             this.b편집모드.Dock = System.Windows.Forms.DockStyle.Right;
             this.b편집모드.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b편집모드.ImageOptions.SvgImage")));
-            this.b편집모드.Location = new System.Drawing.Point(392, 2);
+            this.b편집모드.Location = new System.Drawing.Point(522, 2);
             this.b편집모드.Name = "b편집모드";
             this.b편집모드.Size = new System.Drawing.Size(130, 31);
             this.b편집모드.TabIndex = 3;
@@ -556,7 +541,7 @@
             this.b모델저장.Appearance.Options.UseFont = true;
             this.b모델저장.Dock = System.Windows.Forms.DockStyle.Right;
             this.b모델저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b모델저장.ImageOptions.SvgImage")));
-            this.b모델저장.Location = new System.Drawing.Point(522, 2);
+            this.b모델저장.Location = new System.Drawing.Point(652, 2);
             this.b모델저장.Name = "b모델저장";
             this.b모델저장.Size = new System.Drawing.Size(130, 31);
             this.b모델저장.TabIndex = 2;
@@ -597,9 +582,21 @@
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1021, 196, 650, 972);
             this.layoutControl2.Root = this.layoutControlGroup1;
-            this.layoutControl2.Size = new System.Drawing.Size(654, 41);
+            this.layoutControl2.Size = new System.Drawing.Size(784, 41);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
+            // 
+            // b카메라촬영
+            // 
+            this.b카메라촬영.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b카메라촬영.Appearance.Options.UseFont = true;
+            this.b카메라촬영.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b카메라촬영.ImageOptions.SvgImage")));
+            this.b카메라촬영.Location = new System.Drawing.Point(654, 3);
+            this.b카메라촬영.Name = "b카메라촬영";
+            this.b카메라촬영.Size = new System.Drawing.Size(127, 36);
+            this.b카메라촬영.StyleController = this.layoutControl2;
+            this.b카메라촬영.TabIndex = 1;
+            this.b카메라촬영.Text = "촬영";
             // 
             // e모델선택
             // 
@@ -618,13 +615,13 @@
             this.e모델선택.Properties.NullText = "[모델선택]";
             this.e모델선택.Properties.PopupSizeable = false;
             this.e모델선택.Properties.ValueMember = "모델번호";
-            this.e모델선택.Size = new System.Drawing.Size(196, 36);
+            this.e모델선택.Size = new System.Drawing.Size(250, 36);
             this.e모델선택.StyleController = this.layoutControl2;
             this.e모델선택.TabIndex = 0;
             // 
             // e카메라선택
             // 
-            this.e카메라선택.Location = new System.Drawing.Point(341, 3);
+            this.e카메라선택.Location = new System.Drawing.Point(395, 3);
             this.e카메라선택.Name = "e카메라선택";
             this.e카메라선택.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e카메라선택.Properties.Appearance.Options.UseFont = true;
@@ -632,7 +629,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e카메라선택.Properties.NullText = "";
             this.e카메라선택.Properties.PopupSizeable = false;
-            this.e카메라선택.Size = new System.Drawing.Size(201, 32);
+            this.e카메라선택.Size = new System.Drawing.Size(255, 32);
             this.e카메라선택.StyleController = this.layoutControl2;
             this.e카메라선택.TabIndex = 5;
             // 
@@ -646,7 +643,7 @@
             this.layoutControlItem4});
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(654, 42);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(784, 42);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem2
@@ -658,13 +655,38 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(123, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(269, 40);
+            this.layoutControlItem2.Size = new System.Drawing.Size(323, 40);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.Text = "모델";
             this.layoutControlItem2.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Left;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(57, 25);
             this.layoutControlItem2.TextToControlDistance = 12;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem3.Control = this.e카메라선택;
+            this.layoutControlItem3.Location = new System.Drawing.Point(323, 0);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(102, 26);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(328, 40);
+            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem3.Text = "카메라";
+            this.layoutControlItem3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            this.layoutControlItem3.TextLocation = DevExpress.Utils.Locations.Left;
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(57, 25);
+            this.layoutControlItem3.TextToControlDistance = 12;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.b카메라촬영;
+            this.layoutControlItem4.Location = new System.Drawing.Point(651, 0);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(131, 40);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
             // xtraTabPage2
             // 
@@ -839,43 +861,6 @@
             // 
             this.xtraSaveFileDialog1.FileName = "xtraSaveFileDialog1";
             // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem3.Control = this.e카메라선택;
-            this.layoutControlItem3.Location = new System.Drawing.Point(269, 0);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(102, 26);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(274, 40);
-            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem3.Text = "카메라";
-            this.layoutControlItem3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            this.layoutControlItem3.TextLocation = DevExpress.Utils.Locations.Left;
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(57, 25);
-            this.layoutControlItem3.TextToControlDistance = 12;
-            // 
-            // b카메라촬영
-            // 
-            this.b카메라촬영.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.b카메라촬영.Appearance.Options.UseFont = true;
-            this.b카메라촬영.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.b카메라촬영.Location = new System.Drawing.Point(546, 3);
-            this.b카메라촬영.Name = "b카메라촬영";
-            this.b카메라촬영.Size = new System.Drawing.Size(105, 36);
-            this.b카메라촬영.StyleController = this.layoutControl2;
-            this.b카메라촬영.TabIndex = 1;
-            this.b카메라촬영.Text = "촬영";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.b카메라촬영;
-            this.layoutControlItem4.Location = new System.Drawing.Point(543, 0);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(109, 40);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
             // Models
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -890,7 +875,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
-            this.splitContainerControl1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
             this.splitContainerControl1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
@@ -923,6 +907,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e카메라선택.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
@@ -932,8 +918,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -999,7 +983,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colregion;
         private DevExpress.XtraEditors.SimpleButton b편집모드;
         private DevExpress.XtraEditors.SimpleButton b마스터저장;
-        private VMMainViewControl_Render vmMainViewControl_Render1;
         private DevExpress.XtraGrid.Columns.GridColumn col디스플레이개수;
         private DevExpress.XtraEditors.SimpleButton b카메라촬영;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;

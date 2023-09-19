@@ -22,7 +22,13 @@ namespace SamhwaInspection.UI
         {
             this.e기본설정.Init();
             this.eIO컨트롤.Init();
-            this.e모델설정.Init();
+            //this.e모델설정.Init();
+            this.e변수설정.Init();
+        }
+
+        public void 변수업데이트()
+        {
+            this.e변수설정.VariableUpdate();
         }
     }
 }

@@ -17,6 +17,7 @@ using System.Diagnostics;
 using SamhwaInspection.UI.Control;
 using DevExpress.Utils.Extensions;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
+using DevExpress.XtraWaitForm;
 
 namespace SamhwaInspection
 {
@@ -30,6 +31,8 @@ namespace SamhwaInspection
         public ResultViewer_표면검사 ResultViewer_표면검사6_앞 = new ResultViewer_표면검사();
         public ResultViewer_표면검사 ResultViewer_표면검사6_뒤 = new ResultViewer_표면검사();
 
+        private UI.Form.WaitForm WaitForm;
+
         public enum 검사면
         {
             앞면,
@@ -39,10 +42,10 @@ namespace SamhwaInspection
         public MainForm()
         {
             //if (!Global.Init()) return;
-            Global.Init();
             InitializeComponent();
+            //this.ShowWaitForm();
+            Global.Init(); //Task.Run(() => { Global.Init(); }); 
             this.StartPosition = FormStartPosition.Manual;
-
             Global.mainForm = this;
             this.tabFormControl1.SelectedPage = p비전검사;
             this.Shown += MainForm_Shown;
@@ -51,23 +54,29 @@ namespace SamhwaInspection
 
         private Boolean Init()
         {
-            ////Global 생성
-            //if (!Global.Init()) return false;
             this.WindowState = FormWindowState.Maximized;
             Debug.WriteLine("Global Init");
             this.state1.Init();
             this.settings1.Init();
             DisplaySetting(Global.모델자료.선택모델.모델번호);
             this.resultList1.Init();
-
             return true;
         }
-
+        private void ShowWaitForm()
+        {
+            WaitForm = new UI.Form.WaitForm() { ShowOnTopMode = ShowFormOnTopMode.AboveAll };
+            WaitForm.Show(this);
+        }
+        private void HideWaitForm()
+        {
+            WaitForm.Close();
+        }
         public void DisplaySetting(int modelNumber)
         {
             BeginInvoke((Action)delegate
             {
                 디스플레이변경(modelNumber);
+                this.settings1.변수업데이트();
             });
         }
 

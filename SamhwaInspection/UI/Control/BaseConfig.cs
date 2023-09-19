@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SamhwaInspection.Schemas;
 using System.Diagnostics.Eventing.Reader;
+using SamhwaInspection.UI.Form;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -66,9 +67,14 @@ namespace SamhwaInspection.UI.Control
             this.e조명켜짐.Toggled += E켜짐_Toggled;
 
             this.btnSaveSetting.Click += BtnSaveSetting_Click;
-
+            this.b도구설정.Click += B도구설정_Click;
             this.user1.Init();
             
+        }
+        private void B도구설정_Click(object sender, EventArgs e)
+        {
+            Teaching form = new Teaching();
+            form.Show(Global.mainForm);
         }
 
         private void E불량이미지저장여부_Toggled(object sender, EventArgs e)

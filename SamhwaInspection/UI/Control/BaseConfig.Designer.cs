@@ -84,6 +84,7 @@
             this.col켜짐 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.e조명켜짐 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.b도구설정 = new DevExpress.XtraEditors.SimpleButton();
             this.btnSaveSetting = new DevExpress.XtraEditors.SimpleButton();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -139,7 +140,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(719, 161);
+            this.groupControl1.Size = new System.Drawing.Size(1012, 161);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "기본설정";
             // 
@@ -156,18 +157,18 @@
             this.layoutControl1.Location = new System.Drawing.Point(2, 27);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(715, 132);
+            this.layoutControl1.Size = new System.Drawing.Size(1008, 132);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // e불량이미지저장여부
             // 
             this.e불량이미지저장여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "사진저장NG", true));
-            this.e불량이미지저장여부.Location = new System.Drawing.Point(471, 106);
+            this.e불량이미지저장여부.Location = new System.Drawing.Point(617, 106);
             this.e불량이미지저장여부.Name = "e불량이미지저장여부";
             this.e불량이미지저장여부.Properties.OffText = "Off";
             this.e불량이미지저장여부.Properties.OnText = "On";
-            this.e불량이미지저장여부.Size = new System.Drawing.Size(242, 22);
+            this.e불량이미지저장여부.Size = new System.Drawing.Size(389, 22);
             this.e불량이미지저장여부.StyleController = this.layoutControl1;
             this.e불량이미지저장여부.TabIndex = 7;
             // 
@@ -182,7 +183,7 @@
             this.e양품이미지저장여부.Name = "e양품이미지저장여부";
             this.e양품이미지저장여부.Properties.OffText = "Off";
             this.e양품이미지저장여부.Properties.OnText = "On";
-            this.e양품이미지저장여부.Size = new System.Drawing.Size(241, 22);
+            this.e양품이미지저장여부.Size = new System.Drawing.Size(387, 22);
             this.e양품이미지저장여부.StyleController = this.layoutControl1;
             this.e양품이미지저장여부.TabIndex = 6;
             // 
@@ -194,11 +195,11 @@
             0,
             0,
             0});
-            this.e로그보관일수.Location = new System.Drawing.Point(471, 80);
+            this.e로그보관일수.Location = new System.Drawing.Point(617, 80);
             this.e로그보관일수.Name = "e로그보관일수";
             this.e로그보관일수.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e로그보관일수.Size = new System.Drawing.Size(242, 22);
+            this.e로그보관일수.Size = new System.Drawing.Size(389, 22);
             this.e로그보관일수.StyleController = this.layoutControl1;
             this.e로그보관일수.TabIndex = 5;
             // 
@@ -214,7 +215,7 @@
             this.e검사결과보관일수.Name = "e검사결과보관일수";
             this.e검사결과보관일수.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e검사결과보관일수.Size = new System.Drawing.Size(241, 22);
+            this.e검사결과보관일수.Size = new System.Drawing.Size(387, 22);
             this.e검사결과보관일수.StyleController = this.layoutControl1;
             this.e검사결과보관일수.TabIndex = 4;
             // 
@@ -224,7 +225,7 @@
             this.e문서저장경로.Name = "e문서저장경로";
             this.e문서저장경로.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.e문서저장경로.Size = new System.Drawing.Size(599, 22);
+            this.e문서저장경로.Size = new System.Drawing.Size(892, 22);
             this.e문서저장경로.StyleController = this.layoutControl1;
             this.e문서저장경로.TabIndex = 3;
             // 
@@ -234,7 +235,7 @@
             this.e사진저장경로.Name = "e사진저장경로";
             this.e사진저장경로.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.e사진저장경로.Size = new System.Drawing.Size(599, 22);
+            this.e사진저장경로.Size = new System.Drawing.Size(892, 22);
             this.e사진저장경로.StyleController = this.layoutControl1;
             this.e사진저장경로.TabIndex = 2;
             // 
@@ -246,7 +247,7 @@
             this.e기본경로.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.e기본경로.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.e기본경로.Size = new System.Drawing.Size(599, 22);
+            this.e기본경로.Size = new System.Drawing.Size(892, 22);
             this.e기본경로.StyleController = this.layoutControl1;
             this.e기본경로.TabIndex = 0;
             // 
@@ -264,7 +265,7 @@
             this.layoutControlItem5});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(715, 132);
+            this.Root.Size = new System.Drawing.Size(1008, 132);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -273,7 +274,7 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.MinSize = new System.Drawing.Size(170, 26);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(715, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1008, 26);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "설정 저장 경로";
             this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Left;
@@ -285,7 +286,7 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(170, 26);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(715, 26);
+            this.layoutControlItem2.Size = new System.Drawing.Size(1008, 26);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.Text = "사진 저장 경로";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(100, 15);
@@ -296,7 +297,7 @@
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 52);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(170, 26);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(715, 26);
+            this.layoutControlItem3.Size = new System.Drawing.Size(1008, 26);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.Text = "문서 저장 경로";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(100, 15);
@@ -307,7 +308,7 @@
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 78);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(170, 26);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(357, 26);
+            this.layoutControlItem4.Size = new System.Drawing.Size(503, 26);
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.Text = "검사결과 보관일수";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(100, 15);
@@ -318,7 +319,7 @@
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 104);
             this.layoutControlItem7.MinSize = new System.Drawing.Size(88, 26);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(357, 28);
+            this.layoutControlItem7.Size = new System.Drawing.Size(503, 28);
             this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem7.Text = "OK 이미지 저장";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(100, 15);
@@ -326,10 +327,10 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.e불량이미지저장여부;
-            this.layoutControlItem8.Location = new System.Drawing.Point(357, 104);
+            this.layoutControlItem8.Location = new System.Drawing.Point(503, 104);
             this.layoutControlItem8.MinSize = new System.Drawing.Size(88, 26);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(358, 28);
+            this.layoutControlItem8.Size = new System.Drawing.Size(505, 28);
             this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem8.Text = "NG 이미지 저장";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(100, 15);
@@ -337,10 +338,10 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.e로그보관일수;
-            this.layoutControlItem5.Location = new System.Drawing.Point(357, 78);
+            this.layoutControlItem5.Location = new System.Drawing.Point(503, 78);
             this.layoutControlItem5.MinSize = new System.Drawing.Size(170, 26);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(358, 26);
+            this.layoutControlItem5.Size = new System.Drawing.Size(505, 26);
             this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem5.Text = "로그 보관일수";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(100, 15);
@@ -351,7 +352,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl2.Location = new System.Drawing.Point(0, 161);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(719, 241);
+            this.groupControl2.Size = new System.Drawing.Size(1012, 241);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "사용자 설정";
             this.groupControl2.Visible = false;
@@ -361,7 +362,7 @@
             this.user1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.user1.Location = new System.Drawing.Point(2, 27);
             this.user1.Name = "user1";
-            this.user1.Size = new System.Drawing.Size(715, 212);
+            this.user1.Size = new System.Drawing.Size(1008, 212);
             this.user1.TabIndex = 0;
             // 
             // groupControl3
@@ -370,7 +371,7 @@
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl3.Location = new System.Drawing.Point(0, 402);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(719, 199);
+            this.groupControl3.Size = new System.Drawing.Size(1012, 199);
             this.groupControl3.TabIndex = 2;
             this.groupControl3.Text = "카메라 설정";
             // 
@@ -381,7 +382,7 @@
             this.GridControl1.Location = new System.Drawing.Point(2, 27);
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.Name = "GridControl1";
-            this.GridControl1.Size = new System.Drawing.Size(715, 170);
+            this.GridControl1.Size = new System.Drawing.Size(1008, 170);
             this.GridControl1.TabIndex = 0;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -397,7 +398,9 @@
             this.GridView1.AllowCustomMenu = true;
             this.GridView1.AllowExport = true;
             this.GridView1.AllowPrint = true;
+            this.GridView1.AllowSettingsMenu = false;
             this.GridView1.AllowSummaryMenu = true;
+            this.GridView1.ApplyFocusedRow = true;
             this.GridView1.Caption = "";
             this.GridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCamera,
@@ -584,7 +587,7 @@
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl4.Location = new System.Drawing.Point(0, 601);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(719, 165);
+            this.groupControl4.Size = new System.Drawing.Size(1012, 165);
             this.groupControl4.TabIndex = 3;
             this.groupControl4.Text = "조명 설정";
             // 
@@ -598,7 +601,7 @@
             this.GridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.e조명켜짐,
             this.e조명밝기});
-            this.GridControl2.Size = new System.Drawing.Size(715, 136);
+            this.GridControl2.Size = new System.Drawing.Size(1008, 136);
             this.GridControl2.TabIndex = 0;
             this.GridControl2.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -614,7 +617,9 @@
             this.GridView2.AllowCustomMenu = true;
             this.GridView2.AllowExport = true;
             this.GridView2.AllowPrint = true;
+            this.GridView2.AllowSettingsMenu = false;
             this.GridView2.AllowSummaryMenu = true;
+            this.GridView2.ApplyFocusedRow = true;
             this.GridView2.Caption = "";
             this.GridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.col구분,
@@ -728,20 +733,33 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.b도구설정);
             this.panelControl1.Controls.Add(this.btnSaveSetting);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 788);
+            this.panelControl1.Location = new System.Drawing.Point(0, 1142);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(719, 36);
+            this.panelControl1.Size = new System.Drawing.Size(1012, 52);
             this.panelControl1.TabIndex = 4;
+            // 
+            // b도구설정
+            // 
+            this.b도구설정.Appearance.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b도구설정.Appearance.Options.UseFont = true;
+            this.b도구설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.b도구설정.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b도구설정.ImageOptions.SvgImage")));
+            this.b도구설정.Location = new System.Drawing.Point(2, 2);
+            this.b도구설정.Name = "b도구설정";
+            this.b도구설정.Size = new System.Drawing.Size(889, 48);
+            this.b도구설정.TabIndex = 11;
+            this.b도구설정.Text = "VM 설정";
             // 
             // btnSaveSetting
             // 
             this.btnSaveSetting.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnSaveSetting.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSaveSetting.ImageOptions.SvgImage")));
-            this.btnSaveSetting.Location = new System.Drawing.Point(598, 2);
+            this.btnSaveSetting.Location = new System.Drawing.Point(891, 2);
             this.btnSaveSetting.Name = "btnSaveSetting";
-            this.btnSaveSetting.Size = new System.Drawing.Size(119, 32);
+            this.btnSaveSetting.Size = new System.Drawing.Size(119, 48);
             this.btnSaveSetting.TabIndex = 0;
             this.btnSaveSetting.Text = "설정저장";
             // 
@@ -759,15 +777,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(719, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1012, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 824);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 1194);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(719, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1012, 0);
             // 
             // barDockControlLeft
             // 
@@ -775,15 +793,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 824);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 1194);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(719, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1012, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 824);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 1194);
             // 
             // BaseConfig
             // 
@@ -799,7 +817,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "BaseConfig";
-            this.Size = new System.Drawing.Size(719, 824);
+            this.Size = new System.Drawing.Size(1012, 1194);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -907,5 +925,6 @@
         private DevExpress.XtraEditors.XtraFolderBrowserDialog d문서저장;
         private DevExpress.XtraEditors.XtraFolderBrowserDialog d사진저장;
         private DevExpress.XtraEditors.XtraFolderBrowserDialog d기본경로;
+        private DevExpress.XtraEditors.SimpleButton b도구설정;
     }
 }

@@ -39,17 +39,16 @@ namespace SamhwaInspection.Schemas
     public class 비전마스터구동 : List<비전마스터플로우>
     {
         public 비전마스터구동() { }
-
+        public VmGlobals 글로벌변수제어 = new VmGlobals();
+        public void Save() => VmSolution.Save();
         public void Init()
         {
+            base.Clear(); //모델변경시 기존데이터 clear
             //VM Solution 불러오기
             string lastModelSolutionPath = Global.모델자료[Global.환경설정.선택모델].솔루션파일저장경로;
             VmSolution.Load(lastModelSolutionPath, null);
-
-            //모듈 콜백 Disable
+            글로벌변수제어.Init();
             VmSolution.Instance.DisableModulesCallback();
-
-            base.Clear(); //모델변경시 기존데이터 clear
             for (int i = 0; i < 9; i++)
             {
                 if (i > 5)
@@ -340,5 +339,7 @@ namespace SamhwaInspection.Schemas
 
             return imageBaseData;
         }
+
+       
     }
 }

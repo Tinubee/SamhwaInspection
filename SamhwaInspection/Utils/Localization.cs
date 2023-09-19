@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace SamhwaInspection.Utils
 {
@@ -45,22 +46,22 @@ namespace SamhwaInspection.Utils
             return a.GetString(lang);
         }
 
-        //public static void SetColumnCaption(GridView view, Type source)
-        //{
-        //    foreach (GridColumn col in view.Columns)
-        //    {
-        //        try
-        //        {
-        //            PropertyInfo p = source.GetProperty(col.FieldName);
-        //            if (p == null) continue;
-        //            col.Caption = GetString(p);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Debug.WriteLine($"[{source.Name}, {col.FieldName}] {ex.Message}", "SetColumnCaption");
-        //        }
-        //    }
-        //}
+        public static void SetColumnCaption(GridView view, Type source)
+        {
+            foreach (GridColumn col in view.Columns)
+            {
+                try
+                {
+                    PropertyInfo p = source.GetProperty(col.FieldName);
+                    if (p == null) continue;
+                    col.Caption = GetString(p);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[{source.Name}, {col.FieldName}] {ex.Message}", "SetColumnCaption");
+                }
+            }
+        }
 
         //public static void SetColumnCaption(LookUpEdit edit, Type source)
         //{

@@ -24,7 +24,6 @@ namespace SamhwaInspection
 
     public static class Global
     {
-
         private const String 로그영역 = "프로그램";
         public static 그랩제어 그랩제어;
         public static Mvs그랩제어 Mvs그랩제어;
@@ -61,7 +60,6 @@ namespace SamhwaInspection
         public static Boolean Init()
         {
             Debug.WriteLine(GetGuid(), "Process GUID");
-
             try
             {
                 그랩제어 = new 그랩제어();

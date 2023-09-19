@@ -212,8 +212,6 @@ namespace SamhwaInspection.UI.Control
                         Page2Image = Data.MatImage;
                         isGrabCompleted_Page2 = true;
                     }
-
-
                     Debug.WriteLine("자동검사 전");
                     if (isGrabCompleted_Page1 & isGrabCompleted_Page2)
                     {
@@ -222,35 +220,10 @@ namespace SamhwaInspection.UI.Control
 
                         //조명 끔
                         Global.조명제어.TurnOff(조명구분.BACK);
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("영상획득 완료");
-
                         // 이미지 연결
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("이미지 이어붙이기");
-
-                        
-                        //roiAlign = new Rect(9000, 0, 2500, 2 *height_cam);
                         roiAlign = new Rect(6700, 0, 1800, 2 * height_cam);
-
-                        //Cv2.ImWrite("C:\\IVM\\SamhwaENP\\SaveImage\\Image1.bmp", mergedImage);
-
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
-
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("FindBlob");
-
-
-                        //foreach (Rect blob in blobs)
-                        //{
-                        //    Debug.WriteLine(blob.Size.ToString());
-                        //    Debug.WriteLine(blob.X.ToString());
-                        //    Debug.WriteLine(blob.Y.ToString());
-                        //}
                         Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         if (blobs.Count != 6)
                         {
@@ -281,52 +254,21 @@ namespace SamhwaInspection.UI.Control
                             {
                                 roi[i] = new Rect(0, blobs[i].Y - 2000, width_cam, 13000);
                             }
-
-                            //roi[i] = new Rect(0, blobs[i].Y - 2000, width_cam, 13000);
                             splitImage[i] = new Mat(mergedImage, roi[i]);
                         }
-
-                        //roi1 = new Rect(0, blobs[0].Y - 2000, width_cam, 20000);
-                        //roi2 = new Rect(0, blobs[1].Y - 2000, width_cam, 20000);
-                        //roi3 = new Rect(0, blobs[2].Y - 2000, width_cam, 20000);
-                        //roi4 = new Rect(0, blobs[3].Y - 2000, width_cam, 20000);
-
-                        //splitImage1 = new Mat(mergedImage, roi1);
-                        //splitImage2 = new Mat(mergedImage, roi2);
-                        //splitImage3 = new Mat(mergedImage, roi3);
-                        //splitImage4 = new Mat(mergedImage, roi4);
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("Align 후 이미지 자르기");
-
                         Debug.WriteLine("자동검사 시작");
                         for (int i = 0; i < splitImage.Length; i++)
                         {
                             자동검사(splitImage[i], (Flow구분)i);
                         }
-                        //자동검사(splitImage1, Flow구분.Flow1);
-                        //자동검사(splitImage2, Flow구분.Flow2);
-                        //자동검사(splitImage3, Flow구분.Flow3);
-                        //자동검사(splitImage4, Flow구분.Flow4);
 
                         isCompleted_Camera1 = true;
                         Debug.WriteLine("카메라1 검사완료");
-
-                        //검사 완료 시간 확인
-                        Global.tactTimeChecker.Stop();
-                        //Global.신호제어.SendValueToPLC("W0020", 0);
                     }
                 }
-
                 //모든 검사가 끝나면 실행. 여기서는 아직 카메라 1개만 구현되어 있으므로 아래와 같음.
                 if (isCompleted_Camera1)
                 {
-                    //this.DataSourceBind();
-
-                    //State에 결과 표시
-                    //this.myGridControl1.DataSource = Global.모델자료.선택모델.검사목록;
-                    //결과정보생성(Data.MatImage);
-                    //              결과정보생성(Global.환경설정.resultMatImage_cam1);
                     isCompleted_Camera1 = false;
                 }
             }

@@ -43,6 +43,8 @@
             this.panel유무검사 = new DevExpress.XtraEditors.PanelControl();
             this.p표면검사_앞 = new DevExpress.XtraTab.XtraTabPage();
             this.panel표면검사_앞 = new DevExpress.XtraEditors.PanelControl();
+            this.p표면검사_뒤 = new DevExpress.XtraTab.XtraTabPage();
+            this.panel표면검사_뒤 = new DevExpress.XtraEditors.PanelControl();
             this.state1 = new SamhwaInspection.UI.Control.State();
             this.p검사현황 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer2 = new DevExpress.XtraBars.TabFormContentContainer();
@@ -50,8 +52,6 @@
             this.p환경설정 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.settings1 = new SamhwaInspection.UI.Settings();
-            this.p표면검사_뒤 = new DevExpress.XtraTab.XtraTabPage();
-            this.panel표면검사_뒤 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tc검사디스플레이)).BeginInit();
@@ -62,10 +62,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panel유무검사)).BeginInit();
             this.p표면검사_앞.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel표면검사_앞)).BeginInit();
-            this.tabFormContentContainer2.SuspendLayout();
-            this.tabFormContentContainer3.SuspendLayout();
             this.p표면검사_뒤.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel표면검사_뒤)).BeginInit();
+            this.tabFormContentContainer2.SuspendLayout();
+            this.tabFormContentContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabFormControl1
@@ -192,6 +192,23 @@
             this.panel표면검사_앞.Size = new System.Drawing.Size(1918, 875);
             this.panel표면검사_앞.TabIndex = 2;
             // 
+            // p표면검사_뒤
+            // 
+            this.p표면검사_뒤.Controls.Add(this.panel표면검사_뒤);
+            this.p표면검사_뒤.Name = "p표면검사_뒤";
+            this.p표면검사_뒤.Size = new System.Drawing.Size(1918, 875);
+            this.p표면검사_뒤.Text = "표면검사 [뒷면]";
+            // 
+            // panel표면검사_뒤
+            // 
+            this.panel표면검사_뒤.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.panel표면검사_뒤.Appearance.Options.UseBackColor = true;
+            this.panel표면검사_뒤.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel표면검사_뒤.Location = new System.Drawing.Point(0, 0);
+            this.panel표면검사_뒤.Name = "panel표면검사_뒤";
+            this.panel표면검사_뒤.Size = new System.Drawing.Size(1918, 875);
+            this.panel표면검사_뒤.TabIndex = 3;
+            // 
             // state1
             // 
             this.state1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -247,23 +264,6 @@
             this.settings1.Size = new System.Drawing.Size(1920, 1010);
             this.settings1.TabIndex = 0;
             // 
-            // p표면검사_뒤
-            // 
-            this.p표면검사_뒤.Controls.Add(this.panel표면검사_뒤);
-            this.p표면검사_뒤.Name = "p표면검사_뒤";
-            this.p표면검사_뒤.Size = new System.Drawing.Size(1918, 875);
-            this.p표면검사_뒤.Text = "표면검사 [뒷면]";
-            // 
-            // panel표면검사_뒤
-            // 
-            this.panel표면검사_뒤.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.panel표면검사_뒤.Appearance.Options.UseBackColor = true;
-            this.panel표면검사_뒤.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel표면검사_뒤.Location = new System.Drawing.Point(0, 0);
-            this.panel표면검사_뒤.Name = "panel표면검사_뒤";
-            this.panel표면검사_뒤.Size = new System.Drawing.Size(1918, 875);
-            this.panel표면검사_뒤.TabIndex = 3;
-            // 
             // MainForm
             // 
             this.Appearance.Options.UseFont = true;
@@ -277,7 +277,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TabFormControl = this.tabFormControl1;
-            this.Text = "Kirin";
+            this.Text = "Samhwa";
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).EndInit();
             this.tabFormContentContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tc검사디스플레이)).EndInit();
@@ -288,10 +288,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panel유무검사)).EndInit();
             this.p표면검사_앞.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel표면검사_앞)).EndInit();
-            this.tabFormContentContainer2.ResumeLayout(false);
-            this.tabFormContentContainer3.ResumeLayout(false);
             this.p표면검사_뒤.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel표면검사_뒤)).EndInit();
+            this.tabFormContentContainer2.ResumeLayout(false);
+            this.tabFormContentContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
