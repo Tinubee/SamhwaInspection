@@ -79,10 +79,5 @@ namespace SamhwaInspection.UI.Control
             public String 저장확인 { get { return Localization.GetString(Items.저장확인); } }
             public String 적용확인 { get { return Localization.GetString(Items.적용확인); } }
         }
-
-        private void GridControl1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

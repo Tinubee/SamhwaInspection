@@ -38,28 +38,18 @@ namespace SamhwaInspection.UI.Control
         }
 
         private CameraType 카메라1 = CameraType.Camera1;
-        //private CameraType 카메라2 = CameraType.Camera2;
         private delegate void 이미지그랩완료보고대리자(AcquisitionData Data);
-
-
-
         private Cam cam1;
-        //private Cam cam2;
         private Boolean isCompleted_Camera1 = false;
-
         private Boolean isGrabCompleted_Page1;
         private Boolean isGrabCompleted_Page2;
-
         public Bitmap tempBitmap;
         public Mat Page1Image;
         public Mat Page2Image;
         public Mat mergedImage;
-
         public Rect[] roi = new Rect[6];
         public Rect roiAlign;
-
         public Mat[] splitImage = new Mat[6];
-
         public Int32 height_cam, width_cam;
 
         public void Init()
@@ -71,7 +61,6 @@ namespace SamhwaInspection.UI.Control
                 this.cam1.Active();
             }
 
-            //Viewer와 Tool 연결
             vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.Flow1));
             vmControl_Render2.Init(Global.비전마스터구동.GetItem(Flow구분.Flow2));
             vmControl_Render3.Init(Global.비전마스터구동.GetItem(Flow구분.Flow3));
@@ -132,52 +121,14 @@ namespace SamhwaInspection.UI.Control
 
             result = Global.비전마스터구동.GetItem(구분).Run(mat);
 
-            //중간 시간체크
-
             결과정보생성(mat, result);
-            Global.tactTimeChecker.Check($"{구분.ToString()} Run 완료");
             return mat;
-
-            //foreach (검사정보 정보 in 수동검사목록)
-            //{
-            //    int x = (int)정보.rectangle.Left;
-            //    int y = (int)정보.rectangle.Top;
-            //    int width = (int)정보.rectangle.Width;
-            //    int height = (int)정보.rectangle.Height;
-
-            //    Rect rect = new Rect(x, y, width, height);
-            //    List<Rect> blobs = Global.검사도구모음.FindBlobs(mat, rect, 128, ThresholdTypes.Binary, SearchMode.BigOne);
-            //    Rect largestBlob = Global.검사도구모음.FindLargestBlob(blobs, rect);
-            //    Scalar 선색상;
-            //    Int32 선굵기;
-
-            //    // 가운데 커다란 홀 기준으로 Calibration함.
-            //    정보.측정 = largestBlob.Width * 97.364/1000;
-
-            //    if (정보.측정 < 정보.최소 || 정보.측정 > 정보.최대)
-            //    {
-            //        정보.판정 = 결과구분.NG;
-            //        선색상 = Global.검사도구모음.RED;
-            //        선굵기 = 10;
-            //    }
-            //    else
-            //    {
-            //        정보.판정 = 결과구분.OK;
-            //        선색상 = Global.검사도구모음.GREEN;
-            //        선굵기 = 5;
-            //    }
-
-            //    Global.검사도구모음.DrawLargestBlob(mat, largestBlob, 선색상, 선굵기);
-            //}
-
         }
 
         private void DataSourceBind()
         {
             if (Global.모델자료.선택모델 == null)
             {
-                //this.viewer1.Canvas.ClearGraphics();
-                //this.viewer2.Canvas.ClearGraphics();
                 this.myGridControl1.DataSource = null;
                 return;
             }
@@ -201,7 +152,6 @@ namespace SamhwaInspection.UI.Control
                 Debug.WriteLine("이프문 전");
                 if (Data.Camera == 카메라1)
                 {
-                    // 여기에 6개 분할 로직 추가
                     if (Data.PageIndex == 1)
                     {
                         Page1Image = Data.MatImage;
@@ -258,9 +208,7 @@ namespace SamhwaInspection.UI.Control
                         }
                         Debug.WriteLine("자동검사 시작");
                         for (int i = 0; i < splitImage.Length; i++)
-                        {
                             자동검사(splitImage[i], (Flow구분)i);
-                        }
 
                         isCompleted_Camera1 = true;
                         Debug.WriteLine("카메라1 검사완료");
@@ -280,12 +228,6 @@ namespace SamhwaInspection.UI.Control
 
         private void 결과정보생성(Mat img1, bool result)
         {
-            //검사결과 결과 = new 검사결과(Global.모델자료.선택모델.검사목록);
-            //Debug.WriteLine($"{결과.최종결과}", 결과.최종결과);
-            //Debug.WriteLine($"{결과.검사일시}", 결과.검사일시);
-            //Debug.WriteLine($"{결과.모델번호}", 결과.모델번호);
-
-
             if (result)
             {
                 Global.환경설정.현재결과상태 = 결과구분.OK;
@@ -306,20 +248,12 @@ namespace SamhwaInspection.UI.Control
                     img1.SaveImage(Path.Combine(Global.환경설정.NG이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
                 }
             }
-
             // 검사자료 GridView DataSource에 추가(DB에서 읽어와서 표시하기에는 검사 -> 저장 -> select 하는 시간이 길어서 이전 검사결과까지만 읽어지므로 해당 코드 추가)
-
-
             //여기 DB업로드
             //결과.AddToDb();
-
             //Global.검사자료.AddResult(결과);
             Global.환경설정.결과갱신요청();
             //Global.검사자료.AddResult(결과);
-
-
-
-
             //결과 = null;
         }
     }

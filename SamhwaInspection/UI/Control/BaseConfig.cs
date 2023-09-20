@@ -25,28 +25,18 @@ namespace SamhwaInspection.UI.Control
 
         public void Init()
         {
-
             this.Bing환경설정.DataSource = Global.환경설정;
-            
-
             this.d기본경로.SelectedPath = Global.환경설정.기본경로;
             this.d사진저장.SelectedPath = Global.환경설정.이미지저장경로;
             this.d문서저장.SelectedPath = Global.환경설정.자료저장경로;
-
             this.e기본경로.Text = this.d기본경로.SelectedPath;
             this.e사진저장경로.Text = this.d사진저장.SelectedPath;
             this.e문서저장경로.Text = this.d문서저장.SelectedPath;
-
             this.e양품이미지저장여부.Toggled += E양품이미지저장여부_Toggled;
             this.e불량이미지저장여부.Toggled += E불량이미지저장여부_Toggled;
-            
-            
-
-
             this.e기본경로.ButtonClick += E기본경로_ButtonClick;
             this.e사진저장경로.ButtonClick += E사진저장_ButtonClick;
             this.e문서저장경로.ButtonClick += E문서저장_ButtonClick;
-
 
             this.GridView1.Init(this.barManager1);
             this.GridView1.AddPopupMemuItem("Test", IvmUtils.Resources.인쇄, ButtonPrintClick);
@@ -55,8 +45,6 @@ namespace SamhwaInspection.UI.Control
             this.GridView1.OptionsView.ShowAutoFilterRow = false;
             this.GridView1.OptionsView.ShowFooter = false;
             this.GridControl1.DataSource = Global.그랩제어;
-            //this.GridView1.CellValueChanged += GridView1_CellValueChanged;
-
 
             this.GridView2.Init();
             this.GridView2.OptionsBehavior.Editable = true;
@@ -69,7 +57,6 @@ namespace SamhwaInspection.UI.Control
             this.btnSaveSetting.Click += BtnSaveSetting_Click;
             this.b도구설정.Click += B도구설정_Click;
             this.user1.Init();
-            
         }
         private void B도구설정_Click(object sender, EventArgs e)
         {
@@ -133,8 +120,6 @@ namespace SamhwaInspection.UI.Control
             //throw new NotImplementedException();
             Global.그랩제어.Save();
             Global.조명제어.Save();
-
-
         }
 
         private void E켜짐_Toggled(object sender, EventArgs e)
@@ -166,7 +151,6 @@ namespace SamhwaInspection.UI.Control
             Cam cam =  view.GetFocusedRow() as Cam;
             if (cam != null) return;
             IvmUtils.Utils.DebugSerializeObject(cam);
-
         }
     }
 }

@@ -41,10 +41,9 @@ namespace SamhwaInspection
 
         public MainForm()
         {
-            //if (!Global.Init()) return;
             InitializeComponent();
-            //this.ShowWaitForm();
-            Global.Init(); //Task.Run(() => { Global.Init(); }); 
+            Global.Init();
+            Debug.WriteLine("Global Init Finished");
             this.StartPosition = FormStartPosition.Manual;
             Global.mainForm = this;
             this.tabFormControl1.SelectedPage = p비전검사;
@@ -55,7 +54,6 @@ namespace SamhwaInspection
         private Boolean Init()
         {
             this.WindowState = FormWindowState.Maximized;
-            Debug.WriteLine("Global Init");
             this.state1.Init();
             this.settings1.Init();
             DisplaySetting(Global.모델자료.선택모델.모델번호);
@@ -132,7 +130,6 @@ namespace SamhwaInspection
             catch (Exception ex)
             {
                 Global.오류로그("메인페이지", "프로그램 시작", "프로그램 시작 중 오류가 발생하였습니다.\n" + ex.Message, true);
-                //Utils.ErrorMsg(ex.Message);
             }
         }
 

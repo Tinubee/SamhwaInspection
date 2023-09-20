@@ -44,9 +44,8 @@ namespace SamhwaInspection.Schemas
         public void Init()
         {
             base.Clear(); //모델변경시 기존데이터 clear
-            //VM Solution 불러오기
-            string lastModelSolutionPath = Global.모델자료[Global.환경설정.선택모델].솔루션파일저장경로;
-            VmSolution.Load(lastModelSolutionPath, null);
+            string lastModelSolutionPath = Global.모델자료[Global.환경설정.선택모델].솔루션파일저장경로; 
+            VmSolution.Load(lastModelSolutionPath, null); //VM Solution 불러오기
             글로벌변수제어.Init();
             VmSolution.Instance.DisableModulesCallback();
             for (int i = 0; i < 9; i++)
@@ -58,15 +57,11 @@ namespace SamhwaInspection.Schemas
                     base.Add(new 비전마스터플로우((Flow구분)i, plcAddress));
                 }
                 else
-                {
                     base.Add(new 비전마스터플로우((Flow구분)i, $"W000{i}"));
-                }
             }
 
             if (Global.mainForm != null)
-            {
                 Global.mainForm.DisplaySetting(Global.모델자료.선택모델.모델번호);
-            }
         }
 
         public new void Add(비전마스터플로우 툴)
@@ -99,7 +94,6 @@ namespace SamhwaInspection.Schemas
         public List<ImageSourceModuleTool> InputModuleTool_List = new List<ImageSourceModuleTool>();
         public List<ShellModuleTool> ShellModuleTool_List = new List<ShellModuleTool>();
 
-
         public delegate void InspectionFinished(GraphicsSetModuleTool graphicTool);
         public event InspectionFinished InspectionFinishedEvent;
         public ShellModuleTool ShellModuleTool;
@@ -116,17 +110,12 @@ namespace SamhwaInspection.Schemas
             if (this.ShellModuleTool != null) this.ShellModuleTool.EnableResultCallback();
 
             for (int lop = 0; lop < graphicsSetModuleTool_List.Count; lop++)
-            {
                 if (this.graphicsSetModuleTool_List[lop] != null) this.graphicsSetModuleTool_List[lop].EnableResultCallback();
-            }
 
             this.결과 = false;
             this.결과업데이트완료 = false;
             if (plcAddress != string.Empty)
-            {
                 this.PLC결과어드레스 = plcAddress;
-            }
-
         }
         public void Init()
         {
@@ -178,7 +167,6 @@ namespace SamhwaInspection.Schemas
             {
                 GlobalVariableModuleTool.SetGlobalVar("topFlatness_Value", topFlatnessData[(int)구분]);
                 GlobalVariableModuleTool.SetGlobalVar("bottomFlatness_Value", bottomFlatnessData[(int)구분]);
-
             }
         }
 
@@ -262,9 +250,7 @@ namespace SamhwaInspection.Schemas
             {
                 SetFlatnessData(); //평탄도 데이터 셋팅.
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
-
                 this.Procedure.Run();
-
                 String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
                 if (resultString == "NONE")
                 {
@@ -315,10 +301,8 @@ namespace SamhwaInspection.Schemas
                             Global.신호제어.SendValueToPLC("W0020", 0);
                         }
                     }
-
                 }
                 Debug.WriteLine($"{this.PLC결과어드레스} 신호 날림");
-
                 Debug.WriteLine("Process RUN", $"{this.구분.ToString()}");
                 return this.결과;
             }
@@ -339,7 +323,5 @@ namespace SamhwaInspection.Schemas
 
             return imageBaseData;
         }
-
-       
     }
 }

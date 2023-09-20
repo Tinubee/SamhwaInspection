@@ -11,7 +11,6 @@ namespace SamhwaInspection.Schemas
     public class VmGlobals : List<VmVariable>
     {
         private GlobalVariableModuleTool Variables;
-
         public void Init()
         {
             base.Clear(); //모델변경시 기존 변수들 초기화

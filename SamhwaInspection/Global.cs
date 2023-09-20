@@ -42,7 +42,6 @@ namespace SamhwaInspection
         public static 비전마스터구동 비전마스터구동;
         public static MainForm mainForm;
         public static 검사자료 검사자료;
-        public static StopWatchControl tactTimeChecker;
 
         public delegate void BaseEvent();
 
@@ -65,67 +64,42 @@ namespace SamhwaInspection
                 그랩제어 = new 그랩제어();
                 Mvs그랩제어 = new Mvs그랩제어();
                 Debug.WriteLine("Global 카메라 제어 클래스 생성");
-
                 환경설정 = new 환경설정();
                 Debug.WriteLine("Global 환경설정 클래스 생성");
-
-                //로그자료 = new 로그자료();
-                //Debug.WriteLine("Global 로그자료 클래스 생성");
-
                 Global.정보로그(로그영역, "시작", "프로그램을 시작합니다.", false);
-
                 유저자료 = new 유저자료();
                 Debug.WriteLine("Global 유저자료 클래스 생성");
-
                 모델자료 = new 모델자료();
                 Debug.WriteLine("Global 모델자료 클래스 생성");
-
                 신호제어 = new 신호제어();
                 Debug.WriteLine("Global 신호제어 클래스 생성");
-
                 조명제어 = new LightControl();
                 Debug.WriteLine("Global 조명제어 클래스 생성");
-
                 검사도구모음 = new 검사도구모음();
                 Debug.WriteLine("Global 검사도구모음 클래스 생성");
-
                 비전마스터구동 = new 비전마스터구동();
                 Debug.WriteLine("Global 비전마스터구동 클래스 생성");
-
                 검사자료 = new 검사자료();
                 Debug.WriteLine("Global 검사자료 클래스 생성");
-
                 그랩제어.Init();
                 Mvs그랩제어.Init();
                 Debug.WriteLine("카메라 제어 클래스 Init완료");
-
                 환경설정.Init();
                 Debug.WriteLine("환경설정 클래스 Init완료");
-
                 //로그자료.Init();
                 //Debug.WriteLine("로그자료 클래스 Init완료");
-
                 유저자료.Init();
                 Debug.WriteLine("유저자료 클래스 Init완료");
-
                 모델자료.Init();
                 Debug.WriteLine("모델자료 클래스 Init완료");
-
                 신호제어.Init();
                 Debug.WriteLine("신호제어 클래스 Init완료");
-
                 조명제어.Init();
                 Debug.WriteLine("조명제어 클래스 Init완료");
-
                 검사자료.Init();
                 Debug.WriteLine("검사자료 클래스 Init완료!");
-
                 비전마스터구동.Init();
                 Debug.WriteLine("비전마스터구동 클래스 Init완료!");
-
-                //택타임측정기 새로 추가
-                tactTimeChecker = new StopWatchControl("비젼검사");
-
                 return true;
             }
             catch (Exception ex)
@@ -152,21 +126,14 @@ namespace SamhwaInspection
                 Debug.WriteLine("그랩Close");
                 조명제어?.Close();
                 Debug.WriteLine("조명Close");
-
                 모델자료?.Close();
                 Debug.WriteLine("모델자료Close");
-
                 검사자료?.Close();
                 Debug.WriteLine("검사자료Close");
-
                 신호제어?.Close();
                 Debug.WriteLine("신호Close");
-
-
-
                 환경설정?.Close();
                 Debug.WriteLine("환경설정Close");
-
                 //로그자료?.Close();
                 //Debug.WriteLine("로그Close");
                 return true;
@@ -256,44 +223,5 @@ namespace SamhwaInspection
             return 로그;
         }
         #endregion
-
-    }
-
-
-    //시간측정용 컨트롤 따로 만들었음!
-    public class StopWatchControl
-    {
-        private Stopwatch stopWatch;
-        private String startTime;
-        private String endTime;
-        private String name;
-
-        public StopWatchControl(String Name)
-        {
-            //생성자
-            Init(Name);
-        }
-
-        public void Init(String Name)
-        {
-            this.stopWatch = new Stopwatch();
-            this.name = Name;
-        }
-        public void Start()
-        {
-            this.stopWatch.Start();
-        }
-        public void Stop()
-        {
-            this.stopWatch.Stop();
-            TimeSpan elapsed = this.stopWatch.Elapsed;
-            Debug.WriteLine($"{elapsed.TotalMilliseconds}", $"{this.name} 최종 검사시간");
-            this.stopWatch.Reset();
-        }
-        public void Check(String 설명)
-        {
-            TimeSpan elapsed = this.stopWatch.Elapsed;
-            Debug.WriteLine($"{elapsed.TotalMilliseconds}", $" {this.name} {설명}");
-        }
     }
 }

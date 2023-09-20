@@ -256,7 +256,6 @@ namespace SamhwaInspection.Schemas
             cclink_echo = new BackgroundWorker();
             cclink_echo.DoWork += cclink_echo_DoWork;
             cclink_echo.RunWorkerAsync(0);
-            //Start();
         }
 
         // 작업을 생성하고 통신 작업 실행
@@ -277,11 +276,7 @@ namespace SamhwaInspection.Schemas
         {
             try
             {
-                //PLC 결과요청 F치수검사, R치수검사 시그널 off
                 Global.신호제어.SendValueToPLC("W0028", 0);
-                //Global.신호제어.SendValueToPLC("W0034", 0);
-
-                //ThreadRoop flag On
                 thred_roop_index = 0;
 
                 while (thred_roop_index == 0)
@@ -298,7 +293,6 @@ namespace SamhwaInspection.Schemas
                                 Global.환경설정.모델변경요청(정보.값 - 1);
                                 Global.비전마스터구동.Init();
                             }
-                            //Global.신호제어.SendValueToPLC("W0010", 0);
                         }
 
                         if (정보.주소 == "W0021" & 정보.값 == 1) // 유무검사 트리거신호

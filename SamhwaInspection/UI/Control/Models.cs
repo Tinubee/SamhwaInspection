@@ -131,55 +131,6 @@ namespace SamhwaInspection.UI.Control
             //List<검사정보> 검사목록 = Global.모델자료.선택모델.검사목록.ToList(); 
             List<검사정보> 수동검사목록 = Global.모델자료.선택모델.선택카메라검사목록(this.카메라); 
             Mat mat = Cv2.ImRead(Global.모델자료.선택모델.마스터이미지경로(this.카메라));
-
-            bool result = false;
-
-            //result = Global.비전마스터구동.GetItem(Flow구분.Flow1).Run(mat);
-
-
-
-                //중간 시간체크
-
-                //결과정보생성(mat);
-                //Global.tactTimeChecker.Check($"{구분.ToString()} Run 완료");
-
-
-
-                //foreach(검사정보 정보 in 수동검사목록)
-                //{
-                //    int x = (int)정보.rectangle.Left;
-                //    int y = (int)정보.rectangle.Top;
-                //    int width = (int)정보.rectangle.Width;
-                //    int height = (int)정보.rectangle.Height;
-
-                //    Rect rect = new Rect(x, y, width, height);
-                //    List<Rect> blobs = Global.검사도구모음.FindBlobs(mat, rect, 128, ThresholdTypes.Binary, SearchMode.BigOne);
-                //    Rect largestBlob = Global.검사도구모음.FindLargestBlob(blobs, rect);
-                //    Scalar 선색상;
-
-                //    정보.측정 = largestBlob.Width * 97.364 / 1000;
-
-                //    if (정보.측정 < 정보.최소 || 정보.측정 > 정보.최대)
-                //    {
-
-                //        정보.판정 = 결과구분.NG;
-                //        선색상 = Global.검사도구모음.RED;
-                //    }
-                //    else 
-                //    { 선색상 = Global.검사도구모음.GREEN;
-                //        정보.판정 = 결과구분.OK;
-
-                //    }
-
-                //    Global.검사도구모음.DrawLargestBlob(mat, largestBlob, 선색상, 2);
-                //    //DrawBlobs(mat, blobs, new Scalar(0, 0, 255), 3);
-
-                //}
-                //DataSourceBind();
-
-            //this.e뷰어.LoadImage(mat);
-            Debug.WriteLine($"{카메라} 수동검사 완료");
-            //Cv2.ImShow("Test", mat);
         }
 
         private void DataSourceBind()
@@ -216,11 +167,7 @@ namespace SamhwaInspection.UI.Control
             Global.모델자료.선택모델.SelectAll(this.카메라, false);
             this.SelectedRegion.rectangle.Selected = true;
             this.SelectedRegion.rectangle.PropertyChanged += RectanglePropertyChanged;
-
-            
-
             this.propertyGridControl1.SelectedObject = selectedItem.rectangle;
-
             //if (this.e뷰어.Canvas.Image != null) 
             //{
             //this.e뷰어.RefreshImage();
