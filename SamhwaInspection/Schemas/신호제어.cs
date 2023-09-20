@@ -313,12 +313,8 @@ namespace SamhwaInspection.Schemas
                             Global.조명제어.TurnOn(조명구분.BACK);
 
                             SendValueToPLC(정보.주소, 0);
-
                             //시간체크 함수 Start -> 검사시간
-                            Global.tactTimeChecker.Start();
-
                             Global.그랩제어[0].ProductIndex = ProductIndex.PRODUCT_INDEX1;
-
                             //카메라 Software Trig날림(영상찍기 시작)
                             Global.그랩제어[0].SoftTrig();
                         }

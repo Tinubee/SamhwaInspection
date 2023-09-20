@@ -109,7 +109,6 @@ namespace SamhwaInspection.UI.Control
             //중간 시간체크
 
             결과정보생성(mat, result);
-            Global.tactTimeChecker.Check($"{구분.ToString()} Run 완료");
             return mat;
         }
 

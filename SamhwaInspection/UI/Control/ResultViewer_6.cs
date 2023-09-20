@@ -139,6 +139,11 @@ namespace SamhwaInspection.UI.Control
 
         private void Paint_camImage(AcquisitionData Data)
         {
+            List<float> floats = new List<float>();
+
+            floats.Max();
+            floats.Min();
+
             try
             {
                 if(Global.모델자료.선택모델.디스플레이개수 != 6) return;

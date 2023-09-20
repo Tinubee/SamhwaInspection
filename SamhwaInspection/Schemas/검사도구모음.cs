@@ -27,7 +27,7 @@ namespace SamhwaInspection.Schemas
             this.RED = new Scalar(0, 0, 255);
             this.GREEN = new Scalar(0, 255, 0);
         }
-s
+
         public List<Rect> FindBlobs2(Mat srcImage, Rect region, double threshold, ThresholdTypes thresholdType = ThresholdTypes.Binary, SearchMode searchMode = SearchMode.BigOne, Int32 minArea = 300000, Int32 maxArea = 500000)
         {
             // 이미지에서 Region을 잘라냅니다.

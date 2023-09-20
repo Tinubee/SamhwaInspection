@@ -106,7 +106,6 @@ namespace SamhwaInspection.UI.Control
             //중간 시간체크
 
             결과정보생성(mat, result);
-            Global.tactTimeChecker.Check($"{구분.ToString()} Run 완료");
             return mat;
 
             //foreach (검사정보 정보 in 수동검사목록)
@@ -220,33 +219,10 @@ namespace SamhwaInspection.UI.Control
 
                         //조명 끔
                         Global.조명제어.TurnOff(조명구분.BACK);
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("영상획득 완료");
-
                         // 이미지 연결
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("이미지 이어붙이기");
-
                         roiAlign = new Rect(9300, 0, 2000, 2 * height_cam);
-
-                        //Cv2.ImWrite("C:\\IVM\\SamhwaENP\\SaveImage\\Image1.bmp", mergedImage);
-
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
-
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("FindBlob");
-
-
-                        //foreach (Rect blob in blobs)
-                        //{
-                        //    Debug.WriteLine(blob.Size.ToString());
-                        //    Debug.WriteLine(blob.X.ToString());
-                        //    Debug.WriteLine(blob.Y.ToString());
-                        //}
                         Debug.WriteLine($"Blob 개수 : {blobs.Count}");
 
                         if (Global.신호제어.마스터모드여부 == 1)
@@ -294,21 +270,6 @@ namespace SamhwaInspection.UI.Control
 
                             splitImage[i] = new Mat(mergedImage, roi[i]);
                         }
-
-
-                        //roi1 = new Rect(0, blobs[0].Y - 2000, width_cam, 20000);
-                        //roi2 = new Rect(0, blobs[1].Y - 2000, width_cam, 20000);
-                        //roi3 = new Rect(0, blobs[2].Y - 2000, width_cam, 20000);
-                        //roi4 = new Rect(0, blobs[3].Y - 2000, width_cam, 20000);
-
-                        //splitImage1 = new Mat(mergedImage, roi1);
-                        //splitImage2 = new Mat(mergedImage, roi2);
-                        //splitImage3 = new Mat(mergedImage, roi3);
-                        //splitImage4 = new Mat(mergedImage, roi4);
-
-                        //중간 시간체크
-                        Global.tactTimeChecker.Check("Align 후 이미지 자르기");
-
                         Debug.WriteLine("자동검사 시작");
                         if (Global.신호제어.마스터모드여부 == 1)
                         {
@@ -321,17 +282,8 @@ namespace SamhwaInspection.UI.Control
                                 자동검사(splitImage[i], (Flow구분)i);
                             }
                         }
-
-                        //자동검사(splitImage1, Flow구분.Flow1);
-                        //자동검사(splitImage2, Flow구분.Flow2);
-                        //자동검사(splitImage3, Flow구분.Flow3);
-                        //자동검사(splitImage4, Flow구분.Flow4);
-
                         isCompleted_Camera1 = true;
                         Debug.WriteLine("카메라1 검사완료");
-
-                        //검사 완료 시간 확인
-                        Global.tactTimeChecker.Stop();
                         //Global.신호제어.SendValueToPLC("W0020", 0);
                     }
                 }
