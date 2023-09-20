@@ -167,45 +167,49 @@ namespace SamhwaInspection.UI.Control
                     {
                         isGrabCompleted_Page1 = false;
                         isGrabCompleted_Page2 = false;
-
+                        for (int lop = 0; lop < roi.Length; lop++)
+                            roi[lop].Y = 0;
                         //조명 끔
                         Global.조명제어.TurnOff(조명구분.BACK);
                         // 이미지 연결
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-                        roiAlign = new Rect(6700, 0, 1800, 2 * height_cam);
+                        roiAlign = new Rect(6400, 0, 1800, 2 * height_cam);
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
                         Debug.WriteLine($"Blob 개수 : {blobs.Count}");
-                        if (blobs.Count != 6)
+                        int blobCount = blobs.Count();
+                        for (int lop = 0; lop < blobCount; lop++)
                         {
-                            for (int i = 0; i < blobs.Count(); i++)
-                            {
-                                Debug.WriteLine($"6개 아닐때 {i}번 blob Y 크기 : {blobs[i].Y}");
-                            }
-                            for (int lop = 0; lop < 6; lop++)
-                            {
-                                Global.신호제어.PLC.SetDevice2($"W000{lop}", 2);
-                                if (lop == 5)
-                                {
-                                    Debug.WriteLine("트리거신호 초기화");
-                                    Global.신호제어.SendValueToPLC("W0020", 0);
-                                }
-                            }
-                            return;
-                        }
-
-                        for (int i = 0; i < roi.Length; i++)
-                        {
-                            Debug.WriteLine($"Blob Y 크기 : {blobs[i].Y}");
-                            if (blobs[i].Y < 2000)
-                            {
-                                roi[i] = new Rect(0, 0, width_cam, 13000);
-                            }
+                            Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                            if (blobs[lop].Y < 2000)
+                                roi[lop] = new Rect(1000, 0, width_cam, 13000);
                             else
                             {
-                                roi[i] = new Rect(0, blobs[i].Y - 2000, width_cam, 13000);
+                                if (blobs[lop].Y < 14000) roi[0] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
+                                else if (blobs[lop].Y < 30000) roi[1] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
+                                else if (blobs[lop].Y < 45000) roi[2] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
+                                else if (blobs[lop].Y < 60000) roi[3] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
+                                else if (blobs[lop].Y < 70000) roi[4] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
+                                else if (blobs[lop].Y < 80000) roi[5] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
                             }
-                            splitImage[i] = new Mat(mergedImage, roi[i]);
                         }
+
+                        for (int lop = 0; lop < roi.Length; lop++)
+                        {
+                            if (roi[lop].Y == 0)
+                            {
+                                if (lop == 0) roi[lop] = new Rect(0, 1000, width_cam, 20000);
+                                if (lop == 1) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                if (lop == 2) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                if (lop == 3) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                if (lop == 4) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                if (lop == 5) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                            }
+                            splitImage[lop] = new Mat(mergedImage, roi[lop]);
+                        }
+                    
+                        for (int lop = 0; lop < roi.Length; lop++)
+                            roi[lop].Y = 0;
+
                         Debug.WriteLine("자동검사 시작");
                         for (int i = 0; i < splitImage.Length; i++)
                             자동검사(splitImage[i], (Flow구분)i);
@@ -216,9 +220,7 @@ namespace SamhwaInspection.UI.Control
                 }
                 //모든 검사가 끝나면 실행. 여기서는 아직 카메라 1개만 구현되어 있으므로 아래와 같음.
                 if (isCompleted_Camera1)
-                {
                     isCompleted_Camera1 = false;
-                }
             }
             catch (Exception ex)
             {
