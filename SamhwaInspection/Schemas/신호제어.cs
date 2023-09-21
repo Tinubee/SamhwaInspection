@@ -36,6 +36,8 @@ namespace SamhwaInspection.Schemas
         {
             [Address("W0010")]
             모델변경트리거,
+            [Address("W0011")]
+            트레이개수,
 
             [Address("W0020")]
             결과값요청트리거,
@@ -70,7 +72,6 @@ namespace SamhwaInspection.Schemas
             //F상부치수검사카메라트리거5,
             //[Address("W002D")]
             //F상부치수검사카메라트리거6,
-
             //RearJig 상부치수검사카메라 트리거
             [Address("W002E")]
             R상부치수검사카메라트리거1,
@@ -294,6 +295,11 @@ namespace SamhwaInspection.Schemas
                                 Global.비전마스터구동.Init();
                             }
                         }
+
+                        //if(정보.주소 == "W0011" & 정보.값 > 0) //트레이 개수
+                        //{
+                            //Debug.WriteLine($"{정보.값}");
+                        //}
 
                         if (정보.주소 == "W0021" & 정보.값 == 1) // 유무검사 트리거신호
                         {

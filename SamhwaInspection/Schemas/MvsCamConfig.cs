@@ -173,11 +173,13 @@ namespace SamhwaInspection.Schemas
             }
             catch (Euresys.MultiCamException ex)
             {
+                Debug.WriteLine(ex.ToString());
                 //IvmUtils.Utils.DebugException(ex, 3, "MultiCamException");
                 //this.AcquisitionFinishedEvent?.Invoke(new AcquisitionData(this.Camera, $"MultiCam Exception: {ex.Message}"));
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 //IvmUtils.Utils.DebugException(ex, 3, "MultiCamSystemException");
                 //this.AcquisitionFinishedEvent?.Invoke(new AcquisitionData(this.Camera, $"System Exception: {ex.Message}"));
             }

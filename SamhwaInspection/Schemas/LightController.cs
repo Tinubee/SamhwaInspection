@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,7 @@ namespace SamhwaInspection.Schemas
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 SerialPort.Dispose();
                 SerialPort = null;
                 //Global.오류로그(로그영역, "장치연결", "조명 제어 포트에 연결할 수 없습니다.\n" + ex.Message, true);
@@ -83,6 +85,7 @@ namespace SamhwaInspection.Schemas
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 //Global.오류로그(로그영역, 구분, ex.Message, true);
                 return false;
             }

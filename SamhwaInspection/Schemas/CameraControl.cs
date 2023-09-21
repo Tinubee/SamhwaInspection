@@ -267,6 +267,7 @@ namespace SamhwaInspection.Schemas
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
                 //Global.오류로그(로그영역, "카메라 설정 로드", ex.Message, false);
             }
         }

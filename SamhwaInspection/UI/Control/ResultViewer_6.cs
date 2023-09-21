@@ -181,23 +181,24 @@ namespace SamhwaInspection.UI.Control
                         {
                             Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
                             if (blobs[lop].Y < 2000)
-                                roi[lop] = new Rect(1000, 0, width_cam, 13000);
+                                roi[lop] = new Rect(0, 1800, width_cam, 13000);
                             else
                             {
-                                if (blobs[lop].Y < 14000) roi[0] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
-                                else if (blobs[lop].Y < 30000) roi[1] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
-                                else if (blobs[lop].Y < 45000) roi[2] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
-                                else if (blobs[lop].Y < 60000) roi[3] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
-                                else if (blobs[lop].Y < 70000) roi[4] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
-                                else if (blobs[lop].Y < 80000) roi[5] = new Rect(0, blobs[lop].Y - 2000, width_cam, 13000);
+                                if (blobs[lop].Y < 14000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                else if (blobs[lop].Y < 28000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                else if (blobs[lop].Y < 43000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                else if (blobs[lop].Y < 55000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                else if (blobs[lop].Y < 65000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
                             }
                         }
 
                         for (int lop = 0; lop < roi.Length; lop++)
                         {
+                            Debug.WriteLine($"roi Y 크기 : {roi[lop].Y}");
                             if (roi[lop].Y == 0)
                             {
-                                if (lop == 0) roi[lop] = new Rect(0, 1000, width_cam, 20000);
+                                if (lop == 0) roi[lop] = new Rect(0, 1800, width_cam, 13000);
                                 if (lop == 1) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
                                 if (lop == 2) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
                                 if (lop == 3) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
