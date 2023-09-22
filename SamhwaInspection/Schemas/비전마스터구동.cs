@@ -252,13 +252,6 @@ namespace SamhwaInspection.Schemas
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();
                 String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
-                if (resultString == "NONE")
-                {
-                    this.결과 = false;
-                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 4);
-                    return this.결과;
-                }
-
                 if (resultString == "NG")
                 {
                     this.결과 = false;
@@ -303,7 +296,7 @@ namespace SamhwaInspection.Schemas
                     }
                 }
                 Debug.WriteLine($"{this.PLC결과어드레스} 신호 날림");
-                Debug.WriteLine("Process RUN", $"{this.구분.ToString()}");
+                Debug.WriteLine("Process RUN", $"{this.구분}");
                 return this.결과;
             }
 

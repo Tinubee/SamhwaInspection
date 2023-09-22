@@ -295,12 +295,10 @@ namespace SamhwaInspection.Schemas
                                 Global.비전마스터구동.Init();
                             }
                         }
-
                         //if(정보.주소 == "W0011" & 정보.값 > 0) //트레이 개수
                         //{
                             //Debug.WriteLine($"{정보.값}");
                         //}
-
                         if (정보.주소 == "W0021" & 정보.값 == 1) // 유무검사 트리거신호
                         {
                             int nRet = Global.Cam[0].SetCommandValue("TriggerSoftware");
@@ -314,10 +312,8 @@ namespace SamhwaInspection.Schemas
                         // 치수검사 트리거 On일 경우( F지그, R지그 둘 중 하나라도 On이면 실행)
                         if (정보.주소 == "W0028" & 정보.값 == 1)
                         {
-
                             //조명키고
                             Global.조명제어.TurnOn(조명구분.BACK);
-
                             SendValueToPLC(정보.주소, 0);
                             //시간체크 함수 Start -> 검사시간
                             Global.그랩제어[0].ProductIndex = ProductIndex.PRODUCT_INDEX1;

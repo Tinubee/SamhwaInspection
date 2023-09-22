@@ -198,26 +198,19 @@ namespace SamhwaInspection.UI.Control
                                 if (lop == 2) roi[lop] = new Rect(0, roi[lop - 1].Y + 20000, width_cam, 20000);
                                 if (lop == 3) roi[lop] = new Rect(0, roi[lop - 1].Y + 20000, width_cam, 20000);
                             }
-
                             splitImage[lop] = new Mat(mergedImage, roi[lop]);
                         }
 
                         for (int lop = 0; lop < roi.Length; lop++)
-                        {
                             roi[lop].Y = 0;
-                        }
 
                         Debug.WriteLine("자동검사 시작");
                         if (Global.신호제어.마스터모드여부 == 1)
-                        {
                             자동검사(splitImage[0], (Flow구분)0);
-                        }
                         else
                         {
                             for (int i = 0; i < splitImage.Length; i++)
-                            {
                                 자동검사(splitImage[i], (Flow구분)i);
-                            }
                         }
 
                         isCompleted_Camera1 = true;
@@ -226,15 +219,7 @@ namespace SamhwaInspection.UI.Control
                 }
 
                 if (isCompleted_Camera1)
-                {
-                    //this.DataSourceBind();
-
-                    //State에 결과 표시
-                    //this.myGridControl1.DataSource = Global.모델자료.선택모델.검사목록;
-                    //결과정보생성(Data.MatImage);
-                    //              결과정보생성(Global.환경설정.resultMatImage_cam1);
                     isCompleted_Camera1 = false;
-                }
             }
             catch (Exception ex)
             {
