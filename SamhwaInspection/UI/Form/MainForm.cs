@@ -74,9 +74,11 @@ namespace SamhwaInspection
             BeginInvoke((Action)delegate
             {
                 디스플레이변경(modelNumber);
-                this.settings1.변수업데이트();
+                변수업데이트();//this.settings1.변수업데이트();
             });
         }
+
+        public void 변수업데이트() => this.settings1.변수업데이트();
 
         public void 디스플레이변경(int modelNumber)
         {

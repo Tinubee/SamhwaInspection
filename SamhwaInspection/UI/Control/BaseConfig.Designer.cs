@@ -84,7 +84,6 @@
             this.col켜짐 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.e조명켜짐 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.b도구설정 = new DevExpress.XtraEditors.SimpleButton();
             this.btnSaveSetting = new DevExpress.XtraEditors.SimpleButton();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -94,6 +93,34 @@
             this.d문서저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.d사진저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.d기본경로 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
+            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            this.e작은원치수측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e큰원치수측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e슬롯부20Point검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e슬롯부200Point검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e높이측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e너비측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e50_5부측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e33_94부측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e15부측정검사여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.toggleSwitch11 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.e슬롯부20Point검사여부1 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.e슬롯부20Point검사여부11 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -131,6 +158,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl3)).BeginInit();
+            this.layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.e작은원치수측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e큰원치수측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부200Point검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e높이측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e너비측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e50_5부측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e33_94부측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e15부측정검사여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitch11.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부11.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -733,25 +790,12 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.b도구설정);
             this.panelControl1.Controls.Add(this.btnSaveSetting);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl1.Location = new System.Drawing.Point(0, 1142);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1012, 52);
             this.panelControl1.TabIndex = 4;
-            // 
-            // b도구설정
-            // 
-            this.b도구설정.Appearance.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.b도구설정.Appearance.Options.UseFont = true;
-            this.b도구설정.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.b도구설정.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b도구설정.ImageOptions.SvgImage")));
-            this.b도구설정.Location = new System.Drawing.Point(2, 2);
-            this.b도구설정.Name = "b도구설정";
-            this.b도구설정.Size = new System.Drawing.Size(889, 48);
-            this.b도구설정.TabIndex = 11;
-            this.b도구설정.Text = "VM 설정";
             // 
             // btnSaveSetting
             // 
@@ -803,10 +847,344 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 1194);
             // 
+            // groupControl5
+            // 
+            this.groupControl5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupControl5.Controls.Add(this.layoutControl3);
+            this.groupControl5.Controls.Add(this.layoutControl2);
+            this.groupControl5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupControl5.Location = new System.Drawing.Point(0, 766);
+            this.groupControl5.Name = "groupControl5";
+            this.groupControl5.Size = new System.Drawing.Size(1012, 161);
+            this.groupControl5.TabIndex = 9;
+            this.groupControl5.Text = "검사설정";
+            // 
+            // layoutControl3
+            // 
+            this.layoutControl3.Controls.Add(this.e작은원치수측정검사여부);
+            this.layoutControl3.Controls.Add(this.e큰원치수측정검사여부);
+            this.layoutControl3.Controls.Add(this.e슬롯부20Point검사여부);
+            this.layoutControl3.Controls.Add(this.e슬롯부200Point검사여부);
+            this.layoutControl3.Controls.Add(this.e높이측정검사여부);
+            this.layoutControl3.Controls.Add(this.e너비측정검사여부);
+            this.layoutControl3.Controls.Add(this.e50_5부측정검사여부);
+            this.layoutControl3.Controls.Add(this.e33_94부측정검사여부);
+            this.layoutControl3.Controls.Add(this.e15부측정검사여부);
+            this.layoutControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl3.Location = new System.Drawing.Point(2, 27);
+            this.layoutControl3.Name = "layoutControl3";
+            this.layoutControl3.Root = this.layoutControlGroup2;
+            this.layoutControl3.Size = new System.Drawing.Size(1008, 132);
+            this.layoutControl3.TabIndex = 1;
+            this.layoutControl3.Text = "layoutControl3";
+            // 
+            // e작은원치수측정검사여부
+            // 
+            this.e작은원치수측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "작은원치수측정검사", true));
+            this.e작은원치수측정검사여부.Location = new System.Drawing.Point(568, 2);
+            this.e작은원치수측정검사여부.Name = "e작은원치수측정검사여부";
+            this.e작은원치수측정검사여부.Properties.OffText = "Off";
+            this.e작은원치수측정검사여부.Properties.OnText = "On";
+            this.e작은원치수측정검사여부.Size = new System.Drawing.Size(438, 22);
+            this.e작은원치수측정검사여부.StyleController = this.layoutControl3;
+            this.e작은원치수측정검사여부.TabIndex = 17;
+            // 
+            // e큰원치수측정검사여부
+            // 
+            this.e큰원치수측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "큰원치수측정검사", true));
+            this.e큰원치수측정검사여부.Location = new System.Drawing.Point(131, 2);
+            this.e큰원치수측정검사여부.Name = "e큰원치수측정검사여부";
+            this.e큰원치수측정검사여부.Properties.OffText = "Off";
+            this.e큰원치수측정검사여부.Properties.OnText = "On";
+            this.e큰원치수측정검사여부.Size = new System.Drawing.Size(304, 22);
+            this.e큰원치수측정검사여부.StyleController = this.layoutControl3;
+            this.e큰원치수측정검사여부.TabIndex = 16;
+            // 
+            // e슬롯부20Point검사여부
+            // 
+            this.e슬롯부20Point검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "슬롯부20Point검사", true));
+            this.e슬롯부20Point검사여부.Location = new System.Drawing.Point(131, 28);
+            this.e슬롯부20Point검사여부.Name = "e슬롯부20Point검사여부";
+            this.e슬롯부20Point검사여부.Properties.OffText = "Off";
+            this.e슬롯부20Point검사여부.Properties.OnText = "On";
+            this.e슬롯부20Point검사여부.Size = new System.Drawing.Size(304, 22);
+            this.e슬롯부20Point검사여부.StyleController = this.layoutControl3;
+            this.e슬롯부20Point검사여부.TabIndex = 26;
+            // 
+            // e슬롯부200Point검사여부
+            // 
+            this.e슬롯부200Point검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "슬롯부200Point검사", true));
+            this.e슬롯부200Point검사여부.Location = new System.Drawing.Point(568, 28);
+            this.e슬롯부200Point검사여부.Name = "e슬롯부200Point검사여부";
+            this.e슬롯부200Point검사여부.Properties.OffText = "Off";
+            this.e슬롯부200Point검사여부.Properties.OnText = "On";
+            this.e슬롯부200Point검사여부.Size = new System.Drawing.Size(438, 22);
+            this.e슬롯부200Point검사여부.StyleController = this.layoutControl3;
+            this.e슬롯부200Point검사여부.TabIndex = 37;
+            // 
+            // e높이측정검사여부
+            // 
+            this.e높이측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "높이측정검사", true));
+            this.e높이측정검사여부.Location = new System.Drawing.Point(131, 54);
+            this.e높이측정검사여부.Name = "e높이측정검사여부";
+            this.e높이측정검사여부.Properties.OffText = "Off";
+            this.e높이측정검사여부.Properties.OnText = "On";
+            this.e높이측정검사여부.Size = new System.Drawing.Size(304, 22);
+            this.e높이측정검사여부.StyleController = this.layoutControl3;
+            this.e높이측정검사여부.TabIndex = 26;
+            // 
+            // e너비측정검사여부
+            // 
+            this.e너비측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "너비측정검사", true));
+            this.e너비측정검사여부.Location = new System.Drawing.Point(568, 54);
+            this.e너비측정검사여부.Name = "e너비측정검사여부";
+            this.e너비측정검사여부.Properties.OffText = "Off";
+            this.e너비측정검사여부.Properties.OnText = "On";
+            this.e너비측정검사여부.Size = new System.Drawing.Size(438, 22);
+            this.e너비측정검사여부.StyleController = this.layoutControl3;
+            this.e너비측정검사여부.TabIndex = 37;
+            // 
+            // e50_5부측정검사여부
+            // 
+            this.e50_5부측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "D50_5부측정", true));
+            this.e50_5부측정검사여부.Location = new System.Drawing.Point(131, 80);
+            this.e50_5부측정검사여부.Name = "e50_5부측정검사여부";
+            this.e50_5부측정검사여부.Properties.OffText = "Off";
+            this.e50_5부측정검사여부.Properties.OnText = "On";
+            this.e50_5부측정검사여부.Size = new System.Drawing.Size(304, 22);
+            this.e50_5부측정검사여부.StyleController = this.layoutControl3;
+            this.e50_5부측정검사여부.TabIndex = 26;
+            // 
+            // e33_94부측정검사여부
+            // 
+            this.e33_94부측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "D33_94부측정", true));
+            this.e33_94부측정검사여부.Location = new System.Drawing.Point(568, 80);
+            this.e33_94부측정검사여부.Name = "e33_94부측정검사여부";
+            this.e33_94부측정검사여부.Properties.OffText = "Off";
+            this.e33_94부측정검사여부.Properties.OnText = "On";
+            this.e33_94부측정검사여부.Size = new System.Drawing.Size(438, 22);
+            this.e33_94부측정검사여부.StyleController = this.layoutControl3;
+            this.e33_94부측정검사여부.TabIndex = 37;
+            // 
+            // e15부측정검사여부
+            // 
+            this.e15부측정검사여부.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bing환경설정, "D15부측정", true));
+            this.e15부측정검사여부.Location = new System.Drawing.Point(131, 108);
+            this.e15부측정검사여부.Name = "e15부측정검사여부";
+            this.e15부측정검사여부.Properties.OffText = "Off";
+            this.e15부측정검사여부.Properties.OnText = "On";
+            this.e15부측정검사여부.Size = new System.Drawing.Size(875, 22);
+            this.e15부측정검사여부.StyleController = this.layoutControl3;
+            this.e15부측정검사여부.TabIndex = 26;
+            // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup2.GroupBordersVisible = false;
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem12,
+            this.layoutControlItem13,
+            this.layoutControlItem6,
+            this.layoutControlItem10,
+            this.layoutControlItem11,
+            this.layoutControlItem20,
+            this.layoutControlItem15,
+            this.layoutControlItem21,
+            this.layoutControlItem16});
+            this.layoutControlGroup2.Name = "Root";
+            this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1008, 132);
+            this.layoutControlGroup2.TextVisible = false;
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.Control = this.e큰원치수측정검사여부;
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem12.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem12.Name = "layoutControlItem7";
+            this.layoutControlItem12.Size = new System.Drawing.Size(437, 26);
+            this.layoutControlItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem12.Text = "큰원 치수 측정";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.e작은원치수측정검사여부;
+            this.layoutControlItem13.Location = new System.Drawing.Point(437, 0);
+            this.layoutControlItem13.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem13.Name = "layoutControlItem8";
+            this.layoutControlItem13.Size = new System.Drawing.Size(571, 26);
+            this.layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem13.Text = "작은원 치수 측정";
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.e슬롯부20Point검사여부;
+            this.layoutControlItem6.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem6.CustomizationFormText = "슬롯부 20Point 측정";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 26);
+            this.layoutControlItem6.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(437, 26);
+            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem6.Text = "슬롯부 20Point 측정";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.e슬롯부200Point검사여부;
+            this.layoutControlItem10.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem10.CustomizationFormText = "슬롯부 200Point 측정";
+            this.layoutControlItem10.Location = new System.Drawing.Point(437, 26);
+            this.layoutControlItem10.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(571, 26);
+            this.layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem10.Text = "슬롯부 200Point 측정";
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.e높이측정검사여부;
+            this.layoutControlItem11.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem11.CustomizationFormText = "높이 측정";
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 52);
+            this.layoutControlItem11.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(437, 26);
+            this.layoutControlItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem11.Text = "높이 측정";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem20
+            // 
+            this.layoutControlItem20.Control = this.e너비측정검사여부;
+            this.layoutControlItem20.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem20.CustomizationFormText = "너비 측정";
+            this.layoutControlItem20.Location = new System.Drawing.Point(437, 52);
+            this.layoutControlItem20.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem20.Name = "layoutControlItem20";
+            this.layoutControlItem20.Size = new System.Drawing.Size(571, 26);
+            this.layoutControlItem20.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem20.Text = "너비 측정";
+            this.layoutControlItem20.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.e50_5부측정검사여부;
+            this.layoutControlItem15.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem15.CustomizationFormText = "50.5부 측정";
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 78);
+            this.layoutControlItem15.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(437, 28);
+            this.layoutControlItem15.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem15.Text = "50.5부 측정";
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem21
+            // 
+            this.layoutControlItem21.Control = this.e33_94부측정검사여부;
+            this.layoutControlItem21.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem21.CustomizationFormText = "33.94부 측정";
+            this.layoutControlItem21.Location = new System.Drawing.Point(437, 78);
+            this.layoutControlItem21.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem21.Name = "layoutControlItem21";
+            this.layoutControlItem21.Size = new System.Drawing.Size(571, 28);
+            this.layoutControlItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem21.Text = "33.94부 측정";
+            this.layoutControlItem21.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControlItem16
+            // 
+            this.layoutControlItem16.Control = this.e15부측정검사여부;
+            this.layoutControlItem16.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem16.CustomizationFormText = "15부 측정";
+            this.layoutControlItem16.Location = new System.Drawing.Point(0, 106);
+            this.layoutControlItem16.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem16.Name = "layoutControlItem16";
+            this.layoutControlItem16.Size = new System.Drawing.Size(1008, 26);
+            this.layoutControlItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem16.Text = "15부 측정";
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // layoutControl2
+            // 
+            this.layoutControl2.Location = new System.Drawing.Point(2, 27);
+            this.layoutControl2.Name = "layoutControl2";
+            this.layoutControl2.Root = this.layoutControlGroup1;
+            this.layoutControl2.Size = new System.Drawing.Size(1008, 89);
+            this.layoutControl2.TabIndex = 0;
+            this.layoutControl2.Text = "layoutControl2";
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1008, 89);
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // toggleSwitch11
+            // 
+            this.toggleSwitch11.Location = new System.Drawing.Point(99, 108);
+            this.toggleSwitch11.Name = "toggleSwitch11";
+            this.toggleSwitch11.Properties.OffText = "Off";
+            this.toggleSwitch11.Properties.OnText = "On";
+            this.toggleSwitch11.Size = new System.Drawing.Size(907, 22);
+            this.toggleSwitch11.TabIndex = 7;
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.toggleSwitch11;
+            this.layoutControlItem9.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem9.CustomizationFormText = "NG 이미지 저장";
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 106);
+            this.layoutControlItem9.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(1008, 26);
+            this.layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem9.Text = "NG 이미지 저장";
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(117, 15);
+            // 
+            // e슬롯부20Point검사여부1
+            // 
+            this.e슬롯부20Point검사여부1.Location = new System.Drawing.Point(131, 54);
+            this.e슬롯부20Point검사여부1.Name = "e슬롯부20Point검사여부1";
+            this.e슬롯부20Point검사여부1.Properties.OffText = "Off";
+            this.e슬롯부20Point검사여부1.Properties.OnText = "On";
+            this.e슬롯부20Point검사여부1.Size = new System.Drawing.Size(858, 22);
+            this.e슬롯부20Point검사여부1.TabIndex = 26;
+            // 
+            // e슬롯부20Point검사여부11
+            // 
+            this.e슬롯부20Point검사여부11.Location = new System.Drawing.Point(131, 54);
+            this.e슬롯부20Point검사여부11.Name = "e슬롯부20Point검사여부11";
+            this.e슬롯부20Point검사여부11.Properties.OffText = "Off";
+            this.e슬롯부20Point검사여부11.Properties.OnText = "On";
+            this.e슬롯부20Point검사여부11.Size = new System.Drawing.Size(858, 22);
+            this.e슬롯부20Point검사여부11.TabIndex = 26;
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.e슬롯부20Point검사여부11;
+            this.layoutControlItem14.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem14.CustomizationFormText = "슬롯부 20Point 측정";
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 52);
+            this.layoutControlItem14.MinSize = new System.Drawing.Size(88, 26);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(991, 26);
+            this.layoutControlItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem14.Text = "슬롯부 20Point 측정";
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(117, 15);
+            // 
             // BaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupControl5);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
@@ -855,6 +1233,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl3)).EndInit();
+            this.layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.e작은원치수측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e큰원치수측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부200Point검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e높이측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e너비측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e50_5부측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e33_94부측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e15부측정검사여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitch11.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부11.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -925,6 +1333,33 @@
         private DevExpress.XtraEditors.XtraFolderBrowserDialog d문서저장;
         private DevExpress.XtraEditors.XtraFolderBrowserDialog d사진저장;
         private DevExpress.XtraEditors.XtraFolderBrowserDialog d기본경로;
-        private DevExpress.XtraEditors.SimpleButton b도구설정;
+        private DevExpress.XtraEditors.GroupControl groupControl5;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl3;
+        private DevExpress.XtraEditors.ToggleSwitch e작은원치수측정검사여부;
+        private DevExpress.XtraEditors.ToggleSwitch e큰원치수측정검사여부;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraEditors.ToggleSwitch toggleSwitch11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraEditors.ToggleSwitch e슬롯부20Point검사여부;
+        private DevExpress.XtraEditors.ToggleSwitch e슬롯부200Point검사여부;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.ToggleSwitch e슬롯부20Point검사여부1;
+        private DevExpress.XtraEditors.ToggleSwitch e슬롯부20Point검사여부11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraEditors.ToggleSwitch e높이측정검사여부;
+        private DevExpress.XtraEditors.ToggleSwitch e너비측정검사여부;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
+        private DevExpress.XtraEditors.ToggleSwitch e50_5부측정검사여부;
+        private DevExpress.XtraEditors.ToggleSwitch e33_94부측정검사여부;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
+        private DevExpress.XtraEditors.ToggleSwitch e15부측정검사여부;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
     }
 }

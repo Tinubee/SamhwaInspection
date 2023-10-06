@@ -40,6 +40,26 @@ namespace SamhwaInspection.Schemas
         [Description("로그 보관일수"), JsonProperty("DaysToKeepLogs")]
         public int 로그보관 { get; set; } = 120;
 
+        [Description("큰원 치수 측정"), JsonProperty("BigCircleIns")]
+        public Boolean 큰원치수측정검사 { get; set; } = false;
+        [Description("작은원 치수 측정"), JsonProperty("SmallCircleIns")]
+        public Boolean 작은원치수측정검사 { get; set; } = false;
+        [Description("높이 측정"), JsonProperty("Height")]
+        public Boolean 높이측정검사 { get; set; } = false;
+        [Description("너비 측정"), JsonProperty("Width")]
+        public Boolean 너비측정검사 { get; set; } = false;
+        [Description("슬롯부 20Point 측정"), JsonProperty("Slot20PointIns")]
+        public Boolean 슬롯부20Point검사 { get; set; } = false;
+        [Description("슬롯부 200Point 측정"), JsonProperty("Slot200PointIns")]
+        public Boolean 슬롯부200Point검사 { get; set; } = false;
+        [Description("50.5부 측정"), JsonProperty("50.5PointIns")]
+        public Boolean D50_5부측정 { get; set; } = false;
+        [Description("33.94부 측정"), JsonProperty("33.94PointIns")]
+        public Boolean D33_94부측정 { get; set; } = false;
+        [Description("15부 측정"), JsonProperty("15PointIns")]
+        public Boolean D15부측정 { get; set; } = false;
+
+
         #region 수량관리
         [JsonIgnore]
         public Int32 양품갯수 { get; set; } = 0;

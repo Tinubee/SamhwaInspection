@@ -23,6 +23,11 @@ namespace SamhwaInspection.Schemas
             }
         }
 
+        public void InspectUseSet(string Name,  string Value)
+        {
+            this.Variables.SetGlobalVar(Name, Value);
+        }
+
         public void Set()
         {
             foreach (VmVariable v in this)

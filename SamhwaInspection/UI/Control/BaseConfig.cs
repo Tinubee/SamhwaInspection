@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using SamhwaInspection.Schemas;
 using System.Diagnostics.Eventing.Reader;
 using SamhwaInspection.UI.Form;
+using OpenCvSharp;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -34,6 +35,17 @@ namespace SamhwaInspection.UI.Control
             this.e문서저장경로.Text = this.d문서저장.SelectedPath;
             this.e양품이미지저장여부.Toggled += E양품이미지저장여부_Toggled;
             this.e불량이미지저장여부.Toggled += E불량이미지저장여부_Toggled;
+
+            this.e큰원치수측정검사여부.Toggled += E큰원치수측정검사여부_Toggled;
+            this.e작은원치수측정검사여부.Toggled += E작은원치수측정검사여부_Toggled;
+            this.e슬롯부20Point검사여부.Toggled += E슬롯부20Point검사여부_Toggled;
+            this.e슬롯부200Point검사여부.Toggled += E슬롯부200Point검사여부_Toggled;
+            this.e너비측정검사여부.Toggled += E너비측정검사여부_Toggled;
+            this.e높이측정검사여부.Toggled += E높이측정검사여부_Toggled;
+            this.e50_5부측정검사여부.Toggled += E50_5부측정검사여부_Toggled;
+            this.e33_94부측정검사여부.Toggled += E33_94부측정검사여부_Toggled;
+            this.e15부측정검사여부.Toggled += E15부측정검사여부_Toggled;
+
             this.e기본경로.ButtonClick += E기본경로_ButtonClick;
             this.e사진저장경로.ButtonClick += E사진저장_ButtonClick;
             this.e문서저장경로.ButtonClick += E문서저장_ButtonClick;
@@ -55,14 +67,59 @@ namespace SamhwaInspection.UI.Control
             this.e조명켜짐.Toggled += E켜짐_Toggled;
 
             this.btnSaveSetting.Click += BtnSaveSetting_Click;
-            this.b도구설정.Click += B도구설정_Click;
             this.user1.Init();
         }
-        private void B도구설정_Click(object sender, EventArgs e)
+
+        private void E작은원치수측정검사여부_Toggled(object sender, EventArgs e)
         {
-            Teaching form = new Teaching();
-            form.Show(Global.mainForm);
+            Global.환경설정.작은원치수측정검사 = e작은원치수측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("작은원Pass", Convert.ToInt32(Global.환경설정.작은원치수측정검사).ToString());
         }
+
+        private void E큰원치수측정검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.큰원치수측정검사 = e큰원치수측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("큰원Pass", Convert.ToInt32(Global.환경설정.큰원치수측정검사).ToString());
+        }
+        private void E너비측정검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.너비측정검사 = e너비측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("너비Pass", Convert.ToInt32(Global.환경설정.너비측정검사).ToString());
+        }
+        private void E높이측정검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.높이측정검사 = e높이측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("높이Pass", Convert.ToInt32(Global.환경설정.높이측정검사).ToString());
+        }
+
+        private void E50_5부측정검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.D50_5부측정 = e50_5부측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("50_5Pass", Convert.ToInt32(Global.환경설정.D50_5부측정).ToString());
+        }
+        private void E33_94부측정검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.D33_94부측정 = e33_94부측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("33_94Pass", Convert.ToInt32(Global.환경설정.D33_94부측정).ToString());
+        }
+        private void E15부측정검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.D15부측정 = e15부측정검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("15Pass", Convert.ToInt32(Global.환경설정.D15부측정).ToString());
+        }
+
+        private void E슬롯부20Point검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.슬롯부20Point검사 = e슬롯부20Point검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("슬롯부20Pass", Convert.ToInt32(Global.환경설정.슬롯부20Point검사).ToString());
+        }
+
+        private void E슬롯부200Point검사여부_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.슬롯부200Point검사 = e슬롯부200Point검사여부.IsOn;
+            Global.비전마스터구동.글로벌변수제어.InspectUseSet("슬롯부200Pass", Convert.ToInt32(Global.환경설정.슬롯부200Point검사).ToString());
+        }
+
 
         private void E불량이미지저장여부_Toggled(object sender, EventArgs e)
         {
@@ -111,7 +168,7 @@ namespace SamhwaInspection.UI.Control
                 Cam 정보 = view.GetRow(e.RowHandle) as Cam;
                 정보?.Set();
                 view.RefreshRow(e.RowHandle);
-            } 
+            }
             return;
         }
 
@@ -120,6 +177,8 @@ namespace SamhwaInspection.UI.Control
             //throw new NotImplementedException();
             Global.그랩제어.Save();
             Global.조명제어.Save();
+            Global.비전마스터구동.Save();
+            //Global.mainForm.변수업데이트();
         }
 
         private void E켜짐_Toggled(object sender, EventArgs e)
@@ -148,7 +207,7 @@ namespace SamhwaInspection.UI.Control
         private void ButtonPrintClick(object sender, ItemClickEventArgs e)
         {
             GridView view = sender as GridView;
-            Cam cam =  view.GetFocusedRow() as Cam;
+            Cam cam = view.GetFocusedRow() as Cam;
             if (cam != null) return;
             IvmUtils.Utils.DebugSerializeObject(cam);
         }

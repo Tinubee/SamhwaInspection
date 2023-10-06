@@ -44,7 +44,7 @@ namespace SamhwaInspection.Schemas
         public void Init()
         {
             base.Clear(); //모델변경시 기존데이터 clear
-            string lastModelSolutionPath = Global.모델자료[Global.환경설정.선택모델].솔루션파일저장경로; 
+            string lastModelSolutionPath = Global.모델자료[Global.환경설정.선택모델].솔루션파일저장경로;
             VmSolution.Load(lastModelSolutionPath, null); //VM Solution 불러오기
             글로벌변수제어.Init();
             VmSolution.Instance.DisableModulesCallback();
@@ -102,6 +102,9 @@ namespace SamhwaInspection.Schemas
         public GlobalVariableModuleTool GlobalVariableModuleTool;
         public DataSetModuleTool DataSetModuleTool;
 
+        public List<IMVSGroup> Slot20PointGroupMouduleTool = new List<IMVSGroup>();
+        public List<IMVSGroup> Slot200PointGroupMouduleTool = new List<IMVSGroup>();
+
         public 비전마스터플로우(Flow구분 구분, String plcAddress)
         {
             this.구분 = 구분;
@@ -111,6 +114,9 @@ namespace SamhwaInspection.Schemas
 
             for (int lop = 0; lop < graphicsSetModuleTool_List.Count; lop++)
                 if (this.graphicsSetModuleTool_List[lop] != null) this.graphicsSetModuleTool_List[lop].EnableResultCallback();
+
+            //슬롯부20Point검사설정();
+            //슬롯부200Point검사설정();
 
             this.결과 = false;
             this.결과업데이트완료 = false;
@@ -137,6 +143,11 @@ namespace SamhwaInspection.Schemas
                     this.InputModuleTool = this.Procedure["originImage"] as ImageSourceModuleTool;
                     this.graphicsSetModuleTool = this.Procedure["resultImage"] as GraphicsSetModuleTool;
                     this.ShellModuleTool = this.Procedure["AllResult"] as ShellModuleTool;
+                    for (int lop = 1; lop < 5; lop++)
+                    {
+                        this.Slot20PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_20Point"] as IMVSGroup);
+                        this.Slot200PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_200Point"] as IMVSGroup);
+                    }
                 }
 
                 this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
@@ -213,7 +224,7 @@ namespace SamhwaInspection.Schemas
             try
             {
                 if (this.InputModuleTool != null)
-                {                
+                {
                     this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                     this.Procedure.Run();
 
@@ -240,6 +251,26 @@ namespace SamhwaInspection.Schemas
                 return false;
             }
 
+        }
+
+        public void 슬롯부20Point검사설정()
+        {
+            for (int lop = 0; lop < this.Slot20PointGroupMouduleTool.Count; lop++)
+            {
+                if (this.Slot20PointGroupMouduleTool[lop] != null)
+                    this.Slot20PointGroupMouduleTool[lop].IsForbidden = !Global.환경설정.슬롯부20Point검사;
+            }
+
+        }
+
+        public void 슬롯부200Point검사설정()
+        {
+            for (int lop = 0; lop < this.Slot200PointGroupMouduleTool.Count; lop++)
+            {
+                if (this.Slot200PointGroupMouduleTool[lop] != null)
+                    this.Slot200PointGroupMouduleTool[lop].IsForbidden = !Global.환경설정.슬롯부200Point검사;
+            }
+                
         }
 
         public Boolean Run(Mat mat)
