@@ -333,6 +333,7 @@
     <Compile Include="Schemas\검사도구모음.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사정보.cs" />
+    <Compile Include="Schemas\그랩제어2.cs" />
     <Compile Include="Schemas\로그정보.cs" />
     <Compile Include="Schemas\모델정보.cs" />
     <Compile Include="Schemas\비전마스터구동.cs" />

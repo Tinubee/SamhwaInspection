@@ -54,19 +54,19 @@ namespace SamhwaInspection.Schemas
         PRODUCT_INDEX6,
     }
 
-    public enum Connector
-    {
-        M,
-        A,
-        B,
-    }
+    //public enum Connector
+    //{
+    //    M,
+    //    A,
+    //    B,
+    //}
 
-    public enum AcquisitionMode
-    {
-        PAGE,
-        LONGPAGE,
-        WEB
-    }
+    //public enum AcquisitionMode
+    //{
+    //    PAGE,
+    //    LONGPAGE,
+    //    WEB
+    //}
 
     public enum LineRateMode
     {
@@ -85,15 +85,15 @@ namespace SamhwaInspection.Schemas
         ADR,
     }
 
-    public enum TrigMode
-    {
-        IMMEDIATE,
-        HARD,
-        SOFT,
-        COMBINED,
-        OFF,
-        ON
-    }
+    //public enum TrigMode
+    //{
+    //    IMMEDIATE,
+    //    HARD,
+    //    SOFT,
+    //    COMBINED,
+    //    OFF,
+    //    ON
+    //}
 
     public enum MvCamAcquisitionMode
     {
@@ -165,23 +165,23 @@ namespace SamhwaInspection.Schemas
 
     #region ConvertStringToVar
 
-    public static class ChannelState
-    {
-        [Description("채널은 그래버를 소유하고 있지만 잠금상태는 아님.")]
-        public const string IDLE = "IDLE";
+    //public static class ChannelState
+    //{
+    //    [Description("채널은 그래버를 소유하고 있지만 잠금상태는 아님.")]
+    //    public const string IDLE = "IDLE";
 
-        [Description("채널은 그래버를 사용합니다.")]
-        public const string ACTIVE = "ACTIVE";
+    //    [Description("채널은 그래버를 사용합니다.")]
+    //    public const string ACTIVE = "ACTIVE";
 
-        [Description("채널에 그래버가 없습니다.")]
-        public const string ORPHAN = "ORPHAN";
+    //    [Description("채널에 그래버가 없습니다.")]
+    //    public const string ORPHAN = "ORPHAN";
 
-        [Description("채널은 그래버를 잠그고 acquisition sequence를 시작할 준비가 됨.")]
-        public const string READY = "READY";
+    //    [Description("채널은 그래버를 잠그고 acquisition sequence를 시작할 준비가 됨.")]
+    //    public const string READY = "READY";
 
-        [Description("채널의 상태를 ORPHAN으로 설정합니다.")]
-        public const string FREE = "FREE";
-    }
+    //    [Description("채널의 상태를 ORPHAN으로 설정합니다.")]
+    //    public const string FREE = "FREE";
+    //}
 
     #endregion ConvertStringToVar
 

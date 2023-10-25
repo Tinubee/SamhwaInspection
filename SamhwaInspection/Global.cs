@@ -26,6 +26,7 @@ namespace SamhwaInspection
     {
         private const String 로그영역 = "프로그램";
         public static 그랩제어 그랩제어;
+        public static 그랩제어2 그랩제어2;
         public static Mvs그랩제어 Mvs그랩제어;
         public static List<CCameraInfo> m_ltDeviceList = new List<CCameraInfo>();
         public static List<CCamera> Cam = new List<CCamera>();
@@ -62,6 +63,7 @@ namespace SamhwaInspection
             try
             {
                 그랩제어 = new 그랩제어();
+                그랩제어2 = new 그랩제어2();
                 Mvs그랩제어 = new Mvs그랩제어();
                 Debug.WriteLine("Global 카메라 제어 클래스 생성");
                 환경설정 = new 환경설정();
@@ -81,8 +83,12 @@ namespace SamhwaInspection
                 Debug.WriteLine("Global 비전마스터구동 클래스 생성");
                 검사자료 = new 검사자료();
                 Debug.WriteLine("Global 검사자료 클래스 생성");
-                그랩제어.Init();
-                Mvs그랩제어.Init();
+
+                그랩제어2.Init();
+
+
+                //그랩제어.Init();
+                //Mvs그랩제어.Init();
                 Debug.WriteLine("카메라 제어 클래스 Init완료");
                 환경설정.Init();
                 Debug.WriteLine("환경설정 클래스 Init완료");

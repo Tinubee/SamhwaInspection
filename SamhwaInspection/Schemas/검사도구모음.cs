@@ -75,6 +75,11 @@ namespace SamhwaInspection.Schemas
 
             //Y축에 따라 오름차순으로 정렬하여 리턴
             blobs.Sort((rect1, rect2) => rect1.Y.CompareTo(rect2.Y));
+
+
+
+
+
             Debug.WriteLine("Sort완료");
             return blobs;
         }

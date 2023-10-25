@@ -27,6 +27,7 @@ using OpenCvSharp.ML;
 using System.Runtime.InteropServices;
 using DevExpress.Drawing.Internal.Fonts.Interop;
 using static VMControls.WPF.ModuleResultView;
+using GlobalVariableModuleCs;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -37,9 +38,10 @@ namespace SamhwaInspection.UI.Control
             InitializeComponent();
         }
 
-        private CameraType 카메라1 = CameraType.Camera1;
+        //private CameraType 카메라1 = CameraType.Camera1;
+        private 카메라구분 카메라1 = 카메라구분.Cam02;
         private delegate void 이미지그랩완료보고대리자(AcquisitionData Data);
-        private Cam cam1;
+        private 카메라장치 cam1;
         private Boolean isCompleted_Camera1 = false;
         private Boolean isGrabCompleted_Page1;
         private Boolean isGrabCompleted_Page2;
@@ -56,7 +58,7 @@ namespace SamhwaInspection.UI.Control
         {
             if (cam1 == null)
             {
-                cam1 = Global.그랩제어.GetItem(카메라1);
+                cam1 = Global.그랩제어2.GetItem(카메라1);
                 cam1.AcquisitionFinishedEvent += Paint_camImage;
                 this.cam1.Active();
             }
@@ -173,25 +175,40 @@ namespace SamhwaInspection.UI.Control
                         Global.조명제어.TurnOff(조명구분.BACK);
                         // 이미지 연결
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-                        roiAlign = new Rect(6400, 0, 1800, 2 * height_cam);
+                        roiAlign = new Rect(6400, 0, 2000, 2 * height_cam);
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
                         Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         int blobCount = blobs.Count();
-                        for (int lop = 0; lop < blobCount; lop++)
+                        //List<int> emptyImageIndex = new List<int>();
+                        if(blobCount != 6)
                         {
-                            Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
-                            if (blobs[lop].Y < 2000)
-                                roi[lop] = new Rect(0, 0, width_cam, 13000);
-                            else
+                            for (int lop = 0; lop < blobCount; lop++)
                             {
-                                if (blobs[lop].Y < 15000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                else if (blobs[lop].Y < 28000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                else if (blobs[lop].Y < 43000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                else if (blobs[lop].Y < 55000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                                if (blobs[lop].Y < 2000)
+                                    roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                else
+                                {
+                                    if (blobs[lop].Y < 12000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                    else if (blobs[lop].Y < 26000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                    else if (blobs[lop].Y < 40000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                    else if (blobs[lop].Y < 52000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                    else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                    else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                }
                             }
                         }
+                        else
+                        {
+                            for (int lop = 0; lop < blobCount; lop++)
+                            {
+                                if (blobs[lop].Y < 2000)
+                                    roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                else
+                                    roi[lop] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            }
+                        }
+                       
 
                         for (int lop = 0; lop < roi.Length; lop++)
                         {
@@ -212,9 +229,18 @@ namespace SamhwaInspection.UI.Control
                         for (int lop = 0; lop < roi.Length; lop++)
                             roi[lop].Y = 0;
 
+                        //int flowNum = 0;
                         Debug.WriteLine("자동검사 시작");
-                        for (int i = 0; i < splitImage.Length; i++)
-                            자동검사(splitImage[i], (Flow구분)i);
+                        if (Global.신호제어.마스터모드여부 == 1)
+                        {
+                            //GlobalVariableModuleTool.SetGlobalVar("topFlatness_Value", topFlatnessData[(int)구분]);
+                            자동검사(splitImage[0], (Flow구분)0);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < splitImage.Length; i++)
+                                자동검사(splitImage[i], (Flow구분)i);
+                        }
 
                         isCompleted_Camera1 = true;
                         Debug.WriteLine("카메라1 검사완료");

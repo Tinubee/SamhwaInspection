@@ -270,7 +270,18 @@ namespace SamhwaInspection.Schemas
                 if (this.Slot200PointGroupMouduleTool[lop] != null)
                     this.Slot200PointGroupMouduleTool[lop].IsForbidden = !Global.환경설정.슬롯부200Point검사;
             }
-                
+
+        }
+
+        private void 마스터모드체크()
+        {
+            if (this.구분 == Flow구분.Flow1)
+            {
+                if (Global.신호제어.마스터모드여부 == 1)
+                    this.GlobalVariableModuleTool.SetGlobalVar("마스터모드", "1");
+                else
+                    this.GlobalVariableModuleTool.SetGlobalVar("마스터모드", "0");
+            }
         }
 
         public Boolean Run(Mat mat)
@@ -279,6 +290,7 @@ namespace SamhwaInspection.Schemas
             this.결과업데이트완료 = false;
             if (this.InputModuleTool != null)
             {
+                마스터모드체크();
                 SetFlatnessData(); //평탄도 데이터 셋팅.
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();

@@ -63,6 +63,7 @@ namespace SamhwaInspection.UI.Control
             {
                 if (currentValue_마스터모드 > 0)
                 {
+                    //this.버튼UI변경(this.b운전모드, currentValue_마스터모드, "MASTER", "MANUAL");
                     //Global.조명제어.TurnOn(조명구분.BACK);
                     Debug.WriteLine("조명켬");
                 }
