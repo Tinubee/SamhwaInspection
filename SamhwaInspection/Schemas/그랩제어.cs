@@ -5,7 +5,6 @@ using Euresys.MultiCam;
 using IvmUtils;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
-//using MvUtils;
 using Newtonsoft.Json;
 using OpenCvSharp;
 using System;
@@ -109,7 +108,7 @@ namespace SamhwaInspection.Schemas
     }
     #endregion ConvertStringToVar
 
-    public class 그랩제어2 : Dictionary<CameraType, 카메라장치>
+    public class 그랩제어 : Dictionary<CameraType, 카메라장치>
     {
         //public delegate void 그랩완료대리자(카메라구분 구분, CogImage8Grey 이미지);
         public delegate void 그랩완료대리자(CameraType 구분, Mat 이미지);
@@ -134,8 +133,8 @@ namespace SamhwaInspection.Schemas
 
             this.카메라1 = new EuresysLink(CameraType.Cam01) { 코드 = "" };
             this.카메라2 = new HikeGigE() { 구분 = CameraType.Cam02, 코드 = "K38332378" };
-            this.카메라3 = new HikeGigE() { 구분 = CameraType.Cam03, 코드 = "DA0286474" };
-            this.카메라4 = new HikeGigE() { 구분 = CameraType.Cam04, 코드 = "DA0286475" };
+            this.카메라3 = new HikeGigE() { 구분 = CameraType.Cam03, 코드 = "02DA0286474" };
+            this.카메라4 = new HikeGigE() { 구분 = CameraType.Cam04, 코드 = "02DA0286475" };
             this.Add(CameraType.Cam01, this.카메라1);
             this.Add(CameraType.Cam02, this.카메라2);
             this.Add(CameraType.Cam03, this.카메라3);
@@ -196,51 +195,11 @@ namespace SamhwaInspection.Schemas
 
         public void 그랩완료(CameraType 카메라, Mat 이미지)
         {
-
-            //Int32 검사번호 = Global.장치통신.촬영위치번호(카메라);
-            if(카메라 == CameraType.Cam03)
-            {
-                Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지);
-            }
-            if (카메라 == CameraType.Cam04)
-            {
-                Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지);
-            }
+            if (카메라 == CameraType.Cam02) Global.비전마스터구동.GetItem(Flow구분.유무검사).유무검사(이미지);
+            if (카메라 == CameraType.Cam03) Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지);
+            if (카메라 == CameraType.Cam04) Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지);
             Debug.WriteLine($"{카메라} 그랩완료");
-            //if (검사번호 > 0)
-            //{
-            //    Task.Run(() =>
-            //    {
-            //        //Global.비전마스터구동.GetItem(카메라).Run(이미지);
-            //        //Debug.WriteLine($"{구분} : Flow Run");
-            //        //Global.VM제어.GetItem(카메라).Run(이미지, null);
-            //        //ImageSave(이미지, 카메라, 검사번호, 결과구분.OK);
-            //    });
-            //}
-            //else Global.경고로그(로그영역, "비전검사", $"카메라 [{Utils.GetDescription(카메라)}]의 검사 Index가 없습니다.", true);
-
             this.그랩완료보고?.Invoke(카메라, 이미지);
-        }
-
-        public void 그랩완료(CameraType 카메라, Mat[] 이미지)
-        {
-
-            //Int32 검사번호 = Global.장치통신.촬영위치번호(카메라);
-            Debug.WriteLine($"{카메라} 그랩완료");
-            //if (검사번호 > 0)
-            //{
-            //    Task.Run(() =>
-            //    {
-            //        //Global.비전마스터구동.GetItem(카메라).Run(이미지);
-            //        //Debug.WriteLine($"{구분} : Flow Run");
-            //        //Global.VM제어.GetItem(카메라).Run(이미지, null);
-            //        //ImageSave(이미지, 카메라, 검사번호, 결과구분.OK);
-            //    });
-            //}
-            //else Global.경고로그(로그영역, "비전검사", $"카메라 [{Utils.GetDescription(카메라)}]의 검사 Index가 없습니다.", true);
-
-            //this.그랩완료보고?.Invoke(카메라, 이미지);
-            //Global.조명제어?.TurnOff(카메라);
         }
 
         public void ImageSave(Mat 이미지, CameraType 카메라, Int32 검사번호, 결과구분 결과)
@@ -402,18 +361,18 @@ namespace SamhwaInspection.Schemas
         public override Boolean Init()
         {
             Int32 nRet = this.Camera.CreateHandle(ref Device);
-            if (!그랩제어2.Validate($"[{this.구분}] 카메라 초기화에 실패하였습니다.", nRet, true)) return false;
+            if (!그랩제어.Validate($"[{this.구분}] 카메라 초기화에 실패하였습니다.", nRet, true)) return false;
             
             nRet = this.Camera.OpenDevice();
-            if (!그랩제어2.Validate($"[{this.구분}] 카메라 연결 실패!", nRet, true)) return false;
+            if (!그랩제어.Validate($"[{this.구분}] 카메라 연결 실패!", nRet, true)) return false;
             
-            그랩제어2.Validate("", this.Camera.SetBoolValue("BlackLevelEnable", true), false);
+            그랩제어.Validate("", this.Camera.SetBoolValue("BlackLevelEnable", true), false);
             
             this.옵션적용();
             
             Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
             
-            그랩제어2.Validate("RegisterImageCallBackEx", this.Camera.RegisterImageCallBackEx(this.ImageCallBackDelegate, IntPtr.Zero), false);
+            그랩제어.Validate("RegisterImageCallBackEx", this.Camera.RegisterImageCallBackEx(this.ImageCallBackDelegate, IntPtr.Zero), false);
             return true;
         }
 
@@ -421,14 +380,14 @@ namespace SamhwaInspection.Schemas
         {
             //this.노출적용();
             //this.대비적용();
-            this.밝기적용();
+            //this.밝기적용();
         }
 
         public void 밝기적용() // Black Level : 0 ~ 4095
         {
             if (this.Camera == null) return;
             Int32 nRet = this.Camera.SetIntValue("BlackLevel", this.밝기); //this.Camera.SetBrightness(this.밝기);
-            그랩제어2.Validate($"[{this.구분}] 밝기 설정에 실패하였습니다.", nRet, true);
+            그랩제어.Validate($"[{this.구분}] 밝기 설정에 실패하였습니다.", nRet, true);
         }
 
         ////public void 노출적용()
@@ -448,7 +407,7 @@ namespace SamhwaInspection.Schemas
 
         public override Boolean Start()
         {
-            return 그랩제어2.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
+            return 그랩제어.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
         }
 
         public override Boolean Ready()
@@ -462,24 +421,24 @@ namespace SamhwaInspection.Schemas
             if (this.Camera == null || !this.상태) return true;
             //this.Stop();
             //this.Camera.ClearImageBuffer();
-            return 그랩제어2.Validate($"{this.구분} 종료오류!", Camera.CloseDevice(), false);
+            return 그랩제어.Validate($"{this.구분} 종료오류!", Camera.CloseDevice(), false);
         }
 
         public override Boolean Stop()
         {
             Camera.ClearImageBuffer();
-            return 그랩제어2.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
+            return 그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
         }
 
         #region 이미지 그랩
-        public Boolean TrigForce() => 그랩제어2.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
+        public Boolean TrigForce() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
 
         private void ImageCallBack(IntPtr data, ref MV_FRAME_OUT_INFO_EX frameInfo, IntPtr user)
         {
             try
             {
                 Mat image = new Mat(frameInfo.nHeight, frameInfo.nWidth, MatType.CV_8U, data);
-                Global.그랩제어2.그랩완료(this.구분, image);
+                Global.그랩제어.그랩완료(this.구분, image);
                 this.Stop();
             }
             catch (Exception ex)
@@ -506,7 +465,6 @@ namespace SamhwaInspection.Schemas
         [JsonIgnore, Description("채널번호")]
         public UInt32 Channel;
         [JsonIgnore, Description("카메라 설정 파일")]
-        //public string CamFile { get; set; } = "LineCameraConfig.cam";
         public string CamFile { get; set; } = "LA-CM-16K05A_L16380SC.cam";
         [JsonIgnore, Description("그래버 보드 Index")]
         public UInt32 DriverIndex { get; set; } = 0;
@@ -536,6 +494,7 @@ namespace SamhwaInspection.Schemas
         {
             this.구분 = 구분;
             this.상태 = Init();
+            this.AcquisitionFinishedEvent += AcquisitionFinishedEvent;
         }
 
         public override Boolean Init()
@@ -675,7 +634,7 @@ namespace SamhwaInspection.Schemas
         {
             //AcquisitionData acq = new AcquisitionData(this.Camera, this.ProductIndex);
             AcquisitionData acq = new AcquisitionData(this.구분, PageIndex);
-            Mat image = new Mat();
+            //Mat image = new Mat();
             PageIndex += 1;
             if (PageIndex == 3) PageIndex = 1;
 
@@ -683,7 +642,7 @@ namespace SamhwaInspection.Schemas
             {
                 IntPtr BufferAddress;
                 MC.GetParam(SurfaceAddr, "SurfaceAddr", out BufferAddress);
-                image = new Mat(Height, Width, MatType.CV_8U, BufferAddress);
+                //image = new Mat(Height, Width, MatType.CV_8U, BufferAddress);
                 //Global.그랩제어2.그랩완료(this.구분, image);
                 acq.SetImage(new OpenCvSharp.Mat(Height, Width, OpenCvSharp.MatType.CV_8U, BufferAddress));
             }

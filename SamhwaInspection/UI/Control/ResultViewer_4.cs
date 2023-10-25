@@ -58,7 +58,7 @@ namespace SamhwaInspection.UI.Control
         {
             if (cam1 == null)
             {
-                cam1 = (EuresysLink)Global.그랩제어2.GetItem(카메라1);
+                cam1 = (EuresysLink)Global.그랩제어.GetItem(카메라1);
                 cam1.AcquisitionFinishedEvent += Paint_camImage;
                 this.cam1.Ready();
             }

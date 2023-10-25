@@ -26,7 +26,7 @@ namespace SamhwaInspection
     {
         private const String 로그영역 = "프로그램";
         //public static 그랩제어 그랩제어;
-        public static 그랩제어2 그랩제어2;
+        public static 그랩제어 그랩제어;
         //public static Mvs그랩제어 Mvs그랩제어;
         //public static List<CCameraInfo> m_ltDeviceList = new List<CCameraInfo>();
         //public static List<CCamera> Cam = new List<CCamera>();
@@ -62,7 +62,7 @@ namespace SamhwaInspection
             Debug.WriteLine(GetGuid(), "Process GUID");
             try
             {
-                그랩제어2 = new 그랩제어2();
+                그랩제어 = new 그랩제어();
                 Debug.WriteLine("Global 카메라 제어 클래스 생성");
                 환경설정 = new 환경설정();
                 Debug.WriteLine("Global 환경설정 클래스 생성");
@@ -82,7 +82,7 @@ namespace SamhwaInspection
                 검사자료 = new 검사자료();
                 Debug.WriteLine("Global 검사자료 클래스 생성");
 
-                그랩제어2.Init();
+                그랩제어.Init();
                 Debug.WriteLine("카메라 제어 클래스 Init완료");
                 환경설정.Init();
                 Debug.WriteLine("환경설정 클래스 Init완료");
@@ -122,7 +122,7 @@ namespace SamhwaInspection
             Global.정보로그(로그영역, "종료", "프로그램을 종료합니다.", false);
             try
             {
-                그랩제어2?.Close();
+                그랩제어?.Close();
                 Debug.WriteLine("그랩Close");
                 조명제어?.Close();
                 Debug.WriteLine("조명Close");

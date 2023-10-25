@@ -447,7 +447,7 @@
             // 
             // Bind카메라설정
             // 
-            this.Bind카메라설정.DataSource = typeof(SamhwaInspection.Schemas.그랩제어2);
+            this.Bind카메라설정.DataSource = typeof(SamhwaInspection.Schemas.그랩제어);
             // 
             // GridView1
             // 

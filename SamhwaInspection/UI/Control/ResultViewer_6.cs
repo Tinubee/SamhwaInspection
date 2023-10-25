@@ -59,7 +59,7 @@ namespace SamhwaInspection.UI.Control
         {
             if (cam1 == null)
             {
-                cam1 = (EuresysLink)Global.그랩제어2.GetItem(카메라1);
+                cam1 = (EuresysLink)Global.그랩제어.GetItem(카메라1);
                 cam1.AcquisitionFinishedEvent += Paint_camImage;
                 this.cam1.Ready();
             }
@@ -90,7 +90,7 @@ namespace SamhwaInspection.UI.Control
 
             for (int i = 0; i < roi.Length; i++)
             {
-                roi[i] = new Rect(0, i*20000, width_cam, 25000);
+                roi[i] = new Rect(0, i * 20000, width_cam, 25000);
                 splitImage[i] = new Mat(25000, width_cam, MatType.CV_8UC1);
             }
             #endregion
@@ -134,7 +134,7 @@ namespace SamhwaInspection.UI.Control
         {
             try
             {
-                if(Global.모델자료.선택모델.디스플레이개수 != 6) return;
+                if (Global.모델자료.선택모델.디스플레이개수 != 6) return;
                 Debug.WriteLine("Paint까지 들어옴");
                 if (Data.BmpImage == null) return;
                 if (this.InvokeRequired)
@@ -171,23 +171,45 @@ namespace SamhwaInspection.UI.Control
                         Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         int blobCount = blobs.Count();
                         //List<int> emptyImageIndex = new List<int>();
-                        if(blobCount != 6)
+                        if (blobCount != 6)
                         {
                             for (int lop = 0; lop < blobCount; lop++)
                             {
                                 Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
-                                if (blobs[lop].Y < 2000)
-                                    roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
                                 else
                                 {
-                                    if (blobs[lop].Y < 12000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                    else if (blobs[lop].Y < 26000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                    else if (blobs[lop].Y < 40000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                    else if (blobs[lop].Y < 52000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                    else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                    else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                    roi[lop] = new Rect(0, blobs[lop - 1].Y - 1500, width_cam, 13000);
                                 }
+
+                                //Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                                //if (blobs[lop].Y < 2000)
+                                //    roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                //else
+                                //{
+                                //    if (blobs[lop].Y < 12000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                //    else if (blobs[lop].Y < 26000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                //    else if (blobs[lop].Y < 40000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                //    else if (blobs[lop].Y < 54000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                //    else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                //    else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                //}
                             }
+                            //for (int lop = 0; lop < blobCount; lop++)
+                            //{
+                            //    Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                            //    if (blobs[lop].Y < 2000)
+                            //        roi[lop] = new Rect(0, 0, width_cam, 13000);
+                            //    else
+                            //    {
+                            //        if (blobs[lop].Y < 12000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            //        else if (blobs[lop].Y < 26000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            //        else if (blobs[lop].Y < 40000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            //        else if (blobs[lop].Y < 54000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            //        else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            //        else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                            //    }
+                            //}
                         }
                         else
                         {
@@ -199,7 +221,7 @@ namespace SamhwaInspection.UI.Control
                                     roi[lop] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
                             }
                         }
-                       
+
 
                         for (int lop = 0; lop < roi.Length; lop++)
                         {
@@ -216,7 +238,7 @@ namespace SamhwaInspection.UI.Control
                             Debug.WriteLine($"변경된 roi Y 크기 : {lop}번째 {roi[lop].Y}");
                             splitImage[lop] = new Mat(mergedImage, roi[lop]);
                         }
-                    
+
                         for (int lop = 0; lop < roi.Length; lop++)
                             roi[lop].Y = 0;
 
@@ -245,7 +267,7 @@ namespace SamhwaInspection.UI.Control
             {
                 Debug.WriteLine(ex.Message);
             }
-          }
+        }
 
         private void 결과정보생성(Mat img1, bool result)
         {

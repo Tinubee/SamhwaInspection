@@ -56,7 +56,7 @@ namespace SamhwaInspection.UI.Control
             this.GridView1.OptionsBehavior.Editable = true;
             this.GridView1.OptionsView.ShowAutoFilterRow = false;
             this.GridView1.OptionsView.ShowFooter = false;
-            this.GridControl1.DataSource = Global.그랩제어2;
+            this.GridControl1.DataSource = Global.그랩제어;
 
             this.GridView2.Init();
             this.GridView2.OptionsBehavior.Editable = true;
@@ -175,7 +175,7 @@ namespace SamhwaInspection.UI.Control
         private void BtnSaveSetting_Click(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
-            Global.그랩제어2.Save();
+            Global.그랩제어.Save();
             Global.조명제어.Save();
             Global.비전마스터구동.Save();
             //Global.mainForm.변수업데이트();
