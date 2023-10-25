@@ -28,6 +28,7 @@ using System.Runtime.InteropServices;
 using DevExpress.Drawing.Internal.Fonts.Interop;
 using static VMControls.WPF.ModuleResultView;
 using DevExpress.XtraRichEdit.Model;
+using static SamhwaInspection.Schemas.EuresysLink;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -37,9 +38,9 @@ namespace SamhwaInspection.UI.Control
         {
             InitializeComponent();
         }
-        private CameraType 카메라1 = CameraType.Camera1;
+        private CameraType 카메라1 = CameraType.Cam01;
         private delegate void 이미지그랩완료보고대리자(AcquisitionData Data);
-        private Cam cam1;
+        private EuresysLink cam1;
         private Boolean isCompleted_Camera1 = false;
         private Boolean isGrabCompleted_Page1;
         private Boolean isGrabCompleted_Page2;
@@ -57,9 +58,9 @@ namespace SamhwaInspection.UI.Control
         {
             if (cam1 == null)
             {
-                cam1 = Global.그랩제어.GetItem(카메라1);
+                cam1 = (EuresysLink)Global.그랩제어2.GetItem(카메라1);
                 cam1.AcquisitionFinishedEvent += Paint_camImage;
-                this.cam1.Active();
+                this.cam1.Ready();
             }
             //Viewer와 Tool 연결
             vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.Flow1));

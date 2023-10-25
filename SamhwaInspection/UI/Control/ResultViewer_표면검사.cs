@@ -43,7 +43,7 @@ namespace SamhwaInspection.UI.Control
             InitializeComponent();
         }
 
-        private CameraType 카메라1 = CameraType.Camera1;
+        private CameraType 카메라1 = CameraType.Cam01;
 
         public Bitmap tempBitmap;
         public Mat Page1Image;
@@ -74,7 +74,6 @@ namespace SamhwaInspection.UI.Control
                 vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 3);
                 vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 4);
                 vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 5);
-                카메라그랩활성화(1);
             }
             else
             {
@@ -84,7 +83,6 @@ namespace SamhwaInspection.UI.Control
                 vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 3);
                 vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
                 vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
-                카메라그랩활성화(2);
             }
          
             #region 검사결과 설정
@@ -94,19 +92,6 @@ namespace SamhwaInspection.UI.Control
             this.myGridView1.CustomDrawCell += MyGridView1_CustomDrawCell;
             this.검사목록BindingSource.DataSource = Global.모델자료.선택모델.검사목록;
             #endregion
-        }
-
-        public void 카메라그랩활성화(int 카메라번호)
-        {
-            int nRet = 0;
-            Global.Grabbing[카메라번호] = false;
-            Task.Run(() => { ReceiveTaskProcess(Global.Cam[카메라번호], 카메라번호); });
-
-            nRet = Global.Cam[카메라번호].StartGrabbing();
-            if (CErrorDefine.MV_OK != nRet)
-            {
-                Debug.WriteLine($"{Global.Cam[카메라번호]}Start Grabbing Fail! {nRet}");
-            }
         }
 
         private void MyGridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -132,60 +117,6 @@ namespace SamhwaInspection.UI.Control
             this.myGridControl1.RefreshDataSource();
             Debug.WriteLine("데이터리프레시완료");
         }
-
-        public void ReceiveTaskProcess(CCamera cam, int index)
-        {
-            CFrameout pcFrameInfo = new CFrameout();
-            CDisplayFrameInfo pcDisplayInfo = new CDisplayFrameInfo();
-            CPixelConvertParam pcConvertParam = new CPixelConvertParam();
-            Object BufForDriverLock = new Object();
-            CImage m_pcImgForDriver;        // 이미지 정보
-            CFrameSpecInfo m_pcImgSpecInfo; // 이미지 워터마크 정보
-            int nRet = CErrorDefine.MV_OK;
-
-            while (Global.Grabbing[index])
-            {
-                nRet = cam.GetImageBuffer(ref pcFrameInfo, 1000);
-
-                if (nRet == CErrorDefine.MV_OK)
-                {
-                    lock (BufForDriverLock)
-                    {
-                        m_pcImgForDriver = pcFrameInfo.Image.Clone() as CImage;
-                        m_pcImgSpecInfo = pcFrameInfo.FrameSpec;
-
-                        pcConvertParam.InImage = pcFrameInfo.Image;
-                        if (PixelFormat.Format8bppIndexed == Global.Bitmap[index].PixelFormat)
-                        {
-                            pcConvertParam.OutImage.PixelType = MvGvspPixelType.PixelType_Gvsp_Mono8;
-                            cam.ConvertPixelType(ref pcConvertParam);
-                        }
-                        else
-                        {
-                            pcConvertParam.OutImage.PixelType = MvGvspPixelType.PixelType_Gvsp_BGR8_Packed;
-                            cam.ConvertPixelType(ref pcConvertParam);
-                        }
-                        BitmapData m_pcBitmapData = Global.Bitmap[index].LockBits(new Rectangle(0, 0, pcConvertParam.InImage.Width, pcConvertParam.InImage.Height), ImageLockMode.ReadWrite, Global.Bitmap[index].PixelFormat);
-                        Marshal.Copy(pcConvertParam.OutImage.ImageData, 0, m_pcBitmapData.Scan0, (Int32)pcConvertParam.OutImage.ImageData.Length);
-                        Global.Bitmap[index].UnlockBits(m_pcBitmapData);
-                    }
-
-                    cam.DisplayOneFrame(ref pcDisplayInfo);
-                    cam.FreeImageBuffer(ref pcFrameInfo);
-
-                    Mat mat = BitmapConverter.ToMat(Global.Bitmap[index]);
-                    bool result = false;
-                    Flow구분 구분 = this.검사면 == 검사면.앞면 ? Flow구분.표면검사앞 : Flow구분.표면검사뒤;
-                    result = Global.비전마스터구동.GetItem(구분).표면검사(mat);
-                    Global.Grabbing[index] = false;
-                }
-                else
-                {
-
-                }
-            }
-        }
-
 
         private void 결과정보생성(Mat img1, bool result)
         {

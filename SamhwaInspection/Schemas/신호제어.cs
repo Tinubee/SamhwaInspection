@@ -301,12 +301,18 @@ namespace SamhwaInspection.Schemas
                         //}
                         if (정보.주소 == "W0021" & 정보.값 == 1) // 유무검사 트리거신호
                         {
-                            int nRet = Global.Cam[0].SetCommandValue("TriggerSoftware");
-                            if (CErrorDefine.MV_OK != nRet)
-                            {
-                                Debug.WriteLine($"Trigger Software Fail! {nRet}");
-                            }
-                            SendValueToPLC(정보.주소, 0);
+                            //int nRet = Global.Cam[0].SetCommandValue("TriggerSoftware");
+                            //if (CErrorDefine.MV_OK != nRet)
+                            //{
+                            //    Debug.WriteLine($"Trigger Software Fail! {nRet}");
+                            //}
+                            //SendValueToPLC(정보.주소, 0);
+                            // Global.그랩제어.Ready(카메라구분.Cam03);
+                        }
+                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사 트리거신호
+                        {
+                            Debug.WriteLine("표면검사뒷면 트리거신호 들어옴");
+                            Global.그랩제어2.Ready(CameraType.Cam03);
                         }
 
                         // 치수검사 트리거 On일 경우( F지그, R지그 둘 중 하나라도 On이면 실행)
@@ -315,10 +321,7 @@ namespace SamhwaInspection.Schemas
                             //조명키고
                             Global.조명제어.TurnOn(조명구분.BACK);
                             SendValueToPLC(정보.주소, 0);
-                            //시간체크 함수 Start -> 검사시간
-                            Global.그랩제어[0].ProductIndex = ProductIndex.PRODUCT_INDEX1;
-                            //카메라 Software Trig날림(영상찍기 시작)
-                            Global.그랩제어[0].SoftTrig();
+                            Global.그랩제어2.카메라1.SoftTrig();
                         }
                         if ((정보.주소 == "W0040") && 정보.값 == 1) //상부 평탄도 검사 데이터 트리거
                         {

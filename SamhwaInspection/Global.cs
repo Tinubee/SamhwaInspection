@@ -25,14 +25,14 @@ namespace SamhwaInspection
     public static class Global
     {
         private const String 로그영역 = "프로그램";
-        public static 그랩제어 그랩제어;
+        //public static 그랩제어 그랩제어;
         public static 그랩제어2 그랩제어2;
-        public static Mvs그랩제어 Mvs그랩제어;
-        public static List<CCameraInfo> m_ltDeviceList = new List<CCameraInfo>();
-        public static List<CCamera> Cam = new List<CCamera>();
-        public static List<Bitmap> Bitmap = new List<Bitmap>();
-        public static List<PixelFormat> PixelFormat = new List<PixelFormat>();
-        public static List<bool> Grabbing = new List<bool>();
+        //public static Mvs그랩제어 Mvs그랩제어;
+        //public static List<CCameraInfo> m_ltDeviceList = new List<CCameraInfo>();
+        //public static List<CCamera> Cam = new List<CCamera>();
+        //public static List<Bitmap> Bitmap = new List<Bitmap>();
+        //public static List<PixelFormat> PixelFormat = new List<PixelFormat>();
+        //public static List<bool> Grabbing = new List<bool>();
         public static 환경설정 환경설정;
         public static 유저자료 유저자료;
         public static 신호제어 신호제어;
@@ -62,9 +62,7 @@ namespace SamhwaInspection
             Debug.WriteLine(GetGuid(), "Process GUID");
             try
             {
-                그랩제어 = new 그랩제어();
                 그랩제어2 = new 그랩제어2();
-                Mvs그랩제어 = new Mvs그랩제어();
                 Debug.WriteLine("Global 카메라 제어 클래스 생성");
                 환경설정 = new 환경설정();
                 Debug.WriteLine("Global 환경설정 클래스 생성");
@@ -85,10 +83,6 @@ namespace SamhwaInspection
                 Debug.WriteLine("Global 검사자료 클래스 생성");
 
                 그랩제어2.Init();
-
-
-                //그랩제어.Init();
-                //Mvs그랩제어.Init();
                 Debug.WriteLine("카메라 제어 클래스 Init완료");
                 환경설정.Init();
                 Debug.WriteLine("환경설정 클래스 Init완료");
@@ -128,7 +122,7 @@ namespace SamhwaInspection
             Global.정보로그(로그영역, "종료", "프로그램을 종료합니다.", false);
             try
             {
-                그랩제어?.Close();
+                그랩제어2?.Close();
                 Debug.WriteLine("그랩Close");
                 조명제어?.Close();
                 Debug.WriteLine("조명Close");

@@ -53,7 +53,7 @@ namespace SamhwaInspection.Schemas
     public class 검사정보
     {
         [JsonProperty("cam")]
-        public CameraType 카메라구분 { get; set; } = CameraType.Camera1;
+        public CameraType 카메라구분 { get; set; } = CameraType.Cam01;
         [JsonProperty("ord")]
         public Int32 검사번호 { get; set; } = 0;
         [JsonProperty("name"), Description("검사명")]

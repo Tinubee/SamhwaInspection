@@ -321,12 +321,6 @@
   <ItemGroup>
     <Compile Include="Global.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Schemas\MvsCameraControl.cs" />
-    <Compile Include="Schemas\MvsCamConfig.cs" />
-    <Compile Include="Schemas\MvsCam.cs" />
-    <Compile Include="Schemas\Cam.cs" />
-    <Compile Include="Schemas\CamConfig.cs" />
-    <Compile Include="Schemas\CameraControl.cs" />
     <Compile Include="Schemas\Data\BaseTable.cs" />
     <Compile Include="Schemas\LightController.cs" />
     <Compile Include="Schemas\VmGlobals.cs" />
@@ -375,12 +369,6 @@
     </Compile>
     <Compile Include="UI\Control\ResultList.Designer.cs">
       <DependentUpon>ResultList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Control\ResultViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Control\ResultViewer.Designer.cs">
-      <DependentUpon>ResultViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\ResultViewer_표면검사2.cs">
       <SubType>UserControl</SubType>
@@ -472,12 +460,6 @@
     <Compile Include="UI\Control\CountViewer.Designer.cs">
       <DependentUpon>CountViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Control\ResultCam.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Control\ResultCam.Designer.cs">
-      <DependentUpon>ResultCam.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Control\State.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -524,14 +506,8 @@
     <EmbeddedResource Include="UI\Control\Models.resx">
       <DependentUpon>Models.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Control\ResultCam.resx">
-      <DependentUpon>ResultCam.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultList.resx">
       <DependentUpon>ResultList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Control\ResultViewer.resx">
-      <DependentUpon>ResultViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultViewer_표면검사2.resx">
       <DependentUpon>ResultViewer_표면검사2.cs</DependentUpon>

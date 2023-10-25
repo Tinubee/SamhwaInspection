@@ -28,6 +28,7 @@ using System.Runtime.InteropServices;
 using DevExpress.Drawing.Internal.Fonts.Interop;
 using static VMControls.WPF.ModuleResultView;
 using GlobalVariableModuleCs;
+using static SamhwaInspection.Schemas.EuresysLink;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -39,9 +40,9 @@ namespace SamhwaInspection.UI.Control
         }
 
         //private CameraType 카메라1 = CameraType.Camera1;
-        private 카메라구분 카메라1 = 카메라구분.Cam02;
+        private CameraType 카메라1 = CameraType.Cam01;
         private delegate void 이미지그랩완료보고대리자(AcquisitionData Data);
-        private 카메라장치 cam1;
+        private EuresysLink cam1;
         private Boolean isCompleted_Camera1 = false;
         private Boolean isGrabCompleted_Page1;
         private Boolean isGrabCompleted_Page2;
@@ -58,9 +59,9 @@ namespace SamhwaInspection.UI.Control
         {
             if (cam1 == null)
             {
-                cam1 = Global.그랩제어2.GetItem(카메라1);
+                cam1 = (EuresysLink)Global.그랩제어2.GetItem(카메라1);
                 cam1.AcquisitionFinishedEvent += Paint_camImage;
-                this.cam1.Active();
+                this.cam1.Ready();
             }
 
             vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.Flow1));
@@ -92,16 +93,6 @@ namespace SamhwaInspection.UI.Control
                 roi[i] = new Rect(0, i*20000, width_cam, 25000);
                 splitImage[i] = new Mat(25000, width_cam, MatType.CV_8UC1);
             }
-
-            //roi1 = new Rect(0, 0, width_cam, 25000);
-            //roi2 = new Rect(0, 20000, width_cam, 25000);
-            //roi3 = new Rect(0, 40000, width_cam, 25000);
-            //roi4 = new Rect(0, 60000, width_cam, 25000);
-
-            //splitImage1 = new Mat(25000, width_cam, MatType.CV_8UC1);
-            //splitImage2 = new Mat(25000, width_cam, MatType.CV_8UC1);
-            //splitImage3 = new Mat(25000, width_cam, MatType.CV_8UC1);
-            //splitImage4 = new Mat(25000, width_cam, MatType.CV_8UC1);
             #endregion
         }
 

@@ -50,7 +50,7 @@ namespace SamhwaInspection.UI.Control
             #region 카메라목록 LookUpEdit설정
             EnumToList 카메라목록 = new EnumToList(typeof(CameraType));
             카메라목록.SetLookUpEdit(this.e카메라선택);
-            this.e카메라선택.EditValue = CameraType.Camera1;
+            this.e카메라선택.EditValue = CameraType.Cam01;
             this.e카메라선택.EditValueChanged += E카메라선택_EditValueChanged;
             #endregion
 
@@ -114,15 +114,15 @@ namespace SamhwaInspection.UI.Control
 
         private void B카메라촬영_Click(object sender, EventArgs e)
         {
-            int camNumber = (int)this.카메라;
+            //int camNumber = (int)this.카메라;
 
-            if (camNumber == 0) return;
+            //if (camNumber == 0) return;
 
-            int nRet = Global.Cam[camNumber - 1].SetCommandValue("TriggerSoftware");
-            if (CErrorDefine.MV_OK != nRet)
-            {
-                Debug.WriteLine($"Trigger Software Fail! {nRet}");
-            }
+            //int nRet = Global.Cam[camNumber - 1].SetCommandValue("TriggerSoftware");
+            //if (CErrorDefine.MV_OK != nRet)
+            //{
+            //    Debug.WriteLine($"Trigger Software Fail! {nRet}");
+            //}
         }
 
         private void B수동검사_Click(object sender, EventArgs e)

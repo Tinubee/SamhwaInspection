@@ -13,7 +13,6 @@ using System.Text;
 using System.Threading.Tasks;
 using VM.Core;
 using VM.PlatformSDKCS;
-using static SamhwaInspection.Schemas.CamConfig;
 using ShellModuleCs;
 using DevExpress.Utils.Extensions;
 using GlobalVariableModuleCs;
@@ -187,9 +186,9 @@ namespace SamhwaInspection.Schemas
             this.결과업데이트완료 = false;
             try
             {
-                if (this.InputModuleTool != null)
+                if (this.InputModuleTool_List != null)
                 {
-                    this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
+                    this.InputModuleTool_List[0].SetImageData(MatToImageBaseData(mat));
                     this.Procedure.Run();
 
                     String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
