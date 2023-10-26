@@ -27,7 +27,7 @@ namespace SamhwaInspection.Schemas
     [Description("MELSEC Q13UDV")]
     public class 신호제어
     {
-        public event Global.BaseEvent 동작상태알림;
+        //public event Global.BaseEvent 동작상태알림;
         public ActUtlType64 PLC = null;
         public Boolean 작업여부 = false;
         public static String 로그영역 = "장치통신";
@@ -180,10 +180,7 @@ namespace SamhwaInspection.Schemas
         //private DotUtlType PLC2 = null;
         private BackgroundWorker cclink_thred;
         private BackgroundWorker cclink_echo;
-        private BackgroundWorker send_thred;
-
-
-
+        //private BackgroundWorker send_thred;
 
         int thred_roop_index = 0;
         private 주소자료 입출자료 = new 주소자료();
@@ -301,59 +298,54 @@ namespace SamhwaInspection.Schemas
                         //}
                         if (정보.주소 == "W0021" & 정보.값 == 1) // 유무검사 트리거신호
                         {
-                            //int nRet = Global.Cam[0].SetCommandValue("TriggerSoftware");
-                            //if (CErrorDefine.MV_OK != nRet)
-                            //{
-                            //    Debug.WriteLine($"Trigger Software Fail! {nRet}");
-                            //}
-                            //Debug.WriteLine("공트레이 비전 트리거신호 들어옴");
                             SendValueToPLC(정보.주소, 0);
-                            Global.그랩제어.GetItem(CameraType.Cam02).Ready();
+                            Global.그랩제어.카메라2.Ready();
                             Global.그랩제어.카메라2.TrigForce();
-                            //Global.그랩제어2.Ready(CameraType.Cam02);
                         }
-                        //if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사 트리거신호
-                        //{
-                        //    Debug.WriteLine("표면검사뒷면 트리거신호 들어옴");
-                        //    SendValueToPLC(정보.주소, 0);
-                        //    Global.그랩제어.GetItem(CameraType.Cam03).Ready();
-                        //    Global.그랩제어.카메라3.TrigForce();
-                        //    //Global.그랩제어2.카메라3.TrigForce();
-                        //    //Global.그랩제어2.Ready(CameraType.Cam03);
-                        //}
 
-                        //if (정보.주소 == "W002E" & 정보.값 == 1) // 표면검사 트리거신호
-                        //{
-                        //    Debug.WriteLine("표면검사앞면 트리거신호 들어옴");
-                        //    SendValueToPLC(정보.주소, 0);
-                        //    Global.그랩제어.GetItem(CameraType.Cam04).Ready();
-                        //    Global.그랩제어.카메라4.TrigForce();
-                        //}
+                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사 트리거신호
+                        {
+                            //Debug.WriteLine("표면검사뒷면 트리거신호 들어옴");
+                            //Global.조명제어.TurnOn(조명구분.후면검사조명);
+                            //SendValueToPLC(정보.주소, 0);
+                            //Global.그랩제어.카메라3.Ready();
+                            //Global.그랩제어.카메라3.TrigForce();
+                        }
+
+                        if (정보.주소 == "W002E" & 정보.값 == 1) // 표면검사 트리거신호
+                        {
+                            Debug.WriteLine("표면검사앞면 트리거신호 들어옴");
+                            Global.그랩제어.카메라4.MatImage.Clear();
+                            Global.조명제어.TurnOn(조명구분.상면검사조명);
+                            SendValueToPLC(정보.주소, 0);
+                            Global.그랩제어.카메라4.Ready();
+                            Global.그랩제어.카메라4.TrigForce();
+                        }
                         // 치수검사 트리거 On일 경우( F지그, R지그 둘 중 하나라도 On이면 실행)
                         if (정보.주소 == "W0028" & 정보.값 == 1)
                         {
                             //조명키고
                             Global.조명제어.TurnOn(조명구분.BACK);
                             SendValueToPLC(정보.주소, 0);
-                            Global.그랩제어.카메라1.ProductIndex = ProductIndex.PRODUCT_INDEX1;
+                            //Global.그랩제어.카메라1.ProductIndex = ProductIndex.PRODUCT_INDEX1;
                             Global.그랩제어.카메라1.SoftTrig();
                         }
                         if ((정보.주소 == "W0040") && 정보.값 == 1) //상부 평탄도 검사 데이터 트리거
                         {
                             Global.bFlatnessData = true;
                             //\0050~W0061 상부 평탄도 데이터
-                            Debug.Write("상부 평탄도 데이터 획득 시작");
+                            //Debug.Write("상부 평탄도 데이터 획득 시작");
                             GetFlatnessData(0x50);
                             SendValueToPLC(정보.주소, 0);
-                            Debug.Write("상부 평탄도 데이터 획득 종료");
+                            //Debug.Write("상부 평탄도 데이터 획득 종료");
                         }
                         if ((정보.주소 == "W0041") && 정보.값 == 1) //하부 평탄도 검사 데이터 트리거
                         {
                             //\0062~W0072 하부 평탄도 데이터
-                            Debug.Write("하부 평탄도 데이터 획득 시작");
+                            //Debug.Write("하부 평탄도 데이터 획득 시작");
                             GetFlatnessData(0x62);
                             SendValueToPLC(정보.주소, 0);
-                            Debug.Write("하부 평탄도 데이터 획득 종료");
+                            //Debug.Write("하부 평탄도 데이터 획득 종료");
                             Global.bFlatnessData = false;
                         }
                     }

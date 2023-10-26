@@ -25,14 +25,7 @@ namespace SamhwaInspection
     public static class Global
     {
         private const String 로그영역 = "프로그램";
-        //public static 그랩제어 그랩제어;
         public static 그랩제어 그랩제어;
-        //public static Mvs그랩제어 Mvs그랩제어;
-        //public static List<CCameraInfo> m_ltDeviceList = new List<CCameraInfo>();
-        //public static List<CCamera> Cam = new List<CCamera>();
-        //public static List<Bitmap> Bitmap = new List<Bitmap>();
-        //public static List<PixelFormat> PixelFormat = new List<PixelFormat>();
-        //public static List<bool> Grabbing = new List<bool>();
         public static 환경설정 환경설정;
         public static 유저자료 유저자료;
         public static 신호제어 신호제어;

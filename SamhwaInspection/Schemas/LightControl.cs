@@ -18,8 +18,8 @@ namespace SamhwaInspection.Schemas
     #region EnumSection
     public enum 조명구분
     {
-        TOP1 = 1,
-        TOP2 = 2,
+        후면검사조명 = 1,
+        상면검사조명 = 2,
         TOP3 = 3,
         BACK = 4,
     }
@@ -59,14 +59,13 @@ namespace SamhwaInspection.Schemas
         private const String 로그영역 = "조명컨트롤";
         public void Init()
         {
-            
-            this.Controller1 = new LightController(조명포트.COM3, 19200, $"{Convert.ToChar(2)}", $"{Convert.ToChar(3)}");
+            this.Controller1 = new LightController(조명포트.COM3, 9600, $"{Convert.ToChar(2)}", $"{Convert.ToChar(3)}");
             this.Controller2 = new LightController(조명포트.COM4, 19200, $"{Convert.ToChar(2)}", $"{Convert.ToChar(3)}");
             this.Controller1.Init();
             this.Controller2.Init();
 
-            this.Add(new 조명정보() { 구분 = 조명구분.TOP1, 채널 = 조명채널.CH1, 밝기 = 100, lightController = Controller1, 포트 = Controller1.포트 });
-            this.Add(new 조명정보() { 구분 = 조명구분.TOP2, 채널 = 조명채널.CH2, 밝기 = 100, lightController = Controller1, 포트 = Controller1.포트 });
+            this.Add(new 조명정보() { 구분 = 조명구분.후면검사조명, 채널 = 조명채널.CH1, 밝기 = 100, lightController = Controller1, 포트 = Controller1.포트 });
+            this.Add(new 조명정보() { 구분 = 조명구분.상면검사조명, 채널 = 조명채널.CH6, 밝기 = 100, lightController = Controller1, 포트 = Controller1.포트 });
             this.Add(new 조명정보() { 구분 = 조명구분.BACK, 채널 = 조명채널.CH1, 밝기 = 100, lightController = Controller2, 포트 = Controller2.포트 });
             Debug.WriteLine("조명정보 추가 완료");
             this.Save();
@@ -167,17 +166,12 @@ namespace SamhwaInspection.Schemas
             if (IsOn) this.TurnOn(구분);
             else this.TurnOff(구분);
         }
-
-
-
-
     }
-
 
     public class 조명정보
     {
         [JsonProperty("LightType")]
-        public 조명구분 구분 { get; set; } = 조명구분.TOP1;
+        public 조명구분 구분 { get; set; } = 조명구분.후면검사조명;
         [JsonProperty("Port")]
         public 조명포트 포트 { get; set; } = 조명포트.None;
         [JsonProperty("Channel")]

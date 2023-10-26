@@ -42,10 +42,6 @@ namespace SamhwaInspection.UI.Control
         private CameraType 카메라1 = CameraType.Cam03;
         //private CameraType 카메라2 = CameraType.Camera2;
         private delegate void 이미지그랩완료보고대리자(AcquisitionData Data);
-
-
-
-        private HikeGigE cam1;
         //private Cam cam2;
         private Boolean isCompleted_Camera1 = false;
 
@@ -162,14 +158,14 @@ namespace SamhwaInspection.UI.Control
             try
             {
                 if (Global.모델자료.선택모델.디스플레이개수 != 4) return;
-                Debug.WriteLine("Paint까지 들어옴");
+                //Debug.WriteLine("Paint까지 들어옴");
                 if (Data.BmpImage == null) return;
                 if (this.InvokeRequired)
                 {
                     this.Invoke(new 이미지그랩완료보고대리자(Paint_camImage), new object[] { Data });
                     return;
                 }
-                Debug.WriteLine("이프문 전");
+                //Debug.WriteLine("이프문 전");
                 if (Data.Camera == 카메라1)
                 {
                     // 여기에 6개 분할 로직 추가
@@ -185,106 +181,9 @@ namespace SamhwaInspection.UI.Control
                     }
 
 
-                    Debug.WriteLine("자동검사 전");
+                    //Debug.WriteLine("자동검사 전");
                     if (isGrabCompleted_Page1 & isGrabCompleted_Page2)
                     {
-                        isGrabCompleted_Page1 = false;
-                        isGrabCompleted_Page2 = false;
-
-
-                        //if (Global.환경설정.메뉴얼검사확인)
-                        //{
-
-                        //    splitImage1 = Cv2.ImRead(Path.Combine(Global.환경설정.기본경로, "TestImage\\1.bmp"),ImreadModes.Grayscale);
-                        //    splitImage2 = Cv2.ImRead(Path.Combine(Global.환경설정.기본경로, "TestImage\\2.bmp"),ImreadModes.Grayscale);
-                        //    splitImage3 = Cv2.ImRead(Path.Combine(Global.환경설정.기본경로, "TestImage\\3.bmp"), ImreadModes.Grayscale);
-                        //    splitImage4 = Cv2.ImRead(Path.Combine(Global.환경설정.기본경로, "TestImage\\4.bmp"), ImreadModes.Grayscale);
-
-                        //    //중간 시간체크
-                        //    Global.tactTimeChecker.Check("Align 후 이미지 자르기");
-
-                        //    자동검사(splitImage1, Flow구분.Flow1);
-                        //    자동검사(splitImage2, Flow구분.Flow2);
-                        //    자동검사(splitImage3, Flow구분.Flow3);
-                        //    자동검사(splitImage4, Flow구분.Flow4);
-
-                        //    isCompleted_Camera1 = true;
-                        //    Debug.WriteLine("카메라1 검사완료");
-
-                        //    //검사 완료 시간 확인
-                        //    Global.tactTimeChecker.Stop();
-                        //    return;
-
-                        //}
-
-
-                        //조명 끔
-                        Global.조명제어.TurnOff(조명구분.BACK);
-                        // 이미지 연결
-                        Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-                        roiAlign = new Rect(9300, 0, 2000, 2 * height_cam);
-                        List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
-                        Debug.WriteLine($"Blob 개수 : {blobs.Count}");
-
-                        if (Global.신호제어.마스터모드여부 == 1)
-                        {
-                            if (blobs.Count != 1)
-                            {
-                                for (int i = 0; i < blobs.Count(); i++)
-                                {
-                                    Debug.WriteLine($"1개 아닐때 {i}번 blob Y 크기 : {blobs[i].Y}");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (blobs.Count != 4)
-                            {
-                                for (int i = 0; i < blobs.Count(); i++)
-                                {
-                                    Debug.WriteLine($"4개 아닐때 {i}번 blob Y 크기 : {blobs[i].Y}");
-                                }
-                                for (int lop = 0; lop < 4; lop++)
-                                {
-                                    Global.신호제어.PLC.SetDevice2($"W000{lop}", 2);
-                                    if (lop == 3)
-                                    {
-                                        Debug.WriteLine("트리거신호 초기화");
-                                        Global.신호제어.SendValueToPLC("W0020", 0);
-                                    }
-                                }
-                                return;
-                            }
-                        }
-
-                        for (int i = 0; i < roi.Length; i++)
-                        {
-                            Debug.WriteLine($"Blob Y 크기 : {blobs[i].Y}");
-                            if (blobs[i].Y < 2000)
-                            {
-                                roi[i] = new Rect(0, 0, width_cam, 20000);
-                            }
-                            else
-                            {
-                                roi[i] = new Rect(0, blobs[i].Y - 2000, width_cam, 20000);
-                            }
-
-                            splitImage[i] = new Mat(mergedImage, roi[i]);
-                        }
-                        Debug.WriteLine("자동검사 시작");
-                        if (Global.신호제어.마스터모드여부 == 1)
-                        {
-                            자동검사(splitImage[0], (Flow구분)0);
-                        }
-                        else
-                        {
-                            for (int i = 0; i < splitImage.Length; i++)
-                            {
-                                자동검사(splitImage[i], (Flow구분)i);
-                            }
-                        }
-                        isCompleted_Camera1 = true;
-                        Debug.WriteLine("카메라1 검사완료");
                         //Global.신호제어.SendValueToPLC("W0020", 0);
                     }
                 }

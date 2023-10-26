@@ -79,7 +79,15 @@ namespace SamhwaInspection.Schemas
             }
             try
             {
-                SerialPort.Write($"{STX}{채널}{Command}{ETX}");
+                if (Command.StartsWith("w"))
+                {
+                    int channelNumber = Convert.ToInt32(채널);
+                    for (int lop = channelNumber ; lop < channelNumber + 4; lop++)
+                        SerialPort.Write($"{STX}{lop}{Command}{ETX}");
+                }
+                else
+                    SerialPort.Write($"{STX}{채널}{Command}{ETX}");
+                
                 //Debug.WriteLine($"{STX}{Command}{ETX}");
                 return true;
             }
@@ -101,12 +109,28 @@ namespace SamhwaInspection.Schemas
         public Boolean TurnOn(조명정보 정보)
         {
             //return SendCommand($"{(Int32)정보.채널}", $"{정보.밝기}");
-            return SendCommand($"{(Int32)정보.채널}", "o0000");
+            //후면검사 조명 : 1,2,3,4  상부검사 조명 : 6,7,8,9
+            if(정보.포트 == 조명포트.COM3)
+            {
+                return SendCommand($"{(Int32)정보.채널}", "w0100");
+            }
+            else
+            {
+                return SendCommand($"{(Int32)정보.채널}", "o0000");
+            }
         }
         public Boolean TurnOff(조명정보 정보)
         {
+            if (정보.포트 == 조명포트.COM3)
+            {
+                return SendCommand($"{(Int32)정보.채널}", "w0000");
+            }
+            else
+            {
+                return SendCommand($"{(Int32)정보.채널}", "f0000");
+            }
             //return SendCommand($"{(Int32)정보.채널}", "000");
-            return SendCommand($"{(Int32)정보.채널}", "f0000");
+           
         }
 
     }

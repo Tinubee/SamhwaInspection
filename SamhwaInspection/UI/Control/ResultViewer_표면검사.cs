@@ -43,8 +43,6 @@ namespace SamhwaInspection.UI.Control
             InitializeComponent();
         }
 
-        private CameraType 카메라1 = CameraType.Cam01;
-
         public Bitmap tempBitmap;
         public Mat Page1Image;
         public Mat Page2Image;

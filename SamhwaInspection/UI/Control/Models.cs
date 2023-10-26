@@ -30,7 +30,7 @@ namespace SamhwaInspection.UI.Control
     public partial class Models : DevExpress.XtraEditors.XtraUserControl
     {
         public delegate void CompleteAreaClick();
-        public event CompleteAreaClick CompleteArea;
+        //public event CompleteAreaClick CompleteArea;
 
         private CameraType 카메라 { get { return (CameraType)this.e카메라선택.EditValue; } }
         private Int32 모델번호 { get { return IvmUtils.Utils.IntValue(this.e모델선택.EditValue); } }

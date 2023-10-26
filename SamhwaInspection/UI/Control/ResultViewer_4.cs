@@ -161,7 +161,7 @@ namespace SamhwaInspection.UI.Control
                         isGrabCompleted_Page2 = true;
                     }
 
-                    Debug.WriteLine("자동검사 전");
+                    //Debug.WriteLine("자동검사 전");
                     if (isGrabCompleted_Page1 & isGrabCompleted_Page2)
                     {
                         isGrabCompleted_Page1 = false;
@@ -172,11 +172,11 @@ namespace SamhwaInspection.UI.Control
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
                         roiAlign = new Rect(9300, 0, 2000, 2 * height_cam);
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
-                        Debug.WriteLine($"Blob 개수 : {blobs.Count}");
+                        //Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         int blobCount = blobs.Count();
                         for (int lop = 0; lop < blobCount; lop++)
                         {
-                            Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                            //Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
                             if (blobs[lop].Y < 2000)
                             {
                                 roi[lop] = new Rect(0, 0, width_cam, 20000);
@@ -205,7 +205,7 @@ namespace SamhwaInspection.UI.Control
                         for (int lop = 0; lop < roi.Length; lop++)
                             roi[lop].Y = 0;
 
-                        Debug.WriteLine("자동검사 시작");
+                        //Debug.WriteLine("자동검사 시작");
                         if (Global.신호제어.마스터모드여부 == 1)
                             자동검사(splitImage[0], (Flow구분)0);
                         else
@@ -215,7 +215,7 @@ namespace SamhwaInspection.UI.Control
                         }
 
                         isCompleted_Camera1 = true;
-                        Debug.WriteLine("카메라1 검사완료");
+                        //Debug.WriteLine("카메라1 검사완료");
                     }
                 }
 

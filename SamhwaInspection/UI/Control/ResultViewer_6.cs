@@ -135,14 +135,14 @@ namespace SamhwaInspection.UI.Control
             try
             {
                 if (Global.모델자료.선택모델.디스플레이개수 != 6) return;
-                Debug.WriteLine("Paint까지 들어옴");
+                //Debug.WriteLine("Paint까지 들어옴");
                 if (Data.BmpImage == null) return;
                 if (this.InvokeRequired)
                 {
                     this.Invoke(new 이미지그랩완료보고대리자(Paint_camImage), new object[] { Data });
                     return;
                 }
-                Debug.WriteLine("이프문 전");
+                //Debug.WriteLine("이프문 전");
                 if (Data.Camera == 카메라1)
                 {
                     if (Data.PageIndex == 1)
@@ -155,7 +155,7 @@ namespace SamhwaInspection.UI.Control
                         Page2Image = Data.MatImage;
                         isGrabCompleted_Page2 = true;
                     }
-                    Debug.WriteLine("자동검사 전");
+                    //Debug.WriteLine("자동검사 전");
                     if (isGrabCompleted_Page1 & isGrabCompleted_Page2)
                     {
                         isGrabCompleted_Page1 = false;
@@ -168,14 +168,14 @@ namespace SamhwaInspection.UI.Control
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
                         roiAlign = new Rect(6400, 0, 2000, 2 * height_cam);
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
-                        Debug.WriteLine($"Blob 개수 : {blobs.Count}");
+                        //Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         int blobCount = blobs.Count();
                         //List<int> emptyImageIndex = new List<int>();
                         if (blobCount != 6)
                         {
                             for (int lop = 0; lop < blobCount; lop++)
                             {
-                                Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                                //Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
                                 if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
                                 else
                                 {
@@ -225,7 +225,7 @@ namespace SamhwaInspection.UI.Control
 
                         for (int lop = 0; lop < roi.Length; lop++)
                         {
-                            Debug.WriteLine($"roi Y 크기 : {lop}번째 {roi[lop].Y}");
+                            //Debug.WriteLine($"roi Y 크기 : {lop}번째 {roi[lop].Y}");
                             if (roi[lop].Y == 0)
                             {
                                 if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
@@ -235,7 +235,7 @@ namespace SamhwaInspection.UI.Control
                                 if (lop == 4) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
                                 if (lop == 5) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
                             }
-                            Debug.WriteLine($"변경된 roi Y 크기 : {lop}번째 {roi[lop].Y}");
+                            //Debug.WriteLine($"변경된 roi Y 크기 : {lop}번째 {roi[lop].Y}");
                             splitImage[lop] = new Mat(mergedImage, roi[lop]);
                         }
 
@@ -243,7 +243,7 @@ namespace SamhwaInspection.UI.Control
                             roi[lop].Y = 0;
 
                         //int flowNum = 0;
-                        Debug.WriteLine("자동검사 시작");
+                        //Debug.WriteLine("자동검사 시작");
                         if (Global.신호제어.마스터모드여부 == 1)
                         {
                             //GlobalVariableModuleTool.SetGlobalVar("topFlatness_Value", topFlatnessData[(int)구분]);
@@ -256,7 +256,7 @@ namespace SamhwaInspection.UI.Control
                         }
 
                         isCompleted_Camera1 = true;
-                        Debug.WriteLine("카메라1 검사완료");
+                        //Debug.WriteLine("카메라1 검사완료");
                     }
                 }
                 //모든 검사가 끝나면 실행. 여기서는 아직 카메라 1개만 구현되어 있으므로 아래와 같음.

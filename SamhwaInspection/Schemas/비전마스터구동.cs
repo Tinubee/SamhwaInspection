@@ -19,6 +19,7 @@ using GlobalVariableModuleCs;
 using DataSetModuleCs;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.CodeParser.Diagnostics;
 
 namespace SamhwaInspection.Schemas
 {
@@ -49,14 +50,18 @@ namespace SamhwaInspection.Schemas
             VmSolution.Instance.DisableModulesCallback();
             for (int i = 0; i < 9; i++)
             {
-                if (i > 5)
+                if (i > 5) //7,8
                 {
+                    
                     string plcAddress = string.Empty;
                     if (i == 6) plcAddress = $"W0015";
                     base.Add(new 비전마스터플로우((Flow구분)i, plcAddress));
                 }
-                else
+                else //0,1,2,3,4,5, 6 
+                {
                     base.Add(new 비전마스터플로우((Flow구분)i, $"W000{i}"));
+                }
+                    
             }
 
             if (Global.mainForm != null)
@@ -94,7 +99,6 @@ namespace SamhwaInspection.Schemas
         public List<ShellModuleTool> ShellModuleTool_List = new List<ShellModuleTool>();
 
         public delegate void InspectionFinished(GraphicsSetModuleTool graphicTool);
-        public event InspectionFinished InspectionFinishedEvent;
         public ShellModuleTool ShellModuleTool;
         public ShellResult shellResult;
 
@@ -134,7 +138,7 @@ namespace SamhwaInspection.Schemas
                         this.graphicsSetModuleTool_List.Add(this.Procedure[$"resultImage{lop + 1}"] as GraphicsSetModuleTool);
                         this.InputModuleTool_List.Add(this.Procedure[$"originImage{lop + 1}"] as ImageSourceModuleTool);
                         this.ShellModuleTool_List.Add(this.Procedure[$"AllResult{lop + 1}"] as ShellModuleTool);
-                        this.PLC결과어드레스 = $"W000{lop}";
+                        this.PLC결과어드레스 = this.구분 == Flow구분.표면검사뒤 ? $"W009{lop}" : $"W00A{lop}";
                     }
                 }
                 else
@@ -170,8 +174,8 @@ namespace SamhwaInspection.Schemas
                 bottomFlatnessData[i] = string.Join(",", chunkBottom);
             }
 
-            Debug.WriteLine($"{구분}_상부 평탄도 데이터 : {topFlatnessData[(int)구분]}");
-            Debug.WriteLine($"{구분}_하부 평탄도 데이터 : {bottomFlatnessData[(int)구분]}");
+            //Debug.WriteLine($"{구분}_상부 평탄도 데이터 : {topFlatnessData[(int)구분]}");
+            //Debug.WriteLine($"{구분}_하부 평탄도 데이터 : {bottomFlatnessData[(int)구분]}");
 
             if (GlobalVariableModuleTool != null)
             {
@@ -180,7 +184,7 @@ namespace SamhwaInspection.Schemas
             }
         }
 
-        public Boolean 표면검사(Mat mat)
+        public Boolean 표면검사(List<Mat> matList)
         {
             this.결과 = false;
             this.결과업데이트완료 = false;
@@ -188,7 +192,9 @@ namespace SamhwaInspection.Schemas
             {
                 if (this.InputModuleTool_List != null)
                 {
-                    this.InputModuleTool_List[0].SetImageData(MatToImageBaseData(mat));
+                    for (int lop = 0; lop < matList.Count; lop++)
+                        this.InputModuleTool_List[lop].SetImageData(MatToImageBaseData(matList[lop]));
+                    //this.InputModuleTool_List[0].SetImageData(MatToImageBaseData(mat));
                     this.Procedure.Run();
 
                     String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
@@ -303,7 +309,7 @@ namespace SamhwaInspection.Schemas
                     {
                         if (this.PLC결과어드레스 == "W0003")
                         {
-                            Debug.WriteLine("트리거신호 초기화");
+                            //Debug.WriteLine("트리거신호 초기화");
                             Global.신호제어.SendValueToPLC("W0020", 0);
                         }
                     }
@@ -311,7 +317,7 @@ namespace SamhwaInspection.Schemas
                     {
                         if (this.PLC결과어드레스 == "W0005")
                         {
-                            Debug.WriteLine("트리거신호 초기화");
+                            //Debug.WriteLine("트리거신호 초기화");
                             Global.신호제어.SendValueToPLC("W0020", 0);
                         }
                     }
@@ -324,7 +330,7 @@ namespace SamhwaInspection.Schemas
                     {
                         if (this.PLC결과어드레스 == "W0003")
                         {
-                            Debug.WriteLine("트리거신호 초기화");
+                            //Debug.WriteLine("트리거신호 초기화");
                             Global.신호제어.SendValueToPLC("W0020", 0);
                         }
                     }
@@ -332,13 +338,13 @@ namespace SamhwaInspection.Schemas
                     {
                         if (this.PLC결과어드레스 == "W0005")
                         {
-                            Debug.WriteLine("트리거신호 초기화");
+                            //Debug.WriteLine("트리거신호 초기화");
                             Global.신호제어.SendValueToPLC("W0020", 0);
                         }
                     }
                 }
-                Debug.WriteLine($"{this.PLC결과어드레스} 신호 날림");
-                Debug.WriteLine("Process RUN", $"{this.구분}");
+                //Debug.WriteLine($"{this.PLC결과어드레스} 신호 날림");
+                //Debug.WriteLine("Process RUN", $"{this.구분}");
                 return this.결과;
             }
 
