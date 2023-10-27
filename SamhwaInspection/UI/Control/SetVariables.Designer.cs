@@ -338,6 +338,7 @@
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
+            this.GridControl1.Visible = false;
             // 
             // SetVariables
             // 

@@ -139,7 +139,7 @@ namespace SamhwaInspection.UI.Control
 
             검사상태표현(Global.환경설정.현재결과상태);
             this.환경설정BindingSource.ResetBindings(false);
-            Debug.WriteLine("결과업데이트 완료 in MainForm.");
+            //Debug.WriteLine("결과업데이트 완료 in MainForm.");
 
         }
 

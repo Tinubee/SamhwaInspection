@@ -110,9 +110,10 @@ namespace SamhwaInspection.Schemas
         {
             //return SendCommand($"{(Int32)정보.채널}", $"{정보.밝기}");
             //후면검사 조명 : 1,2,3,4  상부검사 조명 : 6,7,8,9
-            if(정보.포트 == 조명포트.COM3)
+            Debug.WriteLine($"{조명포트.COM3} - {정보.채널} 조명 ON");
+            if (정보.포트 == 조명포트.COM3)
             {
-                return SendCommand($"{(Int32)정보.채널}", "w0100");
+                return SendCommand($"{(Int32)정보.채널}", "w1023");
             }
             else
             {
@@ -121,6 +122,7 @@ namespace SamhwaInspection.Schemas
         }
         public Boolean TurnOff(조명정보 정보)
         {
+            Debug.WriteLine($"{조명포트.COM3} - {정보.채널} 조명 OFF");
             if (정보.포트 == 조명포트.COM3)
             {
                 return SendCommand($"{(Int32)정보.채널}", "w0000");

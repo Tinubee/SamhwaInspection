@@ -232,7 +232,7 @@ namespace SamhwaInspection.Schemas
                 {
                     this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                     this.Procedure.Run();
-
+                    //Debug.WriteLine("공트레이 제품유무검사완료");
                     String resultString = this.ShellModuleTool == null ? "NG" : (ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
 
                     if (resultString == "NG")

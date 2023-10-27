@@ -168,55 +168,32 @@ namespace SamhwaInspection.UI.Control
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
                         roiAlign = new Rect(6400, 0, 2000, 2 * height_cam);
                         List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 470000, 600000);
-                        //Debug.WriteLine($"Blob 개수 : {blobs.Count}");
+                        Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         int blobCount = blobs.Count();
                         //List<int> emptyImageIndex = new List<int>();
                         if (blobCount != 6)
                         {
+                            if(blobCount > 6)
+                            {
+                                Debug.WriteLine("Blob List 첫번째 항목 제거");
+                                blobs.RemoveAt(0);
+                            }
                             for (int lop = 0; lop < blobCount; lop++)
                             {
-                                //Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
+                                Debug.WriteLine($"Blob Y 크기 {lop}번째 : {blobs[lop].Y}");
                                 if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
                                 else
                                 {
                                     roi[lop] = new Rect(0, blobs[lop - 1].Y - 1500, width_cam, 13000);
                                 }
-
-                                //Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
-                                //if (blobs[lop].Y < 2000)
-                                //    roi[lop] = new Rect(0, 0, width_cam, 13000);
-                                //else
-                                //{
-                                //    if (blobs[lop].Y < 12000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                //    else if (blobs[lop].Y < 26000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                //    else if (blobs[lop].Y < 40000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                //    else if (blobs[lop].Y < 54000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                //    else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                //    else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                                //}
                             }
-                            //for (int lop = 0; lop < blobCount; lop++)
-                            //{
-                            //    Debug.WriteLine($"Blob Y 크기 : {blobs[lop].Y}");
-                            //    if (blobs[lop].Y < 2000)
-                            //        roi[lop] = new Rect(0, 0, width_cam, 13000);
-                            //    else
-                            //    {
-                            //        if (blobs[lop].Y < 12000) roi[0] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            //        else if (blobs[lop].Y < 26000) roi[1] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            //        else if (blobs[lop].Y < 40000) roi[2] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            //        else if (blobs[lop].Y < 54000) roi[3] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            //        else if (blobs[lop].Y < 68000) roi[4] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            //        else if (blobs[lop].Y < 90000) roi[5] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            //    }
-                            //}
                         }
                         else
                         {
                             for (int lop = 0; lop < blobCount; lop++)
                             {
-                                if (blobs[lop].Y < 2000)
-                                    roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                if (blobs[lop].Y < 1500)
+                                    roi[lop] = new Rect(0, blobs[lop].Y, width_cam, 13000);
                                 else
                                     roi[lop] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
                             }
@@ -235,7 +212,7 @@ namespace SamhwaInspection.UI.Control
                                 if (lop == 4) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
                                 if (lop == 5) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
                             }
-                            //Debug.WriteLine($"변경된 roi Y 크기 : {lop}번째 {roi[lop].Y}");
+                            Debug.WriteLine($"변경된 roi Y 크기 : {lop+1}번째 {roi[lop].Y}");
                             splitImage[lop] = new Mat(mergedImage, roi[lop]);
                         }
 
