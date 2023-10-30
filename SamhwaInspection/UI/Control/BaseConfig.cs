@@ -120,7 +120,6 @@ namespace SamhwaInspection.UI.Control
             Global.비전마스터구동.글로벌변수제어.InspectUseSet("슬롯부200Pass", Convert.ToInt32(Global.환경설정.슬롯부200Point검사).ToString());
         }
 
-
         private void E불량이미지저장여부_Toggled(object sender, EventArgs e)
         {
             if (e불량이미지저장여부.IsOn)

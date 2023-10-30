@@ -181,7 +181,8 @@ namespace SamhwaInspection.Schemas
         //private DotUtlType PLC2 = null;
         private BackgroundWorker cclink_thred;
         private BackgroundWorker cclink_echo;
-        private BackgroundWorker 표면검사bk;
+        private BackgroundWorker 상부표면검사bk;
+        private BackgroundWorker 하부표면검사bk;
         //private BackgroundWorker send_thred;
 
         int thred_roop_index = 0;
@@ -258,8 +259,11 @@ namespace SamhwaInspection.Schemas
             cclink_echo.DoWork += cclink_echo_DoWork;
             cclink_echo.RunWorkerAsync(0);
 
-            표면검사bk = new BackgroundWorker();
-            표면검사bk.DoWork += 표면검사_DoWork;
+            상부표면검사bk = new BackgroundWorker();
+            상부표면검사bk.DoWork += 상부표면검사_DoWork;
+
+            하부표면검사bk = new BackgroundWorker();
+            하부표면검사bk.DoWork += 하부표면검사_DoWork;
             //표면검사bk.RunWorkerAsync(0);
         }
 
@@ -299,10 +303,6 @@ namespace SamhwaInspection.Schemas
                                 Global.비전마스터구동.Init();
                             }
                         }
-                        //if(정보.주소 == "W0011" & 정보.값 > 0) //트레이 개수
-                        //{
-                        //Debug.WriteLine($"{정보.값}");
-                        //}
                         if (정보.주소 == "W0021" & 정보.값 == 1) // 유무검사 트리거신호
                         {
                             SendValueToPLC(정보.주소, 0);
@@ -310,62 +310,46 @@ namespace SamhwaInspection.Schemas
                             Global.그랩제어.카메라2.TrigForce();
                         }
 
-                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사 트리거신호
+                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사뒷면 트리거신호
                         {
-                            //Debug.WriteLine("표면검사뒷면 트리거신호 들어옴");
-                            //Global.조명제어.TurnOn(조명구분.후면검사조명);
-                            //SendValueToPLC(정보.주소, 0);
-                            //Global.그랩제어.카메라3.Ready();
-                            //Global.그랩제어.카메라3.TrigForce();
+                            Debug.WriteLine("표면검사하부 트리거신호 들어옴");
+                            Global.그랩제어.카메라3.MatImage.Clear();
+                            Global.조명제어.TurnOn(조명구분.후면검사조명);
+                            SendValueToPLC(정보.주소, 0);
+                            Global.그랩제어.카메라3.Ready();
+                            하부표면검사bk.RunWorkerAsync(0);
                         }
 
-                        if (정보.주소 == "W002E" & 정보.값 == 1) // 표면검사 트리거신호
+                        if (정보.주소 == "W002E" & 정보.값 == 1) // 표면검사상면 트리거신호
                         {
-                            Debug.WriteLine("표면검사앞면 트리거신호 들어옴");
+                            Debug.WriteLine("표면검사상부 트리거신호 들어옴");
                             Global.그랩제어.카메라4.MatImage.Clear();
-                            //Global.그랩제어.카메라4.ClearImageBuffer();
                             Global.조명제어.TurnOn(조명구분.상면검사조명);
                             SendValueToPLC(정보.주소, 0);
                             Global.그랩제어.카메라4.Ready();
-                            //Global.그랩제어.카메라4.TrigForce();
-                            표면검사bk.RunWorkerAsync(0);
-                            //int count = 0;
-                            //while(true)
-                            //{
-                            //    if (Global.그랩제어.카메라4.MatImage.Count == 6) return;
-                            //    if(Global.그랩제어.카메라4.MatImage.Count > 0) Task.Delay(150).Wait();
-                            //    Global.그랩제어.카메라4.TrigForce();
-                            //    //count++;
-                            //}
+                            상부표면검사bk.RunWorkerAsync(0);
                         }
                         // 치수검사 트리거 On일 경우( F지그, R지그 둘 중 하나라도 On이면 실행)
                         if (정보.주소 == "W0028" & 정보.값 == 1)
                         {
-                            new Thread(() =>
-                            {
-                                //조명키고
-                                Global.조명제어.TurnOn(조명구분.BACK);
-                                SendValueToPLC(정보.주소, 0);
-                                //Global.그랩제어.카메라1.ProductIndex = ProductIndex.PRODUCT_INDEX1;
-                                Global.그랩제어.카메라1.SoftTrig();
-                            }).Start();
+                            //조명키고
+                            Global.조명제어.TurnOn(조명구분.BACK);
+                            SendValueToPLC(정보.주소, 0);
+                            //Global.그랩제어.카메라1.ProductIndex = ProductIndex.PRODUCT_INDEX1;
+                            Global.그랩제어.카메라1.SoftTrig();
                         }
                         if ((정보.주소 == "W0040") && 정보.값 == 1) //상부 평탄도 검사 데이터 트리거
                         {
                             Global.bFlatnessData = true;
                             //\0050~W0061 상부 평탄도 데이터
-                            //Debug.Write("상부 평탄도 데이터 획득 시작");
                             GetFlatnessData(0x50);
                             SendValueToPLC(정보.주소, 0);
-                            //Debug.Write("상부 평탄도 데이터 획득 종료");
                         }
                         if ((정보.주소 == "W0041") && 정보.값 == 1) //하부 평탄도 검사 데이터 트리거
                         {
                             //\0062~W0072 하부 평탄도 데이터
-                            //Debug.Write("하부 평탄도 데이터 획득 시작");
                             GetFlatnessData(0x62);
                             SendValueToPLC(정보.주소, 0);
-                            //Debug.Write("하부 평탄도 데이터 획득 종료");
                             Global.bFlatnessData = false;
                         }
                     }
@@ -379,17 +363,33 @@ namespace SamhwaInspection.Schemas
             }
         }
 
-        private void 표면검사_DoWork(object sender, DoWorkEventArgs e)
+        private void 상부표면검사_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                //int count = 0;
                 while (true)
                 {
                     if (Global.그랩제어.카메라4.MatImage.Count == 6) return;
                     //if (Global.그랩제어.카메라4.MatImage.Count > 0) Task.Delay(300).Wait();
                     Global.그랩제어.카메라4.TrigForce();
-                    //count++;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("[" + MethodBase.GetCurrentMethod().Name + "]" + ex.ToString());
+            }
+        }
+
+        private void 하부표면검사_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                while (true)
+                {
+                    if (Global.그랩제어.카메라3.MatImage.Count == 6) return;
+                    //if (Global.그랩제어.카메라4.MatImage.Count > 0) Task.Delay(300).Wait();
+                    Global.그랩제어.카메라3.TrigForce();
                 }
 
             }

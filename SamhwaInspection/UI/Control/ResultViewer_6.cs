@@ -29,6 +29,7 @@ using DevExpress.Drawing.Internal.Fonts.Interop;
 using static VMControls.WPF.ModuleResultView;
 using GlobalVariableModuleCs;
 using static SamhwaInspection.Schemas.EuresysLink;
+using DevExpress.CodeParser.Diagnostics;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -171,72 +172,77 @@ namespace SamhwaInspection.UI.Control
                         Debug.WriteLine($"Blob 개수 : {blobs.Count}");
                         int blobCount = blobs.Count();
                         //List<int> emptyImageIndex = new List<int>();
-                        if (blobCount != 6)
-                        {
-                            if(blobCount > 6)
-                            {
-                                Debug.WriteLine("Blob List 첫번째 항목 제거");
-                                blobs.RemoveAt(0);
-                            }
-                            for (int lop = 0; lop < blobCount; lop++)
-                            {
-                                Debug.WriteLine($"Blob Y 크기 {lop}번째 : {blobs[lop].Y}");
-                                if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
-                                else
-                                {
-                                    roi[lop] = new Rect(0, blobs[lop - 1].Y - 1500, width_cam, 13000);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int lop = 0; lop < blobCount; lop++)
-                            {
-                                if (blobs[lop].Y < 1500)
-                                    roi[lop] = new Rect(0, blobs[lop].Y, width_cam, 13000);
-                                else
-                                    roi[lop] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-                            }
-                        }
 
-
-                        for (int lop = 0; lop < roi.Length; lop++)
-                        {
-                            //Debug.WriteLine($"roi Y 크기 : {lop}번째 {roi[lop].Y}");
-                            if (roi[lop].Y == 0)
-                            {
-                                if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
-                                if (lop == 1) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-                                if (lop == 2) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-                                if (lop == 3) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-                                if (lop == 4) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-                                if (lop == 5) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-                            }
-                            Debug.WriteLine($"변경된 roi Y 크기 : {lop+1}번째 {roi[lop].Y}");
-                            splitImage[lop] = new Mat(mergedImage, roi[lop]);
-                        }
-
-                        for (int lop = 0; lop < roi.Length; lop++)
-                            roi[lop].Y = 0;
-
-                        //int flowNum = 0;
-                        //Debug.WriteLine("자동검사 시작");
                         if (Global.신호제어.마스터모드여부 == 1)
                         {
-                            //GlobalVariableModuleTool.SetGlobalVar("topFlatness_Value", topFlatnessData[(int)구분]);
+                            if (blobs[0].Y < 1500) roi[0] = new Rect(0, blobs[0].Y, width_cam, 13000);
+                            else
+                                roi[0] = new Rect(0, blobs[0].Y - 1500, width_cam, 13000);
+
+                            splitImage[0] = new Mat(mergedImage, roi[0]);
                             자동검사(splitImage[0], (Flow구분)0);
                         }
                         else
                         {
+                            if (blobCount != 6)
+                            {
+                                if (blobCount > 6)
+                                {
+                                    while (true)
+                                    {
+                                        Debug.WriteLine("Blob List 첫번째 항목 제거");
+                                        blobs.RemoveAt(0);
+                                        blobCount = blobs.Count();
+
+                                        if (blobCount == 6) break;
+                                    }
+                                }
+                                for (int lop = 0; lop < blobCount; lop++)
+                                {
+                                    Debug.WriteLine($"Blob Y 크기 {lop}번째 : {blobs[lop].Y}");
+                                    if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                    else
+                                    {
+                                        roi[lop] = new Rect(0, blobs[lop - 1].Y - 1500, width_cam, 13000);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (int lop = 0; lop < blobCount; lop++)
+                                {
+                                    if (blobs[lop].Y < 1500)
+                                        roi[lop] = new Rect(0, blobs[lop].Y, width_cam, 13000);
+                                    else
+                                        roi[lop] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
+                                }
+                            }
+                            for (int lop = 0; lop < roi.Length; lop++)
+                            {
+                                //Debug.WriteLine($"roi Y 크기 : {lop}번째 {roi[lop].Y}");
+                                if (roi[lop].Y == 0)
+                                {
+                                    if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
+                                    if (lop == 1) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                    if (lop == 2) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                    if (lop == 3) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                    if (lop == 4) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                    if (lop == 5) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
+                                }
+                                Debug.WriteLine($"변경된 roi Y 크기 : {lop + 1}번째 {roi[lop].Y}");
+                                splitImage[lop] = new Mat(mergedImage, roi[lop]);
+                            }
+
+                            for (int lop = 0; lop < roi.Length; lop++)
+                                roi[lop].Y = 0;
+
+
                             for (int i = 0; i < splitImage.Length; i++)
                                 자동검사(splitImage[i], (Flow구분)i);
                         }
-
                         isCompleted_Camera1 = true;
-                        //Debug.WriteLine("카메라1 검사완료");
                     }
                 }
-                //모든 검사가 끝나면 실행. 여기서는 아직 카메라 1개만 구현되어 있으므로 아래와 같음.
                 if (isCompleted_Camera1)
                     isCompleted_Camera1 = false;
             }

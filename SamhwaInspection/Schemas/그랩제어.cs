@@ -135,10 +135,10 @@ namespace SamhwaInspection.Schemas
             MC.OpenDriver();
             MC.SetParam(MC.CONFIGURATION, "ErrorLog", "error.log");
 
-            this.카메라1 = new EuresysLink(CameraType.Cam01) { 코드 = "" };
-            this.카메라2 = new HikeGigE() { 구분 = CameraType.Cam02, 코드 = "K38332378" };
-            this.카메라3 = new HikeGigE() { 구분 = CameraType.Cam03, 코드 = "02DA0286475" }; //후면
-            this.카메라4 = new HikeGigE() { 구분 = CameraType.Cam04, 코드 = "02DA0286474" }; //상면
+            this.카메라1 = new EuresysLink(CameraType.Cam01) { 코드 = "" }; //라인스캔카메라 치수검사
+            this.카메라2 = new HikeGigE() { 구분 = CameraType.Cam02, 코드 = "K38332378" }; //공트레이 제품유무검사
+            this.카메라3 = new HikeGigE() { 구분 = CameraType.Cam03, 코드 = "02DA0286475" }; //후면 표면검사
+            this.카메라4 = new HikeGigE() { 구분 = CameraType.Cam04, 코드 = "02DA0286474" }; //상면 표면검사
             this.Add(CameraType.Cam01, this.카메라1);
             this.Add(CameraType.Cam02, this.카메라2);
             this.Add(CameraType.Cam03, this.카메라3);
@@ -166,10 +166,7 @@ namespace SamhwaInspection.Schemas
                 CGigECameraInfo gigeInfo = 카메라들[i] as CGigECameraInfo;
                 HikeGigE gige = this.GetItem(gigeInfo.chSerialNumber) as HikeGigE;
                 if (gige == null) continue;
-                //Debug.WriteLine(gigeInfo.chSerialNumber, "시리얼");
                 gige.Init(gigeInfo);
-                //gige.Ready();
-                //if (gige.상태) gige.Start();
             }
 
             Debug.WriteLine($"카메라 갯수: {this.Count}");
@@ -242,20 +239,29 @@ namespace SamhwaInspection.Schemas
             if (카메라 == CameraType.Cam04)
             {
                 Debug.WriteLine($"{카메라} 이미지획득 {this.카메라4.MatImage.Count}개 완료");
-
                 Global.조명제어.TurnOff(조명구분.상면검사조명);
-
                 if (Global.비전마스터구동.Count == 0) return;
                 new Thread(() =>
                 {
                     Debug.WriteLine($"{카메라} : Flow Run");
                     Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지);
-                    ImageSave(이미지, 카메라, 0 ,결과구분.OK);
+                    //ImageSave(이미지, 카메라, 0 ,결과구분.OK);
                     //this.카메라4.MatImage.Clear();
                 }).Start();
-
             }
-            //Debug.WriteLine($"{카메라} 그랩완료");
+            else if (카메라 == CameraType.Cam03)
+            {
+                Debug.WriteLine($"{카메라} 이미지획득 {this.카메라3.MatImage.Count}개 완료");
+                Global.조명제어.TurnOff(조명구분.후면검사조명);
+                if (Global.비전마스터구동.Count == 0) return;
+                new Thread(() =>
+                {
+                    Debug.WriteLine($"{카메라} : Flow Run");
+                    Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지);
+                    //ImageSave(이미지, 카메라, 0, 결과구분.OK);
+                    //this.카메라4.MatImage.Clear();
+                }).Start();
+            }
             this.그랩완료보고2?.Invoke(카메라, 이미지);
         }
 
@@ -452,12 +458,12 @@ namespace SamhwaInspection.Schemas
             //this.밝기적용();
         }
 
-        public void 밝기적용() // Black Level : 0 ~ 4095
-        {
-            if (this.Camera == null) return;
-            Int32 nRet = this.Camera.SetIntValue("BlackLevel", this.밝기); //this.Camera.SetBrightness(this.밝기);
-            그랩제어.Validate($"[{this.구분}] 밝기 설정에 실패하였습니다.", nRet, true);
-        }
+        //public void 밝기적용() // Black Level : 0 ~ 4095
+        //{
+        //    if (this.Camera == null) return;
+        //    Int32 nRet = this.Camera.SetIntValue("BlackLevel", this.밝기); //this.Camera.SetBrightness(this.밝기);
+        //    그랩제어.Validate($"[{this.구분}] 밝기 설정에 실패하였습니다.", nRet, true);
+        //}
 
         ////public void 노출적용()
         //{
@@ -466,7 +472,6 @@ namespace SamhwaInspection.Schemas
         //    그랩제어.Validate($"[{this.구분}] 노출 설정에 실패하였습니다.", nRet, true);
         //}
 
-        //// 2K 카메라 적용 않됨
         //public void 대비적용() // Gain
         //{
         //    if (this.Camera == null) return;
@@ -525,14 +530,22 @@ namespace SamhwaInspection.Schemas
                     this.MatImage.Add(image);
                     Debug.WriteLine($"{MatImage.Count}");
                     Debug.WriteLine($"{image.Data}");
-                    //Task.Delay(200).Wait();
-                    //this.TrigForce();
                     if (Global.그랩제어.카메라4.MatImage.Count == 6)
                     {
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                         this.Stop();
                     }
-                    //}
+                }
+                else if (this.구분 == CameraType.Cam03)
+                {
+                    this.MatImage.Add(image);
+                    Debug.WriteLine($"{MatImage.Count}");
+                    Debug.WriteLine($"{image.Data}");
+                    if (Global.그랩제어.카메라3.MatImage.Count == 6)
+                    {
+                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
+                        this.Stop();
+                    }
                 }
             }
             catch (Exception ex)
