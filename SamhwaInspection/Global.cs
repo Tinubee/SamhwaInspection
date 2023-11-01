@@ -25,6 +25,7 @@ namespace SamhwaInspection
     public static class Global
     {
         private const String 로그영역 = "프로그램";
+        public static event EventHandler<Boolean> Initialized;
         public static 그랩제어 그랩제어;
         public static 환경설정 환경설정;
         public static 유저자료 유저자료;
@@ -75,8 +76,8 @@ namespace SamhwaInspection
                 검사자료 = new 검사자료();
                 Debug.WriteLine("Global 검사자료 클래스 생성");
 
-                그랩제어.Init();
-                Debug.WriteLine("카메라 제어 클래스 Init완료");
+                //그랩제어.Init();
+                //Debug.WriteLine("카메라 제어 클래스 Init완료");
                 환경설정.Init();
                 Debug.WriteLine("환경설정 클래스 Init완료");
                 //로그자료.Init();
@@ -85,21 +86,25 @@ namespace SamhwaInspection
                 Debug.WriteLine("유저자료 클래스 Init완료");
                 모델자료.Init();
                 Debug.WriteLine("모델자료 클래스 Init완료");
-                신호제어.Init();
-                Debug.WriteLine("신호제어 클래스 Init완료");
-                조명제어.Init();
-                Debug.WriteLine("조명제어 클래스 Init완료");
-                검사자료.Init();
-                Debug.WriteLine("검사자료 클래스 Init완료!");
+                //신호제어.Init();
+                //Debug.WriteLine("신호제어 클래스 Init완료");
+                //조명제어.Init();
+                //Debug.WriteLine("조명제어 클래스 Init완료");
+                //검사자료.Init();
+                //Debug.WriteLine("검사자료 클래스 Init완료!");
                 비전마스터구동.Init();
                 Debug.WriteLine("비전마스터구동 클래스 Init완료!");
+                Debug.WriteLine("시스템을 초기화 합니다.");
+                Initialized?.Invoke(null, true);
                 return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 로그정보 로그 = Global.오류로그(로그영역, "초기화 실패", "시스템 초기화에 실패하였습니다.\n" + ex.Message, false);
+                Debug.WriteLine("시스템 초기화에 실패하였습니다.");
             }
+            Initialized.Invoke(null, false);
             return false;
         }
 

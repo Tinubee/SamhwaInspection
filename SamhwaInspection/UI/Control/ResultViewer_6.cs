@@ -61,8 +61,11 @@ namespace SamhwaInspection.UI.Control
             if (cam1 == null)
             {
                 cam1 = (EuresysLink)Global.그랩제어.GetItem(카메라1);
-                cam1.AcquisitionFinishedEvent += Paint_camImage;
-                this.cam1.Ready();
+                if (cam1 != null)
+                {
+                    cam1.AcquisitionFinishedEvent += Paint_camImage;
+                    this.cam1.Ready();
+                }
             }
 
             vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.Flow1));
@@ -82,8 +85,8 @@ namespace SamhwaInspection.UI.Control
 
 
             #region Mat Global변수 설정(추후 이동)
-            height_cam = cam1.height;
-            width_cam = cam1.width;
+            height_cam = cam1 == null ? 13000 : cam1.height;
+            width_cam = cam1 == null ? 20000 : cam1.width;
 
             Page1Image = new Mat(height_cam, width_cam, MatType.CV_8UC1);
             Page2Image = new Mat(height_cam, width_cam, MatType.CV_8UC1);

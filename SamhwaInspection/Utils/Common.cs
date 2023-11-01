@@ -11,13 +11,14 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices;
 
 namespace SamhwaInspection.Utils
 {
     public static class Common
     {
-
-
+        [DllImport("User32.dll")]
+        public static extern Int32 SetForegroundWindow(int hWnd);
         //Description 불러오기
         public static string GetEnumDescription(Enum value)
         {

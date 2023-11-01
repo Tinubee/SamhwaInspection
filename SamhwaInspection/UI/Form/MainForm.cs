@@ -18,6 +18,7 @@ using SamhwaInspection.UI.Control;
 using DevExpress.Utils.Extensions;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DevExpress.XtraWaitForm;
+using SamhwaInspection.Utils;
 
 namespace SamhwaInspection
 {
@@ -42,8 +43,9 @@ namespace SamhwaInspection
         public MainForm()
         {
             InitializeComponent();
-            Global.Init();
-            Debug.WriteLine("Global Init Finished");
+            this.ShowWaitForm();
+            //Global.Init();
+            //Debug.WriteLine("Global Init Finished");
             this.StartPosition = FormStartPosition.Manual;
             Global.mainForm = this;
             this.tabFormControl1.SelectedPage = p비전검사;
@@ -122,12 +124,8 @@ namespace SamhwaInspection
         {
             try
             {
-                if (this.Init())
-                {
-                    this.IsStarted = true;
-                    Global.Start();
-                }
-                else this.Close();
+                Global.Initialized += GlobalInitialized;
+                Task.Run(() => { Global.Init(); });
             }
             catch (Exception ex)
             {
@@ -145,6 +143,29 @@ namespace SamhwaInspection
                 //this.e검사결과.Close();
                 Global.Close();
             }
+        }
+
+        private void GlobalInitialized(object sender, Boolean e)
+        {
+            this.BeginInvoke(new Action(() => GlobalInitialized(e)));
+        }
+
+        private void GlobalInitialized(Boolean e)
+        {
+            Global.Initialized -= GlobalInitialized;
+            if (!e) { this.Close(); return; }
+            this.HideWaitForm();
+            Common.SetForegroundWindow(this.Handle.ToInt32());
+
+            if (this.Init())
+            {
+                Debug.WriteLine("MainForm Init Finished.");
+                this.IsStarted = true;
+                Global.Start();
+            }
+            else this.Close();
+            //this.Init();
+            //Global.Start();
         }
     }
 }

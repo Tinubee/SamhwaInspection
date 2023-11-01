@@ -59,8 +59,11 @@ namespace SamhwaInspection.UI.Control
             if (cam1 == null)
             {
                 cam1 = (EuresysLink)Global.그랩제어.GetItem(카메라1);
-                cam1.AcquisitionFinishedEvent += Paint_camImage;
-                this.cam1.Ready();
+                if (cam1 != null)
+                {
+                    cam1.AcquisitionFinishedEvent += Paint_camImage;
+                    this.cam1.Ready();
+                }
             }
             //Viewer와 Tool 연결
             vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.Flow1));
@@ -78,8 +81,8 @@ namespace SamhwaInspection.UI.Control
 
 
             #region Mat Global변수 설정(추후 이동)
-            height_cam = cam1.height;
-            width_cam = cam1.width;
+            height_cam = cam1 == null ? 13000 : cam1.height;
+            width_cam = cam1 == null ? 20000 : cam1.width;
 
             Page1Image = new Mat(height_cam, width_cam, MatType.CV_8UC1);
             Page2Image = new Mat(height_cam, width_cam, MatType.CV_8UC1);
@@ -90,16 +93,6 @@ namespace SamhwaInspection.UI.Control
                 roi[i] = new Rect(0, i * 20000, width_cam, 25000);
                 splitImage[i] = new Mat(25000, width_cam, MatType.CV_8UC1);
             }
-
-            //roi1 = new Rect(0, 0, width_cam, 25000);
-            //roi2 = new Rect(0, 20000, width_cam, 25000);
-            //roi3 = new Rect(0, 40000, width_cam, 25000);
-            //roi4 = new Rect(0, 60000, width_cam, 25000);
-
-            //splitImage1 = new Mat(25000, width_cam, MatType.CV_8UC1);
-            //splitImage2 = new Mat(25000, width_cam, MatType.CV_8UC1);
-            //splitImage3 = new Mat(25000, width_cam, MatType.CV_8UC1);
-            //splitImage4 = new Mat(25000, width_cam, MatType.CV_8UC1);
             #endregion
         }
 
