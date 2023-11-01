@@ -67,7 +67,7 @@ namespace SamhwaInspection.UI.Control
             this.e조명켜짐.Toggled += E켜짐_Toggled;
 
             this.btnSaveSetting.Click += BtnSaveSetting_Click;
-            this.user1.Init();
+            this.e유저관리.Init();
         }
 
         private void E작은원치수측정검사여부_Toggled(object sender, EventArgs e)

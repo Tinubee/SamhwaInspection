@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetVariables));
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetVariables));
             this.검사변수Bind = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDescription = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,6 +57,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GridControl1 = new IvmUtils.MyGridControl();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.b잠금해제 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.검사변수Bind)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -221,6 +222,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.b잠금해제);
             this.panelControl1.Controls.Add(this.b설정적용);
             this.panelControl1.Controls.Add(this.b도구저장);
             this.panelControl1.Controls.Add(this.b도구설정);
@@ -340,6 +342,18 @@
             this.GridView1});
             this.GridControl1.Visible = false;
             // 
+            // b잠금해제
+            // 
+            this.b잠금해제.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b잠금해제.Appearance.Options.UseFont = true;
+            this.b잠금해제.Dock = System.Windows.Forms.DockStyle.Right;
+            this.b잠금해제.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.b잠금해제.Location = new System.Drawing.Point(1149, 5);
+            this.b잠금해제.Name = "b잠금해제";
+            this.b잠금해제.Size = new System.Drawing.Size(180, 42);
+            this.b잠금해제.TabIndex = 12;
+            this.b잠금해제.Text = "잠금해제";
+            // 
             // SetVariables
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -397,5 +411,6 @@
         private DevExpress.XtraEditors.SimpleButton b도구저장;
         private DevExpress.XtraEditors.SimpleButton b도구설정;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
+        private DevExpress.XtraEditors.SimpleButton b잠금해제;
     }
 }

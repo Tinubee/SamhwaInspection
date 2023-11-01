@@ -34,51 +34,41 @@ namespace SamhwaInspection.Properties {
                 this["Language"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SkinName
-        {
-            get
-            {
+        public string SkinName {
+            get {
                 return ((string)(this["SkinName"]));
             }
-            set
-            {
+            set {
                 this["SkinName"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SvgPaletteName
-        {
-            get
-            {
+        public string SvgPaletteName {
+            get {
                 return ((string)(this["SvgPaletteName"]));
             }
-            set
-            {
+            set {
                 this["SvgPaletteName"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserName
-        {
-            get
-            {
+        public string UserName {
+            get {
                 return ((string)(this["UserName"]));
             }
-            set
-            {
+            set {
                 this["UserName"] = value;
             }
         }
-
     }
 }

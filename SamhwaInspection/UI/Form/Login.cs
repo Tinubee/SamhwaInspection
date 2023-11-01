@@ -45,11 +45,11 @@ namespace SamhwaInspection.UI.Form
             string 사용자명 = Utils.Utils.StrValue(this.e사용자명.Text);
             string 비밀번호 = Utils.Utils.StrValue(this.e비밀번호.Text);
             Global.유저자료.비밀번호확인(사용자명, 비밀번호);
-            if (Global.환경설정.사용권한 != Schemas.유저권한구분.없음) this.DialogResult = DialogResult.OK;
+            if (Global.환경설정.사용권한 == Schemas.유저권한구분.없음) this.DialogResult = DialogResult.No;
             else
             {
                 Global.환경설정.시스템관리자인증(사용자명, 비밀번호);
-                if (Global.환경설정.사용권한 == Schemas.유저권한구분.시스템) this.DialogResult = DialogResult.OK;
+                if (Global.환경설정.사용권한 == Schemas.유저권한구분.시스템 || Global.환경설정.사용권한 == Schemas.유저권한구분.관리자) this.DialogResult = DialogResult.OK;
                 else
                 {
                     //Global.정보로그(로그영역, 번역.로그인, $"[{사용자명}] {번역.인증오류}", false);

@@ -48,8 +48,6 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.user1 = new SamhwaInspection.UI.Control.User();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.GridControl1 = new IvmUtils.MyGridControl();
             this.Bind카메라설정 = new System.Windows.Forms.BindingSource(this.components);
@@ -121,8 +119,8 @@
             this.e슬롯부20Point검사여부1 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e슬롯부20Point검사여부11 = new DevExpress.XtraEditors.ToggleSwitch();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl6 = new DevExpress.XtraEditors.GroupControl();
-            this.user2 = new SamhwaInspection.UI.Control.User();
+            this.e유저관리 = new SamhwaInspection.UI.Control.User();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -143,8 +141,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
@@ -190,8 +186,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부11.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).BeginInit();
-            this.groupControl6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -407,30 +401,11 @@
             this.layoutControlItem5.Text = "로그 보관일수";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(100, 15);
             // 
-            // groupControl2
-            // 
-            this.groupControl2.Controls.Add(this.user1);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl2.Location = new System.Drawing.Point(0, 161);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1012, 241);
-            this.groupControl2.TabIndex = 1;
-            this.groupControl2.Text = "사용자 설정";
-            this.groupControl2.Visible = false;
-            // 
-            // user1
-            // 
-            this.user1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.user1.Location = new System.Drawing.Point(2, 27);
-            this.user1.Name = "user1";
-            this.user1.Size = new System.Drawing.Size(1008, 212);
-            this.user1.TabIndex = 0;
-            // 
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.GridControl1);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl3.Location = new System.Drawing.Point(0, 402);
+            this.groupControl3.Location = new System.Drawing.Point(0, 161);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(1012, 199);
             this.groupControl3.TabIndex = 2;
@@ -646,7 +621,7 @@
             // 
             this.groupControl4.Controls.Add(this.GridControl2);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl4.Location = new System.Drawing.Point(0, 601);
+            this.groupControl4.Location = new System.Drawing.Point(0, 360);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(1012, 165);
             this.groupControl4.TabIndex = 3;
@@ -794,6 +769,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.simpleButton1);
             this.panelControl1.Controls.Add(this.btnSaveSetting);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl1.Location = new System.Drawing.Point(0, 1142);
@@ -857,7 +833,7 @@
             this.groupControl5.Controls.Add(this.layoutControl3);
             this.groupControl5.Controls.Add(this.layoutControl2);
             this.groupControl5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl5.Location = new System.Drawing.Point(0, 766);
+            this.groupControl5.Location = new System.Drawing.Point(0, 525);
             this.groupControl5.Name = "groupControl5";
             this.groupControl5.Size = new System.Drawing.Size(1012, 161);
             this.groupControl5.TabIndex = 9;
@@ -1184,34 +1160,33 @@
             this.layoutControlItem14.Text = "슬롯부 20Point 측정";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(117, 15);
             // 
-            // groupControl6
+            // e유저관리
             // 
-            this.groupControl6.Controls.Add(this.user2);
-            this.groupControl6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl6.Location = new System.Drawing.Point(0, 927);
-            this.groupControl6.Name = "groupControl6";
-            this.groupControl6.Size = new System.Drawing.Size(1012, 194);
-            this.groupControl6.TabIndex = 14;
-            this.groupControl6.Text = "유저정보";
+            this.e유저관리.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e유저관리.Location = new System.Drawing.Point(0, 686);
+            this.e유저관리.Name = "e유저관리";
+            this.e유저관리.Size = new System.Drawing.Size(1012, 456);
+            this.e유저관리.TabIndex = 14;
             // 
-            // user2
+            // simpleButton1
             // 
-            this.user2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.user2.Location = new System.Drawing.Point(2, 27);
-            this.user2.Name = "user2";
-            this.user2.Size = new System.Drawing.Size(1008, 165);
-            this.user2.TabIndex = 0;
+            this.simpleButton1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.simpleButton1.Location = new System.Drawing.Point(772, 2);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(119, 48);
+            this.simpleButton1.TabIndex = 1;
+            this.simpleButton1.Text = "잠금해제";
             // 
             // BaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupControl6);
+            this.Controls.Add(this.e유저관리);
             this.Controls.Add(this.groupControl5);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
-            this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -1239,8 +1214,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
@@ -1286,8 +1259,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부11.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).EndInit();
-            this.groupControl6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1296,7 +1267,6 @@
         #endregion
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.PanelControl panelControl1;
@@ -1317,7 +1287,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private User user1;
         private System.Windows.Forms.BindingSource Bind조명설정;
         private IvmUtils.MyGridControl GridControl1;
         private IvmUtils.MyGridView GridView1;
@@ -1386,7 +1355,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraEditors.ToggleSwitch e15부측정검사여부;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
-        private DevExpress.XtraEditors.GroupControl groupControl6;
-        private User user2;
+        private User e유저관리;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

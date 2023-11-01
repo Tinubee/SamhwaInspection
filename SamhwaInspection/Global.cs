@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
+using SamhwaInspection.UI.Form;
 
 namespace SamhwaInspection
 {

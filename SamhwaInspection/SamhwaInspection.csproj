@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SamhwaInspection</RootNamespace>
     <AssemblyName>SamhwaInspection</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -29,6 +29,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -632,6 +633,10 @@
     <ProjectReference Include="..\..\..\..\IvmUtils\IvmUtils\IvmUtils.vbproj">
       <Project>{4ff0dcfe-cde3-44d5-b674-f3f7e007f57f}</Project>
       <Name>IvmUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvUtils\MvUtils\MvUtils.csproj">
+      <Project>{bdb2ed5c-4a7f-4116-b5a0-1831a1ec0624}</Project>
+      <Name>MvUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

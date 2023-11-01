@@ -19,6 +19,7 @@ using DevExpress.Utils.Extensions;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DevExpress.XtraWaitForm;
 using SamhwaInspection.Utils;
+using SamhwaInspection.UI.Form;
 
 namespace SamhwaInspection
 {
@@ -51,8 +52,29 @@ namespace SamhwaInspection
             this.tabFormControl1.SelectedPage = p비전검사;
             this.Shown += MainForm_Shown;
             this.FormClosing += MainForm_FormClosing;
+            this.tabFormControl1.SelectedPageChanging += 탭변환;
         }
-
+        private void 탭변환(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.tabFormControl1.SelectedContainer.TabIndex == 1)
+                {
+                    Login form = new Login();
+                    DialogResult result = form.ShowDialog();
+                    Debug.WriteLine(result);
+                    if(result == DialogResult.No || result == DialogResult.Cancel)
+                    {
+                        this.tabFormControl1.SelectedPage = p비전검사;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.오류로그("메인페이지", "프로그램 시작", "프로그램 시작 중 오류가 발생하였습니다.\n" + ex.Message, true);
+            }
+        }
         private Boolean Init()
         {
             this.WindowState = FormWindowState.Maximized;
@@ -162,10 +184,10 @@ namespace SamhwaInspection
                 Debug.WriteLine("MainForm Init Finished.");
                 this.IsStarted = true;
                 Global.Start();
+                //Login login = new Login();
+                //login.Show();
             }
             else this.Close();
-            //this.Init();
-            //Global.Start();
         }
     }
 }
