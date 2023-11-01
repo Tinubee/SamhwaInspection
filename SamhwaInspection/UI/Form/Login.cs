@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using SamhwaInspection.Schemas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace SamhwaInspection.UI.Form
         private void Login_Load(object sender, EventArgs e)
         {
             this.e사용자명.Properties.Items.AddRange(Global.유저자료.사용자목록());
+            this.e사용자명.SelectedIndex = 0;
             if (!String.IsNullOrEmpty(Properties.Settings.Default.UserName) && Global.유저자료.GetItem(Properties.Settings.Default.UserName) != null)
                 this.e사용자명.Text = Properties.Settings.Default.UserName;
 
@@ -44,7 +46,13 @@ namespace SamhwaInspection.UI.Form
         {
             string 사용자명 = Utils.Utils.StrValue(this.e사용자명.Text);
             string 비밀번호 = Utils.Utils.StrValue(this.e비밀번호.Text);
-            Global.유저자료.비밀번호확인(사용자명, 비밀번호);
+            유저권한구분 확인 = Global.유저자료.비밀번호확인(사용자명, 비밀번호);
+            if(확인 == 유저권한구분.없음)
+            {
+                Utils.Utils.WarningMsg("비밀번호 오류", "Warning");
+                this.e비밀번호.Focus();
+                return;
+            }
             if (Global.환경설정.사용권한 == Schemas.유저권한구분.없음) this.DialogResult = DialogResult.No;
             else
             {
@@ -54,7 +62,8 @@ namespace SamhwaInspection.UI.Form
                 {
                     //Global.정보로그(로그영역, 번역.로그인, $"[{사용자명}] {번역.인증오류}", false);
                     Utils.Utils.WarningMsg("인증오류", "Warning");
-                    this.e비밀번호.Focus();
+                    this.DialogResult = DialogResult.No;
+                    //this.e비밀번호.Focus();
                 }
             }
         }

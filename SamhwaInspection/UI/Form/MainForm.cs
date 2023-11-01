@@ -20,6 +20,7 @@ using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DevExpress.XtraWaitForm;
 using SamhwaInspection.Utils;
 using SamhwaInspection.UI.Form;
+using DevExpress.XtraBars;
 
 namespace SamhwaInspection
 {
@@ -54,30 +55,25 @@ namespace SamhwaInspection
             this.FormClosing += MainForm_FormClosing;
             this.tabFormControl1.SelectedPageChanging += 탭변환;
         }
-        private void 탭변환(object sender, EventArgs e)
+        private void 탭변환(object sender, TabFormSelectedPageChangingEventArgs e)
         {
-            try
+            if(e.Page == p환경설정)
             {
-                if (this.tabFormControl1.SelectedContainer.TabIndex == 1)
+                Debug.WriteLine(e.Page.Name);
+                Debug.WriteLine(e.PrevPage.Name);
+                Login form = new Login();
+                DialogResult result = form.ShowDialog();
+                Debug.WriteLine(result);
+                if (result == DialogResult.No || result == DialogResult.Cancel)
                 {
-                    Login form = new Login();
-                    DialogResult result = form.ShowDialog();
-                    Debug.WriteLine(result);
-                    if(result == DialogResult.No || result == DialogResult.Cancel)
-                    {
-                        this.tabFormControl1.SelectedPage = p비전검사;
-                        return;
-                    }
+                    e.Cancel = true;
                 }
             }
-            catch (Exception ex)
-            {
-                Global.오류로그("메인페이지", "프로그램 시작", "프로그램 시작 중 오류가 발생하였습니다.\n" + ex.Message, true);
-            }
+           
         }
         private Boolean Init()
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             this.state1.Init();
             this.settings1.Init();
             DisplaySetting(Global.모델자료.선택모델.모델번호);

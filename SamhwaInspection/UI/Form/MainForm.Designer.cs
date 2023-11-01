@@ -70,6 +70,7 @@
             // 
             // tabFormControl1
             // 
+            this.tabFormControl1.AllowMoveTabs = false;
             this.tabFormControl1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tabFormControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barStaticItem1,
