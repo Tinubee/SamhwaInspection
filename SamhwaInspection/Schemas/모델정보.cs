@@ -19,7 +19,7 @@ namespace SamhwaInspection.Schemas
         private const String 로그영역 = "모델정보";
 
         [JsonProperty("Number")]
-        public Int32 모델번호 { get; set; } = 0;
+        public Int32 모델번호 { get; set; } = 1;
         [JsonProperty("ModelName")]
         public String 모델이름 { get; set; } = String.Empty;
         [JsonProperty("ModelPath")]

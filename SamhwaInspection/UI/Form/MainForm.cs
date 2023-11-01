@@ -62,12 +62,12 @@ namespace SamhwaInspection
             this.resultList1.Init();
             return true;
         }
-        private void ShowWaitForm()
+        public void ShowWaitForm()
         {
             WaitForm = new UI.Form.WaitForm() { ShowOnTopMode = ShowFormOnTopMode.AboveAll };
             WaitForm.Show(this);
         }
-        private void HideWaitForm()
+        public void HideWaitForm()
         {
             WaitForm.Close();
         }

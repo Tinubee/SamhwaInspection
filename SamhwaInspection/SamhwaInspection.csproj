@@ -239,6 +239,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0bd662cffb986ca7, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3256f6ee9712a2e5, processorArchitecture=MSIL" />
     <Reference Include="MvCamCtrl.Net">
@@ -436,6 +437,12 @@
     <Compile Include="UI\Control\VMMainViewControl_Render.Designer.cs">
       <DependentUpon>VMMainViewControl_Render.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Form\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Form\Teaching.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -545,6 +552,9 @@
     <EmbeddedResource Include="UI\Control\VMControl_Render.resx">
       <DependentUpon>VMControl_Render.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -574,6 +584,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.VmGlobals.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.유저자료.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

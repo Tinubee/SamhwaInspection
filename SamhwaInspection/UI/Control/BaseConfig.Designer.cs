@@ -121,6 +121,8 @@
             this.e슬롯부20Point검사여부1 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e슬롯부20Point검사여부11 = new DevExpress.XtraEditors.ToggleSwitch();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.groupControl6 = new DevExpress.XtraEditors.GroupControl();
+            this.user2 = new SamhwaInspection.UI.Control.User();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -188,6 +190,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부11.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).BeginInit();
+            this.groupControl6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -1180,10 +1184,29 @@
             this.layoutControlItem14.Text = "슬롯부 20Point 측정";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(117, 15);
             // 
+            // groupControl6
+            // 
+            this.groupControl6.Controls.Add(this.user2);
+            this.groupControl6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupControl6.Location = new System.Drawing.Point(0, 927);
+            this.groupControl6.Name = "groupControl6";
+            this.groupControl6.Size = new System.Drawing.Size(1012, 194);
+            this.groupControl6.TabIndex = 14;
+            this.groupControl6.Text = "유저정보";
+            // 
+            // user2
+            // 
+            this.user2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.user2.Location = new System.Drawing.Point(2, 27);
+            this.user2.Name = "user2";
+            this.user2.Size = new System.Drawing.Size(1008, 165);
+            this.user2.TabIndex = 0;
+            // 
             // BaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupControl6);
             this.Controls.Add(this.groupControl5);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl4);
@@ -1263,6 +1286,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e슬롯부20Point검사여부11.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).EndInit();
+            this.groupControl6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1361,5 +1386,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraEditors.ToggleSwitch e15부측정검사여부;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private DevExpress.XtraEditors.GroupControl groupControl6;
+        private User user2;
     }
 }

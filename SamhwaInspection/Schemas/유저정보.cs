@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SamhwaInspection.Schemas
@@ -39,7 +40,7 @@ namespace SamhwaInspection.Schemas
     public class 유저자료 : BindingList<유저정보>
     {
         private String 저장파일
-        { get { return Path.Combine(Global.환경설정.기본경로, "유저정보.cnf"); } }
+        { get { return Path.Combine(Global.환경설정.기본경로, "Users.conf"); } }
 
         public Boolean Init()
         {
@@ -48,15 +49,16 @@ namespace SamhwaInspection.Schemas
 
         public void Close()
         {
+
         }
 
         public Boolean Load()
         {
             if (!File.Exists(저장파일))
             {
-                this.Add(new 유저정보() { 성명 = 유저권한구분.작업자.ToString(), 암호 = "1234", 권한 = 유저권한구분.작업자 });
-                this.Add(new 유저정보() { 성명 = 유저권한구분.관리자.ToString(), 암호 = "1234", 권한 = 유저권한구분.관리자 });
-                this.Add(new 유저정보() { 성명 = 유저권한구분.시스템.ToString(), 암호 = "1234", 권한 = 유저권한구분.시스템 });
+                this.Add(new 유저정보() { 성명 = "user", 암호 = "0000", 권한 = 유저권한구분.작업자 });
+                this.Add(new 유저정보() { 성명 = "manager", 암호 = "0000", 권한 = 유저권한구분.관리자 });
+                this.Add(new 유저정보() { 성명 = "admin", 암호 = "ivmadmin", 권한 = 유저권한구분.시스템 });
                 this.Save();
                 return true;
             }
@@ -79,6 +81,34 @@ namespace SamhwaInspection.Schemas
         public void Save()
         {
             File.WriteAllText(저장파일, Utils.Common.StringCipher.Encrypt(JsonConvert.SerializeObject(this), Global.GetGuid()));
+        }
+
+        public 유저정보 GetItem(string 성명)
+        {
+            return this.Where(e => e.성명 == 성명).FirstOrDefault();
+        }
+
+        public List<string> 사용자목록()
+        {
+            List<string> 사용자명 = new List<string>();
+            foreach (유저정보 정보 in this)
+            {
+                if (String.IsNullOrEmpty(정보.성명) || String.IsNullOrEmpty(정보.암호) || !정보.허용) continue;
+                사용자명.Add(정보.성명);
+            }
+            return 사용자명;
+        }
+
+        public 유저권한구분 비밀번호확인(string 사용자명, string 비밀번호)
+        {
+            if (String.IsNullOrEmpty(사용자명) || String.IsNullOrEmpty(비밀번호)) return 유저권한구분.없음;
+            유저정보 정보 = this.GetItem(사용자명);
+            if (정보 == null || !정보.허용 || 정보.암호 != 비밀번호) return 유저권한구분.없음;
+            Properties.Settings.Default.UserName = 사용자명;
+            Global.환경설정.사용자명 = 사용자명;
+            Global.환경설정.사용권한 = 정보.권한;
+            //Global.정보로그(로그영역.GetString(), "로그인", $"[{사용자명}] 로그인 하였습니다.", false);
+            return 정보.권한;
         }
     }
 }

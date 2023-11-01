@@ -299,6 +299,7 @@ namespace SamhwaInspection.Schemas
                             if (Global.환경설정.선택모델 != 정보.값 - 1)
                             {
                                 Debug.WriteLine($"현재선택모델 번호 : {정보.값 - 1}");
+                                //Global.mainForm.ShowWaitForm();
                                 Global.환경설정.모델변경요청(정보.값 - 1);
                                 Global.비전마스터구동.Init();
                             }

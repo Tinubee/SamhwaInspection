@@ -173,10 +173,12 @@ namespace SamhwaInspection.UI.Control
 
         private void BtnSaveSetting_Click(object sender, EventArgs e)
         {
+            if (!Utils.Utils.Confirm("환경설정 정보를 저장하시겠습니까?", "확인")) return;
             //throw new NotImplementedException();
             //Global.그랩제어.Save();
             Global.조명제어.Save();
             Global.비전마스터구동.Save();
+            Global.유저자료.Save();
             //Global.mainForm.변수업데이트();
         }
 
