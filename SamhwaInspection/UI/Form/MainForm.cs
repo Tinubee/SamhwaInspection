@@ -57,19 +57,42 @@ namespace SamhwaInspection
         }
         private void 탭변환(object sender, TabFormSelectedPageChangingEventArgs e)
         {
-            if(e.Page == p환경설정)
+            if (e.Page == p환경설정)
             {
-                Debug.WriteLine(e.Page.Name);
-                Debug.WriteLine(e.PrevPage.Name);
-                Login form = new Login();
-                DialogResult result = form.ShowDialog();
-                Debug.WriteLine(result);
-                if (result == DialogResult.No || result == DialogResult.Cancel)
+                if (!Global.환경설정.로그인상태)
                 {
-                    e.Cancel = true;
+                    Login form = new Login();
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.No || result == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                    else
+                    {
+                        if (Global.환경설정.사용권한 == 유저권한구분.없음 || Global.환경설정.사용권한 == 유저권한구분.작업자)
+                        {
+                            Utils.Utils.WarningMsg("인증오류 [ 접근 할 수 있는 권한이 없습니다. ]", "Warning");
+                            e.Cancel = true;
+                            return;
+                        }
+
+                        this.state1.유저상태표현(Global.환경설정.사용자명);
+                        Global.환경설정.로그인상태 = true;
+                        this.state1.b로그인.Text = "로그아웃";
+                    }
+                }
+                else
+                {
+                    if(Global.환경설정.사용권한 == 유저권한구분.없음 || Global.환경설정.사용권한 == 유저권한구분.작업자)
+                    {
+                        Utils.Utils.WarningMsg("인증오류 [ 접근 할 수 있는 권한이 없습니다. ]", "Warning");
+                        e.Cancel = true;
+                        return;
+                    }
                 }
             }
-           
+
         }
         private Boolean Init()
         {

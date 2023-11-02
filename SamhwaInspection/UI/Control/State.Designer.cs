@@ -30,54 +30,63 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.ciView1 = new SamhwaInspection.UI.Control.CiView();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.e저장용량 = new DevExpress.XtraEditors.ProgressBarControl();
+            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.b로그인 = new DevExpress.XtraEditors.SimpleButton();
+            this.lb로그인유저 = new DevExpress.XtraEditors.LabelControl();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.labellayout = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.b수량리셋 = new DevExpress.XtraEditors.SimpleButton();
+            this.e양품수율 = new SamhwaInspection.UI.Control.CountViewer();
+            this.환경설정BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.e전체수량 = new SamhwaInspection.UI.Control.CountViewer();
+            this.e불량수량 = new SamhwaInspection.UI.Control.CountViewer();
+            this.e양품수량 = new SamhwaInspection.UI.Control.CountViewer();
             this.lbl판정결과 = new DevExpress.XtraEditors.LabelControl();
             this.b운전상태 = new DevExpress.XtraEditors.SimpleButton();
             this.b운전모드 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
+            this.모델자료BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.titleView1 = new SamhwaInspection.UI.Control.TitleView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ciView1 = new SamhwaInspection.UI.Control.CiView();
-            this.환경설정BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.e양품수율 = new SamhwaInspection.UI.Control.CountViewer();
-            this.e전체수량 = new SamhwaInspection.UI.Control.CountViewer();
-            this.e불량수량 = new SamhwaInspection.UI.Control.CountViewer();
-            this.e양품수량 = new SamhwaInspection.UI.Control.CountViewer();
-            this.모델자료BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.titleView1 = new SamhwaInspection.UI.Control.TitleView();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.e저장용량.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
+            this.layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labellayout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.환경설정BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.모델자료BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.환경설정BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.모델자료BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,28 +112,89 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // ciView1
+            // 
+            this.ciView1.Location = new System.Drawing.Point(1715, 5);
+            this.ciView1.Name = "ciView1";
+            this.ciView1.Size = new System.Drawing.Size(200, 94);
+            this.ciView1.TabIndex = 19;
+            // 
             // groupControl1
             // 
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("맑은 고딕", 9.5F, System.Drawing.FontStyle.Bold);
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
-            this.groupControl1.Controls.Add(this.e저장용량);
+            this.groupControl1.Controls.Add(this.layoutControl2);
             this.groupControl1.Location = new System.Drawing.Point(1555, 5);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(120, 94);
+            this.groupControl1.Size = new System.Drawing.Size(156, 94);
             this.groupControl1.TabIndex = 17;
-            this.groupControl1.Text = "Disk Usage";
+            this.groupControl1.Text = "      로그인 유저";
             // 
-            // e저장용량
+            // layoutControl2
             // 
-            this.e저장용량.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.환경설정BindingSource, "저장비율", true));
-            this.e저장용량.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e저장용량.EditValue = 50;
-            this.e저장용량.Location = new System.Drawing.Point(2, 27);
-            this.e저장용량.Name = "e저장용량";
-            this.e저장용량.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold);
-            this.e저장용량.Properties.ShowTitle = true;
-            this.e저장용량.Size = new System.Drawing.Size(116, 65);
-            this.e저장용량.TabIndex = 0;
+            this.layoutControl2.Controls.Add(this.b로그인);
+            this.layoutControl2.Controls.Add(this.lb로그인유저);
+            this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl2.Location = new System.Drawing.Point(2, 27);
+            this.layoutControl2.Margin = new System.Windows.Forms.Padding(0);
+            this.layoutControl2.Name = "layoutControl2";
+            this.layoutControl2.Root = this.layoutControlGroup1;
+            this.layoutControl2.Size = new System.Drawing.Size(152, 65);
+            this.layoutControl2.TabIndex = 0;
+            this.layoutControl2.Text = "layoutControl2";
+            // 
+            // b로그인
+            // 
+            this.b로그인.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b로그인.Appearance.Options.UseFont = true;
+            this.b로그인.Location = new System.Drawing.Point(2, 31);
+            this.b로그인.Margin = new System.Windows.Forms.Padding(0);
+            this.b로그인.Name = "b로그인";
+            this.b로그인.Size = new System.Drawing.Size(148, 30);
+            this.b로그인.StyleController = this.layoutControl2;
+            this.b로그인.TabIndex = 5;
+            this.b로그인.Text = "Login";
+            // 
+            // lb로그인유저
+            // 
+            this.lb로그인유저.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lb로그인유저.Appearance.Options.UseFont = true;
+            this.lb로그인유저.Location = new System.Drawing.Point(2, 2);
+            this.lb로그인유저.Name = "lb로그인유저";
+            this.lb로그인유저.Size = new System.Drawing.Size(92, 25);
+            this.lb로그인유저.StyleController = this.layoutControl2;
+            this.lb로그인유저.TabIndex = 4;
+            this.lb로그인유저.Text = "Not Login";
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.labellayout,
+            this.layoutControlItem14});
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(152, 65);
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // labellayout
+            // 
+            this.labellayout.Control = this.lb로그인유저;
+            this.labellayout.Location = new System.Drawing.Point(0, 0);
+            this.labellayout.Name = "labellayout";
+            this.labellayout.Size = new System.Drawing.Size(152, 29);
+            this.labellayout.TextSize = new System.Drawing.Size(0, 0);
+            this.labellayout.TextVisible = false;
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.b로그인;
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 29);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(152, 36);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem14.TextVisible = false;
             // 
             // b수량리셋
             // 
@@ -138,6 +208,54 @@
             this.b수량리셋.StyleController = this.layoutControl1;
             this.b수량리셋.TabIndex = 16;
             this.b수량리셋.Text = "Count Reset";
+            // 
+            // e양품수율
+            // 
+            this.e양품수율.BaseColor = System.Drawing.Color.Empty;
+            this.e양품수율.Caption = "양품률(%)";
+            this.e양품수율.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "양품수율표현", true));
+            this.e양품수율.Location = new System.Drawing.Point(1347, 5);
+            this.e양품수율.Name = "e양품수율";
+            this.e양품수율.Size = new System.Drawing.Size(115, 94);
+            this.e양품수율.TabIndex = 15;
+            this.e양품수율.ValueText = "100.0";
+            // 
+            // 환경설정BindingSource
+            // 
+            this.환경설정BindingSource.DataSource = typeof(SamhwaInspection.Schemas.환경설정);
+            // 
+            // e전체수량
+            // 
+            this.e전체수량.BaseColor = System.Drawing.Color.Empty;
+            this.e전체수량.Caption = "전체수량";
+            this.e전체수량.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "전체갯수", true));
+            this.e전체수량.Location = new System.Drawing.Point(1232, 5);
+            this.e전체수량.Name = "e전체수량";
+            this.e전체수량.Size = new System.Drawing.Size(111, 94);
+            this.e전체수량.TabIndex = 14;
+            this.e전체수량.ValueText = "100.0";
+            // 
+            // e불량수량
+            // 
+            this.e불량수량.BaseColor = System.Drawing.Color.Empty;
+            this.e불량수량.Caption = "불량";
+            this.e불량수량.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "불량갯수표현", true));
+            this.e불량수량.Location = new System.Drawing.Point(1116, 5);
+            this.e불량수량.Name = "e불량수량";
+            this.e불량수량.Size = new System.Drawing.Size(112, 94);
+            this.e불량수량.TabIndex = 13;
+            this.e불량수량.ValueText = "100.0";
+            // 
+            // e양품수량
+            // 
+            this.e양품수량.BaseColor = System.Drawing.Color.Empty;
+            this.e양품수량.Caption = "양품";
+            this.e양품수량.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "양품갯수표현", true));
+            this.e양품수량.Location = new System.Drawing.Point(999, 5);
+            this.e양품수량.Name = "e양품수량";
+            this.e양품수량.Size = new System.Drawing.Size(113, 94);
+            this.e양품수량.TabIndex = 12;
+            this.e양품수량.ValueText = "100.0";
             // 
             // lbl판정결과
             // 
@@ -197,6 +315,18 @@
             this.e모델선택.StyleController = this.layoutControl1;
             this.e모델선택.TabIndex = 8;
             // 
+            // 모델자료BindingSource
+            // 
+            this.모델자료BindingSource.DataSource = typeof(SamhwaInspection.Schemas.모델자료);
+            // 
+            // titleView1
+            // 
+            this.titleView1.Location = new System.Drawing.Point(5, 5);
+            this.titleView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.titleView1.Name = "titleView1";
+            this.titleView1.Size = new System.Drawing.Size(210, 94);
+            this.titleView1.TabIndex = 7;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -218,6 +348,17 @@
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
             this.Root.Size = new System.Drawing.Size(1920, 104);
             this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.titleView1;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(48, 48);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(214, 98);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
@@ -263,106 +404,6 @@
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
-            // layoutControlItem10
-            // 
-            this.layoutControlItem10.Control = this.b수량리셋;
-            this.layoutControlItem10.Location = new System.Drawing.Point(1461, 0);
-            this.layoutControlItem10.MinSize = new System.Drawing.Size(89, 26);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(89, 98);
-            this.layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem10.TextVisible = false;
-            // 
-            // layoutControlItem11
-            // 
-            this.layoutControlItem11.Control = this.groupControl1;
-            this.layoutControlItem11.Location = new System.Drawing.Point(1550, 0);
-            this.layoutControlItem11.MinSize = new System.Drawing.Size(5, 5);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(124, 98);
-            this.layoutControlItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem11.TextVisible = false;
-            // 
-            // ciView1
-            // 
-            this.ciView1.Location = new System.Drawing.Point(1679, 5);
-            this.ciView1.Name = "ciView1";
-            this.ciView1.Size = new System.Drawing.Size(236, 94);
-            this.ciView1.TabIndex = 19;
-            // 
-            // 환경설정BindingSource
-            // 
-            this.환경설정BindingSource.DataSource = typeof(SamhwaInspection.Schemas.환경설정);
-            // 
-            // e양품수율
-            // 
-            this.e양품수율.BaseColor = System.Drawing.Color.Empty;
-            this.e양품수율.Caption = "양품률(%)";
-            this.e양품수율.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "양품수율표현", true));
-            this.e양품수율.Location = new System.Drawing.Point(1347, 5);
-            this.e양품수율.Name = "e양품수율";
-            this.e양품수율.Size = new System.Drawing.Size(115, 94);
-            this.e양품수율.TabIndex = 15;
-            this.e양품수율.ValueText = "100.0";
-            // 
-            // e전체수량
-            // 
-            this.e전체수량.BaseColor = System.Drawing.Color.Empty;
-            this.e전체수량.Caption = "전체수량";
-            this.e전체수량.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "전체갯수", true));
-            this.e전체수량.Location = new System.Drawing.Point(1232, 5);
-            this.e전체수량.Name = "e전체수량";
-            this.e전체수량.Size = new System.Drawing.Size(111, 94);
-            this.e전체수량.TabIndex = 14;
-            this.e전체수량.ValueText = "100.0";
-            // 
-            // e불량수량
-            // 
-            this.e불량수량.BaseColor = System.Drawing.Color.Empty;
-            this.e불량수량.Caption = "불량";
-            this.e불량수량.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "불량갯수표현", true));
-            this.e불량수량.Location = new System.Drawing.Point(1116, 5);
-            this.e불량수량.Name = "e불량수량";
-            this.e불량수량.Size = new System.Drawing.Size(112, 94);
-            this.e불량수량.TabIndex = 13;
-            this.e불량수량.ValueText = "100.0";
-            // 
-            // e양품수량
-            // 
-            this.e양품수량.BaseColor = System.Drawing.Color.Empty;
-            this.e양품수량.Caption = "양품";
-            this.e양품수량.DataBindings.Add(new System.Windows.Forms.Binding("ValueText", this.환경설정BindingSource, "양품갯수표현", true));
-            this.e양품수량.Location = new System.Drawing.Point(999, 5);
-            this.e양품수량.Name = "e양품수량";
-            this.e양품수량.Size = new System.Drawing.Size(113, 94);
-            this.e양품수량.TabIndex = 12;
-            this.e양품수량.ValueText = "100.0";
-            // 
-            // 모델자료BindingSource
-            // 
-            this.모델자료BindingSource.DataSource = typeof(SamhwaInspection.Schemas.모델자료);
-            // 
-            // titleView1
-            // 
-            this.titleView1.Location = new System.Drawing.Point(5, 5);
-            this.titleView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.titleView1.Name = "titleView1";
-            this.titleView1.Size = new System.Drawing.Size(210, 94);
-            this.titleView1.TabIndex = 7;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.titleView1;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(48, 48);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(214, 98);
-            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
-            // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.e양품수량;
@@ -407,12 +448,34 @@
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.b수량리셋;
+            this.layoutControlItem10.Location = new System.Drawing.Point(1461, 0);
+            this.layoutControlItem10.MinSize = new System.Drawing.Size(89, 26);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(89, 98);
+            this.layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem10.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.groupControl1;
+            this.layoutControlItem11.Location = new System.Drawing.Point(1550, 0);
+            this.layoutControlItem11.MinSize = new System.Drawing.Size(5, 5);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(160, 98);
+            this.layoutControlItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem11.TextVisible = false;
+            // 
             // layoutControlItem13
             // 
             this.layoutControlItem13.Control = this.ciView1;
-            this.layoutControlItem13.Location = new System.Drawing.Point(1674, 0);
+            this.layoutControlItem13.Location = new System.Drawing.Point(1710, 0);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(240, 98);
+            this.layoutControlItem13.Size = new System.Drawing.Size(204, 98);
             this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem13.TextVisible = false;
             // 
@@ -427,22 +490,26 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.e저장용량.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
+            this.layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labellayout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.환경설정BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.모델자료BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.환경설정BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.모델자료BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             this.ResumeLayout(false);
 
@@ -474,10 +541,15 @@
         private DevExpress.XtraEditors.SimpleButton b수량리셋;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraEditors.ProgressBarControl e저장용량;
         private System.Windows.Forms.BindingSource 모델자료BindingSource;
         private System.Windows.Forms.BindingSource 환경설정BindingSource;
         private CiView ciView1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraEditors.LabelControl lb로그인유저;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem labellayout;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        public DevExpress.XtraEditors.SimpleButton b로그인;
     }
 }

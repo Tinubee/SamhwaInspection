@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraReports.UI;
 using SamhwaInspection.Schemas;
+using SamhwaInspection.UI.Form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +30,7 @@ namespace SamhwaInspection.UI.Control
             InitializeComponent();
 
         }
-        
+
         private void 입출상태적용()
         {
             currentValue_자동모드 = Global.신호제어.자동모드여부;
@@ -82,9 +84,8 @@ namespace SamhwaInspection.UI.Control
             Global.환경설정.결과상태갱신알림 += 결과업데이트;
 
             this.b수량리셋.Click += 수량리셋;
-
             this.환경설정BindingSource.DataSource = Global.환경설정;
-            
+            this.b로그인.Click += B로그인_Click;
 
             모델변경알림(Global.환경설정.선택모델);
             Global.환경설정.모델변경알림 += 모델변경알림;
@@ -93,11 +94,49 @@ namespace SamhwaInspection.UI.Control
             this.e모델선택.EditValueChanging += 모델변경;
 
             검사상태표현(결과구분.NO);
-
+            유저상태표현(Global.환경설정.사용자명);
             this.e양품수율.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
             this.e양품수량.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information;
             this.e불량수량.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
             this.e전체수량.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.ControlText;
+        }
+
+        public void 로그아웃상태()
+        {
+            Global.환경설정.사용자명 = string.Empty;
+            Global.환경설정.사용권한 = 유저권한구분.없음;
+            Global.환경설정.로그인상태 = false;
+        }
+
+        private void B로그인_Click(object sender, EventArgs e)
+        {
+            if (!Global.환경설정.로그인상태)
+            {
+                Login form = new Login();
+                DialogResult result = form.ShowDialog();
+                if (result == DialogResult.No || result == DialogResult.Cancel)
+                {
+                    로그아웃상태();
+                    return;
+                }
+
+                유저상태표현(Global.환경설정.사용자명);
+                Global.환경설정.로그인상태 = true;
+                b로그인.Text = "로그아웃";
+            }
+            else
+            {
+                if (!Utils.Utils.Confirm($"[{Global.환경설정.사용자명}] 로그아웃 하시겠습니까 ?", "Logout")) return;
+                로그아웃상태();
+                유저상태표현(Global.환경설정.사용자명);
+                b로그인.Text = "로그인";
+            }
+
+        }
+
+        public void 유저상태표현(string 사용자명)
+        {
+            lb로그인유저.Text = 사용자명 == string.Empty ? "Not Login" : 사용자명;
         }
 
         public void 수량리셋(object sender, EventArgs e)
@@ -105,10 +144,6 @@ namespace SamhwaInspection.UI.Control
             if (!IvmUtils.Utils.Confirm("검사수량을 초기화하시겠습니까?")) return;
             Global.환경설정.수량리셋();
             this.환경설정BindingSource.ResetBindings(false);
-
-
-
-
 
             //이스터에그(추후 삭제)//********************************
             //Global.tactTimeChecker.Start();

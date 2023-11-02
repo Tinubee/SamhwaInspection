@@ -33,7 +33,6 @@ namespace SamhwaInspection.UI.Control
             this.b도구설정.Click += 도구설정;
             this.b도구저장.Click += 도구저장;
             this.b설정적용.Click += 설정적용;
-            this.b잠금해제.Click += 잠금해제;
             Utils.Localization.SetColumnCaption(this.GridView1, typeof(VmVariable));
             this.b설정적용.Text = 번역.설정저장;
             this.GridView1.RefreshData();
@@ -47,31 +46,6 @@ namespace SamhwaInspection.UI.Control
         {
             Teaching form = new Teaching();
             form.Show(Global.mainForm);
-        }
-
-        private void 잠금해제(object sender, EventArgs e)
-        {
-            if (!GridControl1.Visible)
-            {
-                Login form = new Login();
-                DialogResult result = form.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    GridControl1.Visible = true;
-                    b도구설정.Visible = true;
-                    b도구저장.Visible = true;
-                    b설정적용.Visible = true;
-                    b잠금해제.Text = "잠금";
-                }
-                return;
-            }
-
-            GridControl1.Visible = false;
-            b도구설정.Visible = false;
-            b도구저장.Visible = false;
-            b설정적용.Visible = false;
-            b잠금해제.Text = "잠금해제";
         }
 
         private void 도구저장(object sender, EventArgs e)

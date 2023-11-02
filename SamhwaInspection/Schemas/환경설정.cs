@@ -96,6 +96,8 @@ namespace SamhwaInspection.Schemas
         //#endregion
 
         #region 사용자관리
+        [JsonIgnore, Description("로그인상태")]
+        public Boolean 로그인상태 = false;
         [JsonIgnore, Description("사용자명")]
         public string 사용자명 { get; set; } = String.Empty;
 
@@ -269,7 +271,7 @@ namespace SamhwaInspection.Schemas
             if (구분 == 결과구분.ER) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
             if (구분 == 결과구분.OK) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information;
             if (구분 == 결과구분.NG) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
-            
+
             return DevExpress.LookAndFeel.DXSkinColors.ForeColors.ControlText;
         }
 

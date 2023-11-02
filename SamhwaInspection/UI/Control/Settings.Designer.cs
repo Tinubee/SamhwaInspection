@@ -31,12 +31,12 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.e기본설정 = new SamhwaInspection.UI.Control.BaseConfig();
             this.eIO컨트롤 = new SamhwaInspection.UI.Control.IOControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.e모델설정 = new SamhwaInspection.UI.Control.Models();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.e변수설정 = new SamhwaInspection.UI.Control.SetVariables();
+            this.e기본설정 = new SamhwaInspection.UI.Control.BaseConfig();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
@@ -90,14 +90,6 @@
             this.splitContainerControl1.SplitterPosition = 829;
             this.splitContainerControl1.TabIndex = 0;
             // 
-            // e기본설정
-            // 
-            this.e기본설정.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e기본설정.Location = new System.Drawing.Point(0, 0);
-            this.e기본설정.Name = "e기본설정";
-            this.e기본설정.Size = new System.Drawing.Size(829, 965);
-            this.e기본설정.TabIndex = 0;
-            // 
             // eIO컨트롤
             // 
             this.eIO컨트롤.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -137,6 +129,14 @@
             this.e변수설정.Size = new System.Drawing.Size(1814, 965);
             this.e변수설정.TabIndex = 0;
             // 
+            // e기본설정
+            // 
+            this.e기본설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e기본설정.Location = new System.Drawing.Point(0, 0);
+            this.e기본설정.Name = "e기본설정";
+            this.e기본설정.Size = new System.Drawing.Size(829, 965);
+            this.e기본설정.TabIndex = 0;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -165,10 +165,10 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private Control.BaseConfig e기본설정;
         private Control.IOControl eIO컨트롤;
         private Control.Models e모델설정;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private Control.SetVariables e변수설정;
+        private Control.BaseConfig e기본설정;
     }
 }

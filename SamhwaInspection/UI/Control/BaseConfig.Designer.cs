@@ -120,7 +120,6 @@
             this.e슬롯부20Point검사여부11 = new DevExpress.XtraEditors.ToggleSwitch();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.e유저관리 = new SamhwaInspection.UI.Control.User();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -769,7 +768,6 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.simpleButton1);
             this.panelControl1.Controls.Add(this.btnSaveSetting);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl1.Location = new System.Drawing.Point(0, 1142);
@@ -1168,16 +1166,6 @@
             this.e유저관리.Size = new System.Drawing.Size(1012, 456);
             this.e유저관리.TabIndex = 14;
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.Location = new System.Drawing.Point(772, 2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(119, 48);
-            this.simpleButton1.TabIndex = 1;
-            this.simpleButton1.Text = "잠금해제";
-            // 
             // BaseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1356,6 +1344,5 @@
         private DevExpress.XtraEditors.ToggleSwitch e15부측정검사여부;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private User e유저관리;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }
