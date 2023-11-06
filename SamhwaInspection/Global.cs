@@ -80,8 +80,8 @@ namespace SamhwaInspection
                 마스터설정 = new 마스터설정();
                 Debug.WriteLine("Global 마스터설정 클래스 생성");
 
-                //그랩제어.Init();
-                //Debug.WriteLine("카메라 제어 클래스 Init완료");
+                그랩제어.Init();
+                Debug.WriteLine("카메라 제어 클래스 Init완료");
                 환경설정.Init();
                 Debug.WriteLine("환경설정 클래스 Init완료");
                 //로그자료.Init();
@@ -90,12 +90,12 @@ namespace SamhwaInspection
                 Debug.WriteLine("유저자료 클래스 Init완료");
                 모델자료.Init();
                 Debug.WriteLine("모델자료 클래스 Init완료");
-                //신호제어.Init();
-                //Debug.WriteLine("신호제어 클래스 Init완료");
-                //조명제어.Init();
-                //Debug.WriteLine("조명제어 클래스 Init완료");
-                //검사자료.Init();
-                //Debug.WriteLine("검사자료 클래스 Init완료!");
+                신호제어.Init();
+                Debug.WriteLine("신호제어 클래스 Init완료");
+                조명제어.Init();
+                Debug.WriteLine("조명제어 클래스 Init완료");
+                검사자료.Init();
+                Debug.WriteLine("검사자료 클래스 Init완료!");
                 비전마스터구동.Init();
                 Debug.WriteLine("비전마스터구동 클래스 Init완료!");
                 마스터설정.Init();

@@ -46,8 +46,6 @@ namespace SamhwaInspection
         {
             InitializeComponent();
             this.ShowWaitForm();
-            //Global.Init();
-            //Debug.WriteLine("Global Init Finished");
             this.StartPosition = FormStartPosition.Manual;
             Global.mainForm = this;
             this.tabFormControl1.SelectedPage = p비전검사;
@@ -96,7 +94,7 @@ namespace SamhwaInspection
         }
         private Boolean Init()
         {
-            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
             this.state1.Init();
             this.settings1.Init();
             DisplaySetting(Global.모델자료.선택모델.모델번호);
