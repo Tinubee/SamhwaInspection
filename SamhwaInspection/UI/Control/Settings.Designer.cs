@@ -31,12 +31,18 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.e기본설정 = new SamhwaInspection.UI.Control.BaseConfig();
             this.eIO컨트롤 = new SamhwaInspection.UI.Control.IOControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.e모델설정 = new SamhwaInspection.UI.Control.Models();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.e변수설정 = new SamhwaInspection.UI.Control.SetVariables();
-            this.e기본설정 = new SamhwaInspection.UI.Control.BaseConfig();
+            this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
+            this.e마스터설정 = new SamhwaInspection.UI.Control.MasterSetting();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
@@ -48,6 +54,7 @@
             this.splitContainerControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
             this.xtraTabPage3.SuspendLayout();
+            this.xtraTabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -62,7 +69,8 @@
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
             this.xtraTabPage2,
-            this.xtraTabPage3});
+            this.xtraTabPage3,
+            this.xtraTabPage4});
             // 
             // xtraTabPage2
             // 
@@ -89,6 +97,14 @@
             this.splitContainerControl1.Size = new System.Drawing.Size(1814, 965);
             this.splitContainerControl1.SplitterPosition = 829;
             this.splitContainerControl1.TabIndex = 0;
+            // 
+            // e기본설정
+            // 
+            this.e기본설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e기본설정.Location = new System.Drawing.Point(0, 0);
+            this.e기본설정.Name = "e기본설정";
+            this.e기본설정.Size = new System.Drawing.Size(829, 965);
+            this.e기본설정.TabIndex = 0;
             // 
             // eIO컨트롤
             // 
@@ -129,13 +145,56 @@
             this.e변수설정.Size = new System.Drawing.Size(1814, 965);
             this.e변수설정.TabIndex = 0;
             // 
-            // e기본설정
+            // xtraTabPage4
             // 
-            this.e기본설정.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e기본설정.Location = new System.Drawing.Point(0, 0);
-            this.e기본설정.Name = "e기본설정";
-            this.e기본설정.Size = new System.Drawing.Size(829, 965);
-            this.e기본설정.TabIndex = 0;
+            this.xtraTabPage4.Controls.Add(this.e마스터설정);
+            this.xtraTabPage4.Controls.Add(this.barDockControlLeft);
+            this.xtraTabPage4.Controls.Add(this.barDockControlRight);
+            this.xtraTabPage4.Controls.Add(this.barDockControlBottom);
+            this.xtraTabPage4.Controls.Add(this.barDockControlTop);
+            this.xtraTabPage4.Name = "xtraTabPage4";
+            this.xtraTabPage4.Size = new System.Drawing.Size(1814, 965);
+            this.xtraTabPage4.Text = "마스터설정";
+            // 
+            // e마스터설정
+            // 
+            this.e마스터설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e마스터설정.Location = new System.Drawing.Point(0, 0);
+            this.e마스터설정.Name = "e마스터설정";
+            this.e마스터설정.Size = new System.Drawing.Size(1814, 965);
+            this.e마스터설정.TabIndex = 4;
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Manager = null;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 965);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1814, 0);
+            this.barDockControlRight.Manager = null;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 965);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 965);
+            this.barDockControlBottom.Manager = null;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1814, 0);
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = null;
+            this.barDockControlTop.Size = new System.Drawing.Size(1814, 0);
             // 
             // Settings
             // 
@@ -155,6 +214,8 @@
             this.splitContainerControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
             this.xtraTabPage3.ResumeLayout(false);
+            this.xtraTabPage4.ResumeLayout(false);
+            this.xtraTabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -170,5 +231,11 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private Control.SetVariables e변수설정;
         private Control.BaseConfig e기본설정;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private Control.MasterSetting e마스터설정;
     }
 }

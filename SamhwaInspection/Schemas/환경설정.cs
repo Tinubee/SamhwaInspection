@@ -34,7 +34,7 @@ namespace SamhwaInspection.Schemas
         [Description("NG 이미지 저장"), JsonProperty("SaveNG")]
         public Boolean 사진저장NG { get; set; } = false;
         [Description("현재 검사모델"), JsonProperty("CurrentModel")]
-        public Int32 선택모델 { get; set; } = 0;
+        public Int32 선택모델 { get; set; } = 1;
         [Description("검사결과 보관일수"), JsonProperty("DaysToKeepResults")]
         public int 결과보관 { get; set; } = 180;
         [Description("로그 보관일수"), JsonProperty("DaysToKeepLogs")]

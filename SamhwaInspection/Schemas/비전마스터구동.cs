@@ -52,7 +52,7 @@ namespace SamhwaInspection.Schemas
             {
                 if (i > 5) //7,8
                 {
-                    
+
                     string plcAddress = string.Empty;
                     if (i == 6) plcAddress = $"W0015";
                     base.Add(new 비전마스터플로우((Flow구분)i, plcAddress));
@@ -61,7 +61,7 @@ namespace SamhwaInspection.Schemas
                 {
                     base.Add(new 비전마스터플로우((Flow구분)i, $"W000{i}"));
                 }
-                    
+
             }
 
             if (Global.mainForm != null)
@@ -300,11 +300,16 @@ namespace SamhwaInspection.Schemas
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();
                 String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
-                if (resultString == "NG")
+                this.결과 = resultString == "OK" ? true : false;
+                
+                if (Global.신호제어.마스터모드여부 == 1)
                 {
-                    this.결과 = false;
-                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
+                    return this.결과;
+                }
 
+                if (this.결과)
+                {
+                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
                     if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
                     {
                         if (this.PLC결과어드레스 == "W0003")
@@ -324,8 +329,7 @@ namespace SamhwaInspection.Schemas
                 }
                 else
                 {
-                    this.결과 = true;
-                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
+                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
                     if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
                     {
                         if (this.PLC결과어드레스 == "W0003")

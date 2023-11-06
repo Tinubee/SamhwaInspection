@@ -325,12 +325,14 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Schemas\Data\BaseTable.cs" />
     <Compile Include="Schemas\LightController.cs" />
+    <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\VmGlobals.cs" />
     <Compile Include="Schemas\검사도구모음.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
+    <Compile Include="Schemas\마스터설정.cs" />
     <Compile Include="Schemas\모델정보.cs" />
     <Compile Include="Schemas\비전마스터구동.cs" />
     <Compile Include="Schemas\신호제어.cs" />
@@ -437,6 +439,12 @@
     </Compile>
     <Compile Include="UI\Control\VMMainViewControl_Render.Designer.cs">
       <DependentUpon>VMMainViewControl_Render.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\MasterSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\MasterSetting.Designer.cs">
+      <DependentUpon>MasterSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Form\Login.cs">
       <SubType>Form</SubType>
@@ -553,6 +561,9 @@
     <EmbeddedResource Include="UI\Control\VMControl_Render.resx">
       <DependentUpon>VMControl_Render.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\MasterSetting.resx">
+      <DependentUpon>MasterSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Form\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -585,6 +596,8 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.VmGlobals.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.검사정보.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터설정.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.유저자료.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

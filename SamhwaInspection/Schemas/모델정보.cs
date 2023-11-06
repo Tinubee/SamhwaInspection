@@ -89,7 +89,7 @@ namespace SamhwaInspection.Schemas
         {
             모델저장폴더 = Path.Combine(Global.환경설정.모델저장경로, 모델이름);
             검사목록파일 = Path.Combine(모델저장폴더, "Tools.json");
-            
+
             //폴더 존재 유무 체크 및 없으면 생성
             if (!Utils.Common.DirectoryExists(모델저장폴더, true))
             {
@@ -101,7 +101,7 @@ namespace SamhwaInspection.Schemas
             else Debug.WriteLine(검사목록파일, "검사목록 저장완료");
         }
 
-        
+
 
         public String 마스터이미지경로(CameraType camera)
         {
@@ -117,7 +117,8 @@ namespace SamhwaInspection.Schemas
         {
             List<검사정보> 선택카메라검사목록 = new List<검사정보>();
 
-            this.검사목록.ForEach(x => {
+            this.검사목록.ForEach(x =>
+            {
                 if (x.카메라구분 == type) 선택카메라검사목록.Add(x);
             });
             return 선택카메라검사목록;
@@ -125,8 +126,9 @@ namespace SamhwaInspection.Schemas
 
         public void SelectAll(CameraType type, Boolean selected)
         {
-            this.검사목록.ForEach(x => { 
-                if (x.카메라구분 == type) x.rectangle.Selected = selected; 
+            this.검사목록.ForEach(x =>
+            {
+                if (x.카메라구분 == type) x.rectangle.Selected = selected;
             });
         }
 
@@ -146,7 +148,7 @@ namespace SamhwaInspection.Schemas
     {
         private const String 로그영역 = "모델자료";
         private String 모델목록파일 { get { return Path.Combine(Global.환경설정.모델저장경로, $"모델목록.json"); } }
-        public 모델정보 선택모델 { get { return this.GetItem(Global.환경설정.선택모델);} }
+        public 모델정보 선택모델 { get { return this.GetItem(Global.환경설정.선택모델); } }
         public void Init()
         {
             this.Load();
@@ -200,12 +202,8 @@ namespace SamhwaInspection.Schemas
             //{
             //    Utils.Common.DirectoryExists(모델.모델저장폴더, true);
             //}
-                //모델.검사현황?.Save();
+            //모델.검사현황?.Save();
             //this.선택모델?.검사현황.Load();
         }
-
     }
-
-
-
 }

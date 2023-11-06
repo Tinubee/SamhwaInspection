@@ -1,4 +1,5 @@
-﻿using GlobalVariableModuleCs;
+﻿using DevExpress.Office.Utils;
+using GlobalVariableModuleCs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,22 @@ namespace SamhwaInspection.Schemas
             }
         }
 
-        public void InspectUseSet(string Name,  string Value)
+        public List<VmVariable> GetCalValue()
+        {
+            List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
+            List<VmVariable> calValueList = new List<VmVariable>();
+            foreach (GlobalVarInfo info in lists)
+            {
+                if (info.strValueType.ToLower() == typeof(String).Name.ToLower()) continue;
+
+                if (info.strValueName.Contains("calValue"))
+                    calValueList.Add(new VmVariable(info));
+            }
+
+            return calValueList;
+        }
+
+        public void InspectUseSet(string Name, string Value)
         {
             this.Variables.SetGlobalVar(Name, Value);
         }

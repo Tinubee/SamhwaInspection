@@ -38,6 +38,7 @@ namespace SamhwaInspection
         public static 비전마스터구동 비전마스터구동;
         public static MainForm mainForm;
         public static 검사자료 검사자료;
+        public static 마스터설정 마스터설정;
 
         public delegate void BaseEvent();
 
@@ -76,6 +77,8 @@ namespace SamhwaInspection
                 Debug.WriteLine("Global 비전마스터구동 클래스 생성");
                 검사자료 = new 검사자료();
                 Debug.WriteLine("Global 검사자료 클래스 생성");
+                마스터설정 = new 마스터설정();
+                Debug.WriteLine("Global 마스터설정 클래스 생성");
 
                 //그랩제어.Init();
                 //Debug.WriteLine("카메라 제어 클래스 Init완료");
@@ -95,6 +98,8 @@ namespace SamhwaInspection
                 //Debug.WriteLine("검사자료 클래스 Init완료!");
                 비전마스터구동.Init();
                 Debug.WriteLine("비전마스터구동 클래스 Init완료!");
+                마스터설정.Init();
+                Debug.WriteLine("마스터설정 클래스 Init완료!");
                 Debug.WriteLine("시스템을 초기화 합니다.");
                 Initialized?.Invoke(null, true);
                 return true;
