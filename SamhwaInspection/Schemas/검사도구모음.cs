@@ -61,6 +61,7 @@ namespace SamhwaInspection.Schemas
             {
                 Rect blob = Cv2.BoundingRect(contour);
                 Int32 Area = blob.Width * blob.Height;
+                Debug.WriteLine($"Blob Area : {Area}");
                 //지정한 범위 내에 있는 blob만 찾기
                 if ((Area > maxArea) || (Area < minArea)) 
                 {

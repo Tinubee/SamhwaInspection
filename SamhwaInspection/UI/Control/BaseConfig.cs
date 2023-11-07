@@ -143,7 +143,11 @@ namespace SamhwaInspection.UI.Control
         private void E문서저장_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (this.d문서저장.ShowDialog() == DialogResult.OK)
+            {
                 this.e문서저장경로.Text = this.d문서저장.SelectedPath;
+                for (int lop = 0; lop < 6; lop++)
+                    Global.비전마스터구동.GetItem((Flow구분)lop).데이터저장경로설정(this.d문서저장.SelectedPath);
+            }
         }
 
         private void E사진저장_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

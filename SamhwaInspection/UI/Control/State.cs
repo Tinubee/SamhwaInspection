@@ -28,7 +28,12 @@ namespace SamhwaInspection.UI.Control
         public State()
         {
             InitializeComponent();
+          
+        }
 
+        private void TitleView1_DoubleClick(object sender, EventArgs e)
+        {
+            Global.그랩제어.GetItem(CameraType.Cam01).Ready();
         }
 
         private void 입출상태적용()
@@ -99,6 +104,8 @@ namespace SamhwaInspection.UI.Control
             this.e양품수량.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information;
             this.e불량수량.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
             this.e전체수량.BaseColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.ControlText;
+
+            titleView1.DoubleClick += TitleView1_DoubleClick;
         }
 
         public void 로그아웃상태()

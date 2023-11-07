@@ -20,6 +20,8 @@ using DataSetModuleCs;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.CodeParser.Diagnostics;
+using SaveTextModuleCs;
+using System.Windows.Shapes;
 
 namespace SamhwaInspection.Schemas
 {
@@ -108,6 +110,9 @@ namespace SamhwaInspection.Schemas
         public List<IMVSGroup> Slot20PointGroupMouduleTool = new List<IMVSGroup>();
         public List<IMVSGroup> Slot200PointGroupMouduleTool = new List<IMVSGroup>();
 
+        public SaveTextModuleTool SaveTextModuleTool;
+        public SaveTextModuleTool SaveTextMasterModuleTool;
+
         public 비전마스터플로우(Flow구분 구분, String plcAddress)
         {
             this.구분 = 구분;
@@ -155,8 +160,24 @@ namespace SamhwaInspection.Schemas
 
                 this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
                 this.DataSetModuleTool = this.Procedure["inputData"] as DataSetModuleTool;
+                this.SaveTextModuleTool = this.Procedure["Save Text1"] as SaveTextModuleTool;
+                this.SaveTextMasterModuleTool = this.Procedure["마스터데이터"] as SaveTextModuleTool;
+
+                데이터저장경로설정(Global.환경설정.자료저장경로);
             }
         }
+
+        public void 데이터저장경로설정(string path)
+        {
+            string dataPath = System.IO.Path.Combine(path, "InspectData");
+
+            if (this.SaveTextModuleTool != null)
+                this.SaveTextModuleTool.ModuParams.Path = dataPath;
+
+            if (this.SaveTextMasterModuleTool != null)
+                this.SaveTextMasterModuleTool.ModuParams.Path = System.IO.Path.Combine(dataPath, "Master");
+        }
+
 
         public void SetFlatnessData()
         {

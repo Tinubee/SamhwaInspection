@@ -311,15 +311,15 @@ namespace SamhwaInspection.Schemas
                             Global.그랩제어.카메라2.TrigForce();
                         }
 
-                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사뒷면 트리거신호
-                        {
-                            Debug.WriteLine("표면검사하부 트리거신호 들어옴");
-                            Global.그랩제어.카메라3.MatImage.Clear();
-                            Global.조명제어.TurnOn(조명구분.후면검사조명);
-                            SendValueToPLC(정보.주소, 0);
-                            Global.그랩제어.카메라3.Ready();
-                            하부표면검사bk.RunWorkerAsync(0);
-                        }
+                        //if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사뒷면 트리거신호
+                        //{
+                        //    Debug.WriteLine("표면검사하부 트리거신호 들어옴");
+                        //    Global.그랩제어.카메라3.MatImage.Clear();
+                        //    Global.조명제어.TurnOn(조명구분.후면검사조명);
+                        //    SendValueToPLC(정보.주소, 0);
+                        //    Global.그랩제어.카메라3.Ready();
+                        //    하부표면검사bk.RunWorkerAsync(0);
+                        //}
 
                         if (정보.주소 == "W002E" & 정보.값 == 1) // 표면검사상면 트리거신호
                         {
@@ -335,9 +335,8 @@ namespace SamhwaInspection.Schemas
                         {
                             //조명키고
                             Global.조명제어.TurnOn(조명구분.BACK);
+                            Global.그랩제어.GetItem(CameraType.Cam01).Ready();
                             SendValueToPLC(정보.주소, 0);
-                            //Global.그랩제어.카메라1.ProductIndex = ProductIndex.PRODUCT_INDEX1;
-                            Global.그랩제어.카메라1.SoftTrig();
                         }
                         if ((정보.주소 == "W0040") && 정보.값 == 1) //상부 평탄도 검사 데이터 트리거
                         {

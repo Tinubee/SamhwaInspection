@@ -251,6 +251,7 @@
     <Reference Include="ReadDatasModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a989deb766dd29c, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
+    <Reference Include="SaveTextModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a3cde6a94e7998ed, processorArchitecture=MSIL" />
     <Reference Include="ShellModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a88b3f19f0240810, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>

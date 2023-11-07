@@ -139,6 +139,9 @@ namespace SamhwaInspection.Schemas
         [JsonIgnore]
         public String NG이미지Cam2폴더경로 { get { return Path.Combine(this.NG이미지저장경로, "Camera2"); } }
 
+        //[JsonIgnore]
+        //public String 검사데이터저장경로 { get { return Path.Combine(this.자료저장경로, "InspectData"); } }
+
         [JsonIgnore]
         public Boolean 메뉴얼검사확인 = false;
 
