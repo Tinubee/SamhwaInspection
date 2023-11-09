@@ -21,9 +21,14 @@ namespace SamhwaInspection.UI.Control
         private Int32 preValue_자동모드;
         private Int32 preValue_자동운전시작;
         private Int32 preValue_마스터모드;
+        private Int32 preValue_Front지그;
+        private Int32 preValue_Rear지그;
+
         private Int32 currentValue_자동모드;
         private Int32 currentValue_자동운전시작;
         private Int32 currentValue_마스터모드;
+        private Int32 currentValue_Front지그;
+        private Int32 currentValue_Rear지그;
 
         public State()
         {
@@ -41,6 +46,37 @@ namespace SamhwaInspection.UI.Control
             currentValue_자동모드 = Global.신호제어.자동모드여부;
             currentValue_자동운전시작 = Global.신호제어.운전시작여부;
             currentValue_마스터모드 = Global.신호제어.마스터모드여부;
+            currentValue_Front지그 = Global.신호제어.Front지그;
+            currentValue_Rear지그 = Global.신호제어.Rear지그;
+
+
+            if (preValue_Front지그 != currentValue_Front지그)
+            {
+                if (preValue_Front지그 > 0)
+                {
+                    Debug.WriteLine("Front지그 On");
+                }
+                else
+                {
+                    Debug.WriteLine("Front지그 Off");
+                }
+                preValue_Front지그 = currentValue_Front지그;
+            }
+
+            if (preValue_Rear지그 != currentValue_Rear지그)
+            {
+                if (preValue_Rear지그 > 0)
+                {
+                    Debug.WriteLine("Rear지그 On");
+                }
+                else
+                {
+                    Debug.WriteLine("Rear지그 Off");
+                }
+                preValue_Rear지그 = currentValue_Rear지그;
+            }
+
+
 
             if (preValue_자동모드 != currentValue_자동모드)
             {
@@ -72,12 +108,12 @@ namespace SamhwaInspection.UI.Control
                 {
                     //this.버튼UI변경(this.b운전모드, currentValue_마스터모드, "MASTER", "MANUAL");
                     //Global.조명제어.TurnOn(조명구분.BACK);
-                    Debug.WriteLine("조명켬");
+                    Debug.WriteLine("마스터모드 On");
                 }
                 else
                 {
                     //Global.조명제어.TurnOff(조명구분.BACK);
-                    Debug.WriteLine("조명끔");
+                    Debug.WriteLine("마스터모드 Off");
                 }
                 preValue_마스터모드 = currentValue_마스터모드;
                 Debug.WriteLine("마스터모드 상태 변경!");

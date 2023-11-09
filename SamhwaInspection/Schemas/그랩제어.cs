@@ -528,8 +528,8 @@ namespace SamhwaInspection.Schemas
                 else if (this.구분 == CameraType.Cam04)
                 {
                     this.MatImage.Add(image);
-                    Debug.WriteLine($"{MatImage.Count}");
-                    Debug.WriteLine($"{image.Data}");
+                    //Debug.WriteLine($"{MatImage.Count}");
+                    //Debug.WriteLine($"{image.Data}");
                     if (Global.그랩제어.카메라4.MatImage.Count == 6)
                     {
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
@@ -539,8 +539,8 @@ namespace SamhwaInspection.Schemas
                 else if (this.구분 == CameraType.Cam03)
                 {
                     this.MatImage.Add(image);
-                    Debug.WriteLine($"{MatImage.Count}");
-                    Debug.WriteLine($"{image.Data}");
+                    //Debug.WriteLine($"{MatImage.Count}");
+                    //Debug.WriteLine($"{image.Data}");
                     if (Global.그랩제어.카메라3.MatImage.Count == 6)
                     {
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
@@ -621,36 +621,6 @@ namespace SamhwaInspection.Schemas
             MC.SetParam(this.Channel, "PageLength_Ln", this.PageLength_Ln);
             MC.SetParam(this.Channel, "SeqLength_pg", this.SeqLength_pg);
 
-            //MC.SetParam(this.Channel, "ColorFormat", "Y8");
-            //MC.SetParam(this.Channel, "TapConfiguration", "FULL_8T8");
-            //MC.SetParam(this.Channel, "AcquisitionMode", "LONGPAGE");
-            //MC.SetParam(this.Channel, "TrigMode", "SOFT");
-            //MC.SetParam(this.Channel, "NextTrigMode", "REPEAT");
-            //MC.SetParam(this.Channel, "PageLength_Ln", 60000);
-            //MC.SetParam(this.Channel, "EndTrigMode", "AUTO");
-            //MC.SetParam(this.Channel, "SeqLength_Ln", 120000);
-            //MC.SetParam(this.Channel, "BreakEffect", "FINISH");
-
-            //MC.SetParam(this.Channel, "ColorFormat", "Y8");
-            //MC.SetParam(this.Channel, "TapConfiguration", "FULL_8T8");
-            //MC.SetParam(this.Channel, "AcquisitionMode", "LONGPAGE");
-            //MC.SetParam(this.Channel, "TrigMode", "HARD");
-            //MC.SetParam(this.Channel, "NextTrigMode", "REPEAT");
-            //MC.SetParam(this.Channel, "PageLength_Ln", 10000);
-            //MC.SetParam(this.Channel, "EndTrigMode", "AUTO");
-            //MC.SetParam(this.Channel, "SeqLength_Ln", 20000);
-            //MC.SetParam(this.Channel, "BreakEffect", "FINISH");
-
-            //MC.SetParam(this.Channel, "ColorFormat", "Y8");
-            //MC.SetParam(this.Channel, "TapConfiguration", "FULL_8T8");
-            //MC.SetParam(this.Channel, "AcquisitionMode", "LONGPAGE");
-            //MC.SetParam(this.Channel, "TrigMode", "HARD");
-            //MC.SetParam(this.Channel, "NextTrigMode", "SAME");
-            //MC.SetParam(this.Channel, "PageLength_Ln", 47500);
-            //MC.SetParam(this.Channel, "EndTrigMode", "AUTO");
-            //MC.SetParam(this.Channel, "SeqLength_pg", 2);
-            //MC.SetParam(this.Channel, "BreakEffect", "FINISH");
-
             MC.GetParam(this.Channel, "ImageSizeY", out this.height);
             MC.GetParam(this.Channel, "ImageSizeX", out this.width);
 
@@ -675,7 +645,6 @@ namespace SamhwaInspection.Schemas
         public override Boolean Start()
         {
             this.Ready();
-            //Debug.WriteLine("Ready");
             return true;
         }
 
@@ -690,8 +659,6 @@ namespace SamhwaInspection.Schemas
         [Description("채널 활성화 준비")]
         public override Boolean Ready()
         {
-            //if (this.CurrentState() != ChannelState.READY)
-            //    MC.SetParam(this.Channel, "ChannelState", ChannelState.READY);
             if (this.CurrentState() != ChannelState.ACTIVE)
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
             Debug.WriteLine("Set Active!");
@@ -773,7 +740,7 @@ namespace SamhwaInspection.Schemas
             //AcquisitionData acq = new AcquisitionData(this.Camera, this.ProductIndex);
             Debug.WriteLine("LineCamera ImageGrab");
             AcquisitionData acq = new AcquisitionData(this.구분, PageIndex);
-            //Mat image = new Mat();
+            Mat image = new Mat();
             PageIndex += 1;
             if (PageIndex == 3) PageIndex = 1;
 
@@ -781,9 +748,8 @@ namespace SamhwaInspection.Schemas
             {
                 IntPtr BufferAddress;
                 MC.GetParam(SurfaceAddr, "SurfaceAddr", out BufferAddress);
-                //image = new Mat(Height, Width, MatType.CV_8U, BufferAddress);
-                //Global.그랩제어2.그랩완료(this.구분, image);
-                acq.SetImage(new OpenCvSharp.Mat(Height, Width, OpenCvSharp.MatType.CV_8U, BufferAddress));
+                image = new Mat(Height, Width, MatType.CV_8U, BufferAddress);
+                acq.SetImage(image);
             }
             catch (Exception ex)
             {

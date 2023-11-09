@@ -126,6 +126,10 @@ namespace SamhwaInspection.Schemas
             //Heartbit_PC,
             [Address("B1010")]
             Heartbit_PLC,
+            [Address("B1018")]
+            FrontJIG,
+            [Address("B1019")]
+            RearJIC,
             //[Address("B1020")]
             //수동모드,
             [Address("B1030")]
@@ -204,6 +208,10 @@ namespace SamhwaInspection.Schemas
         public int 운전시작여부 { get { return 신호읽기(주소구분.운전시작); } }
 
         public int 마스터모드여부 { get { return 신호읽기(주소구분.마스터모드); } }
+
+        //B1018,1819
+        public int Front지그 { get { return 신호읽기(주소구분.FrontJIG); } }
+        public int Rear지그 { get { return 신호읽기(주소구분.RearJIC); } }
         //public int 운전정지여부 { get { return 신호읽기(주소구분.운전정지); } }
         //public int 리셋여부 { get { return 신호읽기(주소구분.리셋); } }
         //public int 알람여부 { get { return 신호읽기(주소구분.알람); } }

@@ -37,7 +37,7 @@ namespace SamhwaInspection.Schemas
             SerialPort.DataBits = (Int32)8;
             SerialPort.StopBits = StopBits.One;
             SerialPort.Parity = Parity.None;
-         }
+        }
 
         public Boolean IsOpen()
         {
@@ -57,7 +57,7 @@ namespace SamhwaInspection.Schemas
                 Debug.WriteLine(ex.ToString());
                 SerialPort.Dispose();
                 SerialPort = null;
-                //Global.오류로그(로그영역, "장치연결", "조명 제어 포트에 연결할 수 없습니다.\n" + ex.Message, true);
+                Debug.WriteLine($"조명 제어 포트에 연결할 수 없습니다. {ex.Message}");
                 return false;
             }
         }
@@ -74,7 +74,7 @@ namespace SamhwaInspection.Schemas
         {
             if (!IsOpen())
             {
-                //Global.오류로그(로그영역, 구분, "조명컨트롤러 포트에 연결할 수 없습니다.", true);
+                Debug.WriteLine("조명컨트롤러 포트에 연결할 수 없습니다.");
                 return false;
             }
             try
@@ -82,12 +82,12 @@ namespace SamhwaInspection.Schemas
                 if (Command.StartsWith("w"))
                 {
                     int channelNumber = Convert.ToInt32(채널);
-                    for (int lop = channelNumber ; lop < channelNumber + 4; lop++)
+                    for (int lop = channelNumber; lop < channelNumber + 4; lop++)
                         SerialPort.Write($"{STX}{lop}{Command}{ETX}");
                 }
                 else
                     SerialPort.Write($"{STX}{채널}{Command}{ETX}");
-                
+
                 //Debug.WriteLine($"{STX}{Command}{ETX}");
                 return true;
             }
@@ -112,27 +112,17 @@ namespace SamhwaInspection.Schemas
             //후면검사 조명 : 1,2,3,4  상부검사 조명 : 6,7,8,9
             Debug.WriteLine($"{조명포트.COM3} - {정보.채널} 조명 ON");
             if (정보.포트 == 조명포트.COM3)
-            {
                 return SendCommand($"{(Int32)정보.채널}", "w1023");
-            }
             else
-            {
                 return SendCommand($"{(Int32)정보.채널}", "o0000");
-            }
         }
         public Boolean TurnOff(조명정보 정보)
         {
             Debug.WriteLine($"{조명포트.COM3} - {정보.채널} 조명 OFF");
             if (정보.포트 == 조명포트.COM3)
-            {
                 return SendCommand($"{(Int32)정보.채널}", "w0000");
-            }
             else
-            {
                 return SendCommand($"{(Int32)정보.채널}", "f0000");
-            }
-            //return SendCommand($"{(Int32)정보.채널}", "000");
-           
         }
 
     }

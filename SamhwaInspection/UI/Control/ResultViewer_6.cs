@@ -134,139 +134,7 @@ namespace SamhwaInspection.UI.Control
             this.myGridControl1.RefreshDataSource();
             Debug.WriteLine("데이터리프레시완료");
         }
-
-        //private void Paint_camImage(AcquisitionData Data)
-        //{
-        //    try
-        //    {
-        //        if (Global.모델자료.선택모델.디스플레이개수 != 6) return;
-        //        Debug.WriteLine("Paint까지 들어옴");
-        //        if (Data.BmpImage == null) return;
-        //        if (this.InvokeRequired)
-        //        {
-        //            this.Invoke(new 이미지그랩완료보고대리자(Paint_camImage), new object[] { Data });
-        //            return;
-        //        }
-        //        Debug.WriteLine("이프문 전");
-        //        if (Data.Camera == 카메라1)
-        //        {
-        //            if (Data.PageIndex == 1)
-        //            {
-        //                Page1Image = Data.MatImage;
-        //                Debug.WriteLine(this.cam1.CurrentState(), "첫번째");
-
-        //                //자동검사(Page1Image, Flow구분.Flow1);
-        //                isGrabCompleted_Page1 = true;
-        //            }
-        //            if (Data.PageIndex == 2)
-        //            {
-        //                Page2Image = Data.MatImage;
-        //                isGrabCompleted_Page2 = true;
-        //                Debug.WriteLine(this.cam1.CurrentState(), "두번쨰");
-
-        //                //자동검사(Page2Image, Flow구분.Flow2);
-        //            }
-        //            Debug.WriteLine("자동검사 전");
-        //            if (isGrabCompleted_Page1 & isGrabCompleted_Page2)
-        //            {
-        //                Debug.WriteLine("자동검사 시작");
-        //                isGrabCompleted_Page1 = false;
-        //                isGrabCompleted_Page2 = false;
-        //                for (int lop = 0; lop < roi.Length; lop++)
-        //                    roi[lop].Y = 0;
-        //                //조명 끔
-        //                //Global.조명제어.TurnOff(조명구분.BACK);
-        //                // 이미지 연결
-        //                Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-        //                Cv2.ImWrite("C://IVM//test.bmp", mergedImage);
-        //                roiAlign = new Rect(6400, 0, 2000, 2 * height_cam);
-        //                List<Rect> blobs = Global.검사도구모음.FindBlobs2(mergedImage, roiAlign, 100, ThresholdTypes.Binary, SearchMode.WhiteBlob, 330000, 530000);
-        //                Debug.WriteLine($"Blob 개수 : {blobs.Count}");
-        //                int blobCount = blobs.Count();
-        //                //List<int> emptyImageIndex = new List<int>();
-
-        //                if (Global.신호제어.마스터모드여부 == 1)
-        //                {
-        //                    if (blobs[0].Y < 1500) roi[0] = new Rect(0, blobs[0].Y, width_cam, 13000);
-        //                    else
-        //                        roi[0] = new Rect(0, blobs[0].Y - 1500, width_cam, 13000);
-
-        //                    splitImage[0] = new Mat(mergedImage, roi[0]);
-        //                    자동검사(splitImage[0], (Flow구분)0);
-        //                }
-        //                else
-        //                {
-        //                    if (blobCount != 6)
-        //                    {
-        //                        if (blobCount > 6)
-        //                        {
-        //                            while (true)
-        //                            {
-        //                                Debug.WriteLine("Blob List 첫번째 항목 제거");
-        //                                blobs.RemoveAt(0);
-        //                                blobCount = blobs.Count();
-
-        //                                if (blobCount == 6) break;
-        //                            }
-        //                        }
-        //                        for (int lop = 0; lop < blobCount; lop++)
-        //                        {
-        //                            Debug.WriteLine($"Blob Y 크기 {lop}번째 : {blobs[lop].Y}");
-        //                            if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
-        //                            else
-        //                            {
-        //                                roi[lop] = new Rect(0, blobs[lop - 1].Y - 1500, width_cam, 13000);
-        //                            }
-        //                        }
-        //                    }
-        //                    else
-        //                    {
-        //                        for (int lop = 0; lop < blobCount; lop++)
-        //                        {
-        //                            if (blobs[lop].Y < 1500)
-        //                                roi[lop] = new Rect(0, blobs[lop].Y, width_cam, 13000);
-        //                            else
-        //                                roi[lop] = new Rect(0, blobs[lop].Y - 1500, width_cam, 13000);
-        //                        }
-        //                    }
-        //                    for (int lop = 0; lop < roi.Length; lop++)
-        //                    {
-        //                        //Debug.WriteLine($"roi Y 크기 : {lop}번째 {roi[lop].Y}");
-        //                        if (roi[lop].Y == 0)
-        //                        {
-        //                            if (lop == 0) roi[lop] = new Rect(0, 0, width_cam, 13000);
-        //                            if (lop == 1) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-        //                            if (lop == 2) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-        //                            if (lop == 3) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-        //                            if (lop == 4) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-        //                            if (lop == 5) roi[lop] = new Rect(0, roi[lop - 1].Y + 13000, width_cam, 13000);
-        //                        }
-        //                        Debug.WriteLine($"변경된 roi Y 크기 : {lop + 1}번째 {roi[lop].Y}");
-        //                        splitImage[lop] = new Mat(mergedImage, roi[lop]);
-        //                    }
-
-        //                    for (int lop = 0; lop < roi.Length; lop++)
-        //                        roi[lop].Y = 0;
-
-
-        //                    for (int i = 0; i < splitImage.Length; i++)
-        //                        자동검사(splitImage[i], (Flow구분)i);
-        //                }
-        //                isCompleted_Camera1 = true;
-        //            }
-        //        }
-        //        if (isCompleted_Camera1)
-        //        {
-        //            isCompleted_Camera1 = false;
-        //            this.cam1.Ready();
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.Message);
-        //    }
-        //}
+        
         private void Paint_camImage(AcquisitionData Data)
         {
             try
@@ -304,13 +172,10 @@ namespace SamhwaInspection.UI.Control
                         Debug.WriteLine("자동검사 시작");
                         isGrabCompleted_Page1 = false;
                         isGrabCompleted_Page2 = false;
-                        //for (int lop = 0; lop < roi.Length; lop++)
-                        //    roi[lop].Y = 0;
                         //조명 끔
-                        //Global.조명제어.TurnOff(조명구분.BACK);
+                        Global.조명제어.TurnOff(조명구분.BACK);
                         // 이미지 연결
                         Cv2.VConcat(Page1Image, Page2Image, mergedImage);
-                        //Cv2.ImWrite("C://IVM//test.bmp", mergedImage);
                         roi[0] = new Rect(0, 1919, width_cam, 13000);
                         roi[1] = new Rect(0, 15520, width_cam, 13000);
                         roi[2] = new Rect(0, 29118, width_cam, 13000);
@@ -318,31 +183,30 @@ namespace SamhwaInspection.UI.Control
                         roi[4] = new Rect(0, 56267, width_cam, 13000);
                         roi[5] = new Rect(0, 69909, width_cam, 13000);
 
-                        for (int i = 0; i < roi.Length; i++)
+                        if (Global.신호제어.마스터모드여부 == 1)
                         {
-
-                            splitImage[i] = new Mat(mergedImage, roi[i]);
-                            자동검사(splitImage[i], (Flow구분)i);
+                            splitImage[0] = new Mat(mergedImage, roi[0]);
+                            자동검사(splitImage[0], Flow구분.Flow1);
                         }
-                        ////Debug.WriteLine($"roi Y 크기 : {lop}번째 {roi[lop].Y}");
-                        //if (roi[lop].Y == 0)
-                        //{
-                        //    if (lop == 0) roi[lop] = new Rect(0, 2825, width_cam, 13000);
-                        //    if (lop == 1) roi[lop] = new Rect(0, , width_cam, 13000);
-                        //    if (lop == 2) roi[lop] = new Rect(0, , width_cam, 13000);
-                        //    if (lop == 3) roi[lop] = new Rect(0, , width_cam, 13000);
-                        //    if (lop == 4) roi[lop] = new Rect(0, , width_cam, 13000);
-                        //    if (lop == 5) roi[lop] = new Rect(0, , width_cam, 13000);
-                        //}
-                        //Debug.WriteLine($"변경된 roi Y 크기 : {lop + 1}번째 {roi[lop].Y}");
-                        //splitImage[lop] = new Mat(mergedImage, roi[lop]);
+                        else
+                        {
+                            for (int i = 0; i < roi.Length; i++)
+                            {
+                                splitImage[i] = new Mat(mergedImage, roi[i]);
+                                자동검사(splitImage[i], (Flow구분)i);
+                            }
+                            //Task.Run(() =>
+                            //{
+                            //    for (int i = 0; i < splitImage.Count(); i++)
+                            //        자동검사(splitImage[i], (Flow구분)i);
+                            //});
+                        }
                         isCompleted_Camera1 = true;
                     }
                     if (isCompleted_Camera1)
                     {
                         isCompleted_Camera1 = false;
                         //this.cam1.Ready();
-                        
                     }
                 }
             }
@@ -373,8 +237,6 @@ namespace SamhwaInspection.UI.Control
                 }
             }
             Global.환경설정.결과갱신요청();
-            //if (구분 == Flow구분.Flow6)
-            //    this.cam1.Ready();
         }
     }
 }

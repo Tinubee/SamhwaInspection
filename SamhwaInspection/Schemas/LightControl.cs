@@ -60,13 +60,13 @@ namespace SamhwaInspection.Schemas
         public void Init()
         {
             this.Controller1 = new LightController(조명포트.COM3, 9600, $"{Convert.ToChar(2)}", $"{Convert.ToChar(3)}");
-            this.Controller2 = new LightController(조명포트.COM4, 19200, $"{Convert.ToChar(2)}", $"{Convert.ToChar(3)}");
+            //this.Controller2 = new LightController(조명포트.COM4, 19200, $"{Convert.ToChar(2)}", $"{Convert.ToChar(3)}");
             this.Controller1.Init();
-            this.Controller2.Init();
+            //this.Controller2.Init();
 
             this.Add(new 조명정보() { 구분 = 조명구분.후면검사조명, 채널 = 조명채널.CH1, 밝기 = 100, lightController = Controller1, 포트 = Controller1.포트 });
             this.Add(new 조명정보() { 구분 = 조명구분.상면검사조명, 채널 = 조명채널.CH6, 밝기 = 100, lightController = Controller1, 포트 = Controller1.포트 });
-            this.Add(new 조명정보() { 구분 = 조명구분.BACK, 채널 = 조명채널.CH1, 밝기 = 100, lightController = Controller2, 포트 = Controller2.포트 });
+            //this.Add(new 조명정보() { 구분 = 조명구분.BACK, 채널 = 조명채널.CH1, 밝기 = 100, lightController = Controller2, 포트 = Controller2.포트 });
             Debug.WriteLine("조명정보 추가 완료");
             this.Save();
             this.Open();
@@ -116,11 +116,11 @@ namespace SamhwaInspection.Schemas
                 this.Controller1.Close();
                 Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러1에 연결할 수 없습니다.", true);
             }
-            if (!this.Controller2.Open())
-            {
-                this.Controller2.Close();
-                Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러2에 연결할 수 없습니다.", true);
-            }
+            //if (!this.Controller2.Open())
+            //{
+            //    this.Controller2.Close();
+            //    Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러2에 연결할 수 없습니다.", true);
+            //}
         }
         public void Close()
         {

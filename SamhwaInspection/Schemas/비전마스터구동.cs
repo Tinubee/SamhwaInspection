@@ -54,7 +54,6 @@ namespace SamhwaInspection.Schemas
             {
                 if (i > 5) //7,8
                 {
-
                     string plcAddress = string.Empty;
                     if (i == 6) plcAddress = $"W0015";
                     base.Add(new 비전마스터플로우((Flow구분)i, plcAddress));
@@ -117,12 +116,19 @@ namespace SamhwaInspection.Schemas
         {
             this.구분 = 구분;
             this.Init();
-            if (this.graphicsSetModuleTool != null) this.graphicsSetModuleTool.EnableResultCallback();
+            if (this.graphicsSetModuleTool != null)
+            {
+                this.graphicsSetModuleTool.EnableResultCallback();
+            }
             if (this.ShellModuleTool != null) this.ShellModuleTool.EnableResultCallback();
 
             for (int lop = 0; lop < graphicsSetModuleTool_List.Count; lop++)
                 if (this.graphicsSetModuleTool_List[lop] != null) this.graphicsSetModuleTool_List[lop].EnableResultCallback();
 
+            if(this.InputModuleTool != null)
+            {
+                this.InputModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+            }
             //슬롯부20Point검사설정();
             //슬롯부200Point검사설정();
 
@@ -299,6 +305,24 @@ namespace SamhwaInspection.Schemas
 
         }
 
+        private void 지그위치체크()
+        {
+            if (this.구분 == Flow구분.Flow1)
+            {
+                if (Global.신호제어.Front지그 == 1)
+                {
+                    this.GlobalVariableModuleTool.SetGlobalVar("Front지그", "1");
+                    this.GlobalVariableModuleTool.SetGlobalVar("Rear지그", "0");
+                }
+                else if (Global.신호제어.Rear지그 == 1)
+                {
+                    this.GlobalVariableModuleTool.SetGlobalVar("Front지그", "0");
+                    this.GlobalVariableModuleTool.SetGlobalVar("Rear지그", "1");
+                }
+            }
+
+        }
+
         private void 마스터모드체크()
         {
             if (this.구분 == Flow구분.Flow1)
@@ -316,57 +340,56 @@ namespace SamhwaInspection.Schemas
             this.결과업데이트완료 = false;
             if (this.InputModuleTool != null)
             {
+                지그위치체크();
                 마스터모드체크();
                 SetFlatnessData(); //평탄도 데이터 셋팅.
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();
                 String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
                 this.결과 = resultString == "OK" ? true : false;
-                
+
                 if (Global.신호제어.마스터모드여부 == 1)
                 {
+                    if (this.결과) Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
+                    else Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
+
+                    Global.신호제어.SendValueToPLC("W0020", 0);
                     return this.결과;
                 }
 
                 if (this.결과)
                 {
                     Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
-                    if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
-                    {
-                        if (this.PLC결과어드레스 == "W0003")
-                        {
-                            //Debug.WriteLine("트리거신호 초기화");
-                            Global.신호제어.SendValueToPLC("W0020", 0);
-                        }
-                    }
-                    else
-                    {
-                        if (this.PLC결과어드레스 == "W0005")
-                        {
-                            //Debug.WriteLine("트리거신호 초기화");
-                            Global.신호제어.SendValueToPLC("W0020", 0);
-                        }
-                    }
+                    //if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
+                    //{
+                    //    if (this.PLC결과어드레스 == "W0003")
+                    //    {
+                    //        //Debug.WriteLine("트리거신호 초기화");
+                    //        Global.신호제어.SendValueToPLC("W0020", 0);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    if (this.PLC결과어드레스 == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                        Global.신호제어.SendValueToPLC("W0020", 0);
+                    //}
                 }
                 else
                 {
                     Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
-                    if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
-                    {
-                        if (this.PLC결과어드레스 == "W0003")
-                        {
-                            //Debug.WriteLine("트리거신호 초기화");
-                            Global.신호제어.SendValueToPLC("W0020", 0);
-                        }
-                    }
-                    else
-                    {
-                        if (this.PLC결과어드레스 == "W0005")
-                        {
-                            //Debug.WriteLine("트리거신호 초기화");
-                            Global.신호제어.SendValueToPLC("W0020", 0);
-                        }
-                    }
+                    //if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
+                    //{
+                    //    if (this.PLC결과어드레스 == "W0003")
+                    //    {
+                    //        //Debug.WriteLine("트리거신호 초기화");
+                    //        Global.신호제어.SendValueToPLC("W0020", 0);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    if (this.PLC결과어드레스 == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                        Global.신호제어.SendValueToPLC("W0020", 0);
+                    //}
                 }
                 //Debug.WriteLine($"{this.PLC결과어드레스} 신호 날림");
                 //Debug.WriteLine("Process RUN", $"{this.구분}");
