@@ -39,6 +39,22 @@ namespace SamhwaInspection.Schemas
             return calValueList;
         }
 
+        public List<VmVariable> GetMasterInspectionValue()
+        {
+            List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
+            List<VmVariable> masterValueList = new List<VmVariable>();
+            foreach (GlobalVarInfo info in lists)
+            {
+                if (info.strValueType.ToLower() == typeof(float).Name.ToLower()) continue;
+
+                if (info.strValueName.Contains("master"))
+                    masterValueList.Add(new VmVariable(info));
+            }
+
+            return masterValueList;
+        }
+
+
         public void InspectUseSet(string Name, string Value)
         {
             this.Variables.SetGlobalVar(Name, Value);

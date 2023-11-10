@@ -598,6 +598,7 @@
     </None>
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.VmGlobals.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.검사정보.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터변수.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터설정.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.유저자료.datasource" />
     <None Include="Properties\Settings.settings">
