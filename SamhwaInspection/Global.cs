@@ -38,7 +38,7 @@ namespace SamhwaInspection
         public static 비전마스터구동 비전마스터구동;
         public static MainForm mainForm;
         public static 검사자료 검사자료;
-        public static 마스터설정 마스터설정;
+        public static 보정값설정 보정값설정;
         public static 마스터데이터 마스터데이터;
 
         public delegate void BaseEvent();
@@ -60,28 +60,16 @@ namespace SamhwaInspection
             try
             {
                 그랩제어 = new 그랩제어();
-                Debug.WriteLine("Global 카메라 제어 클래스 생성");
                 환경설정 = new 환경설정();
-                Debug.WriteLine("Global 환경설정 클래스 생성");
-                Global.정보로그(로그영역, "시작", "프로그램을 시작합니다.", false);
                 유저자료 = new 유저자료();
-                Debug.WriteLine("Global 유저자료 클래스 생성");
                 모델자료 = new 모델자료();
-                Debug.WriteLine("Global 모델자료 클래스 생성");
                 신호제어 = new 신호제어();
-                Debug.WriteLine("Global 신호제어 클래스 생성");
                 조명제어 = new LightControl();
-                Debug.WriteLine("Global 조명제어 클래스 생성");
                 검사도구모음 = new 검사도구모음();
-                Debug.WriteLine("Global 검사도구모음 클래스 생성");
                 비전마스터구동 = new 비전마스터구동();
-                Debug.WriteLine("Global 비전마스터구동 클래스 생성");
                 검사자료 = new 검사자료();
-                Debug.WriteLine("Global 검사자료 클래스 생성");
-                마스터설정 = new 마스터설정();
-                Debug.WriteLine("Global 마스터설정 클래스 생성");
+                보정값설정 = new 보정값설정();
                 마스터데이터 = new 마스터데이터();
-                Debug.WriteLine("Global 마스터데이터 클래스 생성");
 
                 그랩제어.Init();
                 Debug.WriteLine("카메라 제어 클래스 Init완료");
@@ -101,7 +89,7 @@ namespace SamhwaInspection
                 Debug.WriteLine("검사자료 클래스 Init완료!");
                 비전마스터구동.Init();
                 Debug.WriteLine("비전마스터구동 클래스 Init완료!");
-                마스터설정.Init();
+                보정값설정.Init();
                 Debug.WriteLine("마스터설정 클래스 Init완료!");
                 마스터데이터.Init();
                 Debug.WriteLine("시스템을 초기화 합니다.");

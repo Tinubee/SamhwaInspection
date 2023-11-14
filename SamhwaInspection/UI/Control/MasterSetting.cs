@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils.Extensions;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using MvUtils;
 using SamhwaInspection.Schemas;
@@ -11,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VM.Core;
+using VM.PlatformSDKCS;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -37,7 +40,7 @@ namespace SamhwaInspection.UI.Control
             this.GridView1.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
             this.GridView1.AddEditSelectionMenuItem();
             this.GridView1.AddSelectPopMenuItems();
-            this.GridControl1.DataSource = Global.마스터설정;
+            this.GridControl1.DataSource = Global.보정값설정;
 
             b설정저장.Click += B설정저장_Click;
             b보정값계산.Click += B보정값계산_Click;
@@ -65,12 +68,23 @@ namespace SamhwaInspection.UI.Control
         private void B마스터값로드_Click(object sender, EventArgs e)
         {
             if (!Utils.Utils.Confirm(번역.마스터값로드)) return;
+            List<IMVSGroup> tool = Global.비전마스터구동.GetItem(this.플로우).Slot20PointGroupMouduleTool;
+            List<String> slot_n_1Value = new List<String>();
+            for (int lop = 0; lop < tool.Count; lop++)
+            {
+                foreach (var v in tool[lop].Outputs)
+                {
+                    if (v.Value == null) continue;
+                    if (v.Name.Contains("Slot") && v.Name.Contains("-5"))
+                    {
+                        String resultString = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])v.Value)[4].strValue;
+                        slot_n_1Value.Add(resultString);
+                    }
+                }
+            }
 
-            List<VmVariable> masterValueList = new List<VmVariable>();
-            masterValueList = Global.비전마스터구동.글로벌변수제어.GetMasterInspectionValue();
-
-            Global.마스터설정.마스터비전결과값적용(masterValueList, this.위치, this.플로우);
-
+            Global.보정값설정.비전데이터적용(slot_n_1Value, this.플로우 ,this.위치);
+           
             this.GridView1.RefreshData();
         }
 
@@ -78,7 +92,7 @@ namespace SamhwaInspection.UI.Control
         {
             if (!Utils.Utils.Confirm(번역.보정값계산)) return;
 
-            Global.마스터설정.보정값계산();
+            Global.보정값설정.보정값계산();
 
             GridView1.RefreshData();
         }
@@ -87,8 +101,8 @@ namespace SamhwaInspection.UI.Control
         {
             if (!Utils.Utils.Confirm(번역.적용확인)) return;
 
-            Global.마스터설정.Set(); //글로벌변수값 셋팅
-            Global.마스터설정.Save(); //JSON파일에 저장
+            Global.보정값설정.Set(); //글로벌변수값 셋팅
+            Global.보정값설정.Save(); //JSON파일에 저장
             Global.비전마스터구동.Save(); //변경된 글로벌변수값이 적용된 Solution파일 저장.
         }
 

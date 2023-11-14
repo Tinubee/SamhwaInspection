@@ -92,11 +92,9 @@
             this.c플로우선택.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.c플로우선택.Properties.NullText = "[지그위치선택]";
-            this.c플로우선택.Properties.ReadOnly = true;
             this.c플로우선택.Size = new System.Drawing.Size(250, 44);
             this.c플로우선택.TabIndex = 13;
             this.c플로우선택.TabStop = false;
-            this.c플로우선택.Visible = false;
             // 
             // barManager1
             // 
@@ -185,11 +183,9 @@
             this.c지그선택.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.c지그선택.Properties.NullText = "[지그위치선택]";
-            this.c지그선택.Properties.ReadOnly = true;
             this.c지그선택.Size = new System.Drawing.Size(250, 44);
             this.c지그선택.TabIndex = 12;
             this.c지그선택.TabStop = false;
-            this.c지그선택.Visible = false;
             // 
             // b마스터값로드
             // 
@@ -201,8 +197,7 @@
             this.b마스터값로드.Name = "b마스터값로드";
             this.b마스터값로드.Size = new System.Drawing.Size(230, 42);
             this.b마스터값로드.TabIndex = 11;
-            this.b마스터값로드.Text = "마스터값 불러오기";
-            this.b마스터값로드.Visible = false;
+            this.b마스터값로드.Text = "비전값 불러오기";
             // 
             // b보정값계산
             // 
@@ -230,7 +225,7 @@
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(SamhwaInspection.Schemas.마스터설정);
+            this.bindingSource1.DataSource = typeof(SamhwaInspection.Schemas.보정값설정);
             // 
             // GridControl1
             // 

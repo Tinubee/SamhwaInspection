@@ -169,7 +169,7 @@ namespace SamhwaInspection.Schemas
                 gige.Init(gigeInfo);
             }
 
-            Debug.WriteLine($"카메라 갯수: {this.Count}");
+            //Debug.WriteLine($"카메라 갯수: {this.Count}");
             GC.Collect();
             return true;
         }

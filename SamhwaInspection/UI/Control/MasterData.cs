@@ -44,8 +44,6 @@ namespace SamhwaInspection.UI.Control
             Global.마스터데이터.Save();
             Global.비전마스터구동.Save();
 
-            //this.GridControl1.DataSource = Global.마스터데이터;
-            //this.GridControl1.Refresh();
             this.GridView1.RefreshData();
         }
 

@@ -1,4 +1,5 @@
-﻿using IvmUtils;
+﻿using DevExpress.Office.Utils;
+using IvmUtils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace SamhwaInspection.Schemas
 {
     public class 마스터데이터 : List<마스터데이터설정변수>
     {
-        private string 마스터설정파일 { get { return Path.Combine(Global.환경설정.기본경로, "마스터설정.json"); } }
+        private string 마스터설정파일 { get { return Path.Combine(Global.환경설정.기본경로, "마스터데이터.json"); } }
         List<VmVariable> masterValueList = new List<VmVariable>();
 
         public void Init()
@@ -25,32 +26,13 @@ namespace SamhwaInspection.Schemas
             foreach (VmVariable v in masterValueList)
                 this.Add(new 마스터데이터설정변수(v));
 
-            this.Load();
+            List<마스터데이터설정변수> 자료 = Load();
         }
-        public void Load()
+
+        private List<마스터데이터설정변수> Load()
         {
-            if (File.Exists(마스터설정파일))
-            {
-                try
-                {
-                    마스터데이터설정변수 변수 = JsonConvert.DeserializeObject<마스터데이터설정변수>(File.ReadAllText(마스터설정파일, Encoding.UTF8));
-                    foreach (PropertyInfo p in 변수.GetType().GetProperties())
-                    {
-                        if (!p.CanWrite) continue;
-                        Object v = p.GetValue(변수);
-                        if (v == null) continue;
-                        p.SetValue(this, v);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.ToString());
-                }
-            }
-            else
-            {
-                this.Save();
-            }
+            if (!File.Exists(this.마스터설정파일)) return null;
+            return JsonConvert.DeserializeObject<List<마스터데이터설정변수>>(File.ReadAllText(마스터설정파일), IvmUtils.Utils.JsonSetting());
         }
 
         public void Set()
@@ -88,10 +70,13 @@ namespace SamhwaInspection.Schemas
 
             public 마스터데이터설정변수(VmVariable v)
             {
-                this.검사명칭 = v.Name;
-                this.기준값 = Convert.ToSingle(v.StringValue);
-                this.최소값 = Math.Round(this.기준값 - 0.005, 4);
-                this.최대값 = Math.Round(this.기준값 + 0.005, 4);
+                if(v != null)
+                {
+                    this.검사명칭 = v.Name;
+                    this.기준값 = Convert.ToSingle(v.StringValue);
+                    this.최소값 = this.검사명칭.Contains("MinMaxValue") == false ? Math.Round(this.기준값 - 0.005, 4) : 0;
+                    this.최대값 = this.검사명칭.Contains("MinMaxValue") == false ? Math.Round(this.기준값 + 0.005, 4) : 0;
+                }
             }
         }
     }

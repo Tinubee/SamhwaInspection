@@ -61,9 +61,9 @@ namespace SamhwaInspection.Schemas
 
 
         #region 수량관리
-        [JsonIgnore]
+        [Description("양품갯수"), JsonProperty("OK")]
         public Int32 양품갯수 { get; set; } = 0;
-        [JsonIgnore]
+        [Description("불량갯수"), JsonProperty("NG")]
         public Int32 불량갯수 { get; set; } = 0;
         [JsonIgnore]
         public Int32 전체갯수 { get { return 양품갯수 + 불량갯수; } }

@@ -20,7 +20,7 @@ namespace SamhwaInspection.Schemas
             foreach (GlobalVarInfo info in lists)
             {
                 if (info.strValueType.ToLower() == typeof(String).Name.ToLower()) continue;
-                if (info.strValueName.Contains("calValue")) continue;
+                if (info.strValueName.Contains("calValue") || info.strValueName.Contains("offset")) continue;
 
                 this.Add(new VmVariable(info));
             }

@@ -334,7 +334,7 @@
     <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
     <Compile Include="Schemas\마스터데이터.cs" />
-    <Compile Include="Schemas\마스터설정.cs" />
+    <Compile Include="Schemas\보정값설정.cs" />
     <Compile Include="Schemas\모델정보.cs" />
     <Compile Include="Schemas\비전마스터구동.cs" />
     <Compile Include="Schemas\신호제어.cs" />
