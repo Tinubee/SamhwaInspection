@@ -25,6 +25,7 @@ namespace SamhwaInspection.UI
             //this.e모델설정.Init();
             this.e변수설정.Init();
             this.e마스터설정.Init();
+            this.e마스터데이터.Init();
         }
 
         public void 변수업데이트()

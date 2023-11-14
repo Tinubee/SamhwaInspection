@@ -43,6 +43,8 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
+            this.e마스터데이터 = new SamhwaInspection.UI.Control.MasterData();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
@@ -55,6 +57,7 @@
             this.xtraTabPage1.SuspendLayout();
             this.xtraTabPage3.SuspendLayout();
             this.xtraTabPage4.SuspendLayout();
+            this.xtraTabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -70,7 +73,8 @@
             this.xtraTabPage1,
             this.xtraTabPage2,
             this.xtraTabPage3,
-            this.xtraTabPage4});
+            this.xtraTabPage4,
+            this.xtraTabPage5});
             // 
             // xtraTabPage2
             // 
@@ -154,7 +158,7 @@
             this.xtraTabPage4.Controls.Add(this.barDockControlTop);
             this.xtraTabPage4.Name = "xtraTabPage4";
             this.xtraTabPage4.Size = new System.Drawing.Size(1814, 965);
-            this.xtraTabPage4.Text = "마스터설정";
+            this.xtraTabPage4.Text = "보정값설정";
             // 
             // e마스터설정
             // 
@@ -163,6 +167,8 @@
             this.e마스터설정.Name = "e마스터설정";
             this.e마스터설정.Size = new System.Drawing.Size(1814, 965);
             this.e마스터설정.TabIndex = 4;
+            this.e마스터설정.위치 = SamhwaInspection.UI.Control.MasterSetting.지그위치.Front;
+            this.e마스터설정.플로우 = SamhwaInspection.Schemas.Flow구분.Flow1;
             // 
             // barDockControlLeft
             // 
@@ -196,6 +202,21 @@
             this.barDockControlTop.Manager = null;
             this.barDockControlTop.Size = new System.Drawing.Size(1814, 0);
             // 
+            // xtraTabPage5
+            // 
+            this.xtraTabPage5.Controls.Add(this.e마스터데이터);
+            this.xtraTabPage5.Name = "xtraTabPage5";
+            this.xtraTabPage5.Size = new System.Drawing.Size(1814, 965);
+            this.xtraTabPage5.Text = "마스터데이터";
+            // 
+            // e마스터데이터
+            // 
+            this.e마스터데이터.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e마스터데이터.Location = new System.Drawing.Point(0, 0);
+            this.e마스터데이터.Name = "e마스터데이터";
+            this.e마스터데이터.Size = new System.Drawing.Size(1814, 965);
+            this.e마스터데이터.TabIndex = 0;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -216,6 +237,7 @@
             this.xtraTabPage3.ResumeLayout(false);
             this.xtraTabPage4.ResumeLayout(false);
             this.xtraTabPage4.PerformLayout();
+            this.xtraTabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -237,5 +259,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private Control.MasterSetting e마스터설정;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage5;
+        private Control.MasterData e마스터데이터;
     }
 }

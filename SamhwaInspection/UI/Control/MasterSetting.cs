@@ -77,6 +77,10 @@ namespace SamhwaInspection.UI.Control
         private void B보정값계산_Click(object sender, EventArgs e)
         {
             if (!Utils.Utils.Confirm(번역.보정값계산)) return;
+
+            Global.마스터설정.보정값계산();
+
+            GridView1.RefreshData();
         }
 
         private void B설정저장_Click(object sender, EventArgs e)

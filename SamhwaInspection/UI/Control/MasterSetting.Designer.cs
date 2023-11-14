@@ -96,6 +96,7 @@
             this.c플로우선택.Size = new System.Drawing.Size(250, 44);
             this.c플로우선택.TabIndex = 13;
             this.c플로우선택.TabStop = false;
+            this.c플로우선택.Visible = false;
             // 
             // barManager1
             // 
@@ -188,6 +189,7 @@
             this.c지그선택.Size = new System.Drawing.Size(250, 44);
             this.c지그선택.TabIndex = 12;
             this.c지그선택.TabStop = false;
+            this.c지그선택.Visible = false;
             // 
             // b마스터값로드
             // 
@@ -200,6 +202,7 @@
             this.b마스터값로드.Size = new System.Drawing.Size(230, 42);
             this.b마스터값로드.TabIndex = 11;
             this.b마스터값로드.Text = "마스터값 불러오기";
+            this.b마스터값로드.Visible = false;
             // 
             // b보정값계산
             // 

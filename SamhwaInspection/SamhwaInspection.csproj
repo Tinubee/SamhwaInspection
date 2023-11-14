@@ -333,6 +333,7 @@
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
+    <Compile Include="Schemas\마스터데이터.cs" />
     <Compile Include="Schemas\마스터설정.cs" />
     <Compile Include="Schemas\모델정보.cs" />
     <Compile Include="Schemas\비전마스터구동.cs" />
@@ -362,6 +363,12 @@
     </Compile>
     <Compile Include="UI\Control\IOControl.Designer.cs">
       <DependentUpon>IOControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\MasterData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\MasterData.Designer.cs">
+      <DependentUpon>MasterData.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\Models.cs">
       <SubType>UserControl</SubType>
@@ -520,6 +527,9 @@
     <EmbeddedResource Include="UI\Control\IOControl.resx">
       <DependentUpon>IOControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\MasterData.resx">
+      <DependentUpon>MasterData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\Models.resx">
       <DependentUpon>Models.cs</DependentUpon>
     </EmbeddedResource>
@@ -598,6 +608,7 @@
     </None>
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.VmGlobals.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.검사정보.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터데이터.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터변수.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터설정.datasource" />
     <None Include="Properties\DataSources\SamhwaInspection.Schemas.유저자료.datasource" />

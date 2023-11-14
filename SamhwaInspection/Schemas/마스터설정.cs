@@ -31,7 +31,6 @@ namespace SamhwaInspection.Schemas
     public class 마스터설정 : List<마스터변수>
     {
         private string 마스터데이터파일 { get { return Path.Combine(Global.환경설정.기본경로, "마스터데이터.json"); } }
-        
         List<VmVariable> calValueList = new List<VmVariable>();
         
         public void Init()
@@ -84,6 +83,18 @@ namespace SamhwaInspection.Schemas
                 Global.비전마스터구동.글로벌변수제어.InspectUseSet(v.변수명칭, v.보정값.ToString());
             }
         }
+
+        public void 보정값계산()
+        {
+            foreach (var item in this)
+            {
+                if(item.실측값 == 0 || item.비전측정값 == 0) continue;
+
+                item.보정값 = Math.Round((item.실측값 / item.비전측정값),6);
+                Debug.WriteLine($"{item.검사명칭} 의 보정값 : {item.보정값} ");
+            }
+        }
+
 
         public void 마스터비전결과값적용(List<VmVariable> 결과리스트, 지그위치 위치, Flow구분 플로우 )
         {
