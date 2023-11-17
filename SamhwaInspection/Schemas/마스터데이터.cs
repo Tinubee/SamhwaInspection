@@ -37,10 +37,12 @@ namespace SamhwaInspection.Schemas
 
         public void Set()
         {
+            int minmaxValueIndex = this.FindIndex(x => x.검사명칭.Contains("MinMaxValue"));
+
             foreach (var v in this)
             {
-                v.최소값 = v.검사명칭.Contains("MinMaxValue") == false ? Math.Round(v.기준값 - 0.005, 4) : 0;
-                v.최대값 = v.검사명칭.Contains("MinMaxValue") == false ? Math.Round(v.기준값 + 0.005, 4) : 0;
+                v.최소값 = v.검사명칭.Contains("MinMaxValue") == false ? Math.Round(v.기준값 - this[minmaxValueIndex].기준값, 4) : 0;
+                v.최대값 = v.검사명칭.Contains("MinMaxValue") == false ? Math.Round(v.기준값 + this[minmaxValueIndex].기준값, 4) : 0;
                 Global.비전마스터구동.글로벌변수제어.InspectUseSet(v.검사명칭, v.기준값.ToString());
             }
         }
@@ -70,7 +72,7 @@ namespace SamhwaInspection.Schemas
 
             public 마스터데이터설정변수(VmVariable v)
             {
-                if(v != null)
+                if (v != null)
                 {
                     this.검사명칭 = v.Name;
                     this.기준값 = Convert.ToSingle(v.StringValue);

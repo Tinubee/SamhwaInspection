@@ -18,6 +18,18 @@ namespace SamhwaInspection.Utils
             if (String.IsNullOrEmpty(caption)) caption = Localization.확인.GetString();
             return XtraMessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
+        public static void SaveOK(String message = "")
+        {
+            if (String.IsNullOrEmpty(message)) message = Localization.저장.GetString();
+            InfoMsg(message);
+        }
+
+        public static Boolean InfoMsg(String message, String caption = "")
+        {
+            if (String.IsNullOrEmpty(caption)) caption = Localization.정보.GetString();
+            XtraMessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
+        }
 
         public static String StrValue(Object value)
         {

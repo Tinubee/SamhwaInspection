@@ -45,6 +45,8 @@ namespace SamhwaInspection.UI.Control
             Global.비전마스터구동.Save();
 
             this.GridView1.RefreshData();
+
+            MvUtils.Utils.SaveOK(번역.저장완료);
         }
 
         private class LocalizationInspection

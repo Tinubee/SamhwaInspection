@@ -104,6 +104,8 @@ namespace SamhwaInspection.UI.Control
             Global.보정값설정.Set(); //글로벌변수값 셋팅
             Global.보정값설정.Save(); //JSON파일에 저장
             Global.비전마스터구동.Save(); //변경된 글로벌변수값이 적용된 Solution파일 저장.
+
+            MvUtils.Utils.SaveOK(번역.저장완료);
         }
 
         private class LocalizationInspection
