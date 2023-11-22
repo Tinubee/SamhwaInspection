@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static SamhwaInspection.Schemas.마스터데이터;
+using static SamhwaInspection.UI.Control.MasterSetting;
 
 namespace SamhwaInspection.Schemas
 {
@@ -27,6 +28,14 @@ namespace SamhwaInspection.Schemas
                 this.Add(new 마스터데이터설정변수(v));
 
             List<마스터데이터설정변수> 자료 = Load();
+        }
+
+        public void 비전데이터적용(List<String> visionData)
+        {
+            for (int lop = 0; lop < visionData.Count; lop++)
+            {
+                this[lop].기준값 = Convert.ToSingle(visionData[lop]);
+            }
         }
 
         private List<마스터데이터설정변수> Load()

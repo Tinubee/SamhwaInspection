@@ -13,6 +13,8 @@ using SamhwaInspection.Utils;
 using DevExpress.XtraGrid.Views.Grid;
 using SamhwaInspection.Schemas;
 using static SamhwaInspection.UI.Control.MasterSetting;
+using VM.Core;
+using VM.PlatformSDKCS;
 
 namespace SamhwaInspection.UI.Control
 {
@@ -34,6 +36,37 @@ namespace SamhwaInspection.UI.Control
             this.GridControl1.DataSource = Global.마스터데이터;
 
             b설정적용.Click += B설정적용_Click;
+            b마스터값로드.Click += B마스터값로드_Click;
+        }
+
+        private void B마스터값로드_Click(object sender, EventArgs e)
+        {
+            if (!Utils.Utils.Confirm(번역.마스터값로드)) return;
+            List<IMVSGroup> tool = Global.비전마스터구동.GetItem(Flow구분.Flow1).Slot20PointGroupMouduleTool;
+            List<String> slot_n_1Value = new List<String>();
+
+            for (int lop = 0; lop < tool.Count; lop++)
+            {
+                foreach (var v in tool[lop].Outputs)
+                {
+                    if (v.Value == null) continue;
+                    if (v.Name.Contains("Slot") && v.Name.Contains("-5"))
+                    {
+                        if (((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])v.Value).Count() == 1)
+                        {
+                            if(lop == tool.Count -1) MvUtils.Utils.SaveOK(번역.불러오기오류);
+                            continue;
+                        }
+
+                        String resultString = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])v.Value)[4].strValue;
+                        slot_n_1Value.Add(resultString);
+                    }
+                }
+            }
+
+            Global.마스터데이터.비전데이터적용(slot_n_1Value);
+
+            this.GridView1.RefreshData();
         }
 
         private void B설정적용_Click(object sender, EventArgs e)
@@ -61,12 +94,18 @@ namespace SamhwaInspection.UI.Control
                 저장확인,
                 [Translation("Do you want to apply the value of a global variable?", "Global 변수 값을 적용하시겠습니까?")]
                 적용확인,
+                [Translation("Do you want to load master data values?", "마스터 데이터값을 불러오시겠습니까?")]
+                마스터값로드,
+                [Translation("No data", "비전 데이터가 없습니다. 제품을 지그에 놓고 수동으로 검사를 진행해 주세요.")]
+                불러오기오류,
             }
 
             public String 설정저장 { get { return Localization.GetString(Items.설정저장); } }
             public String 저장완료 { get { return Localization.GetString(Items.저장완료); } }
             public String 저장확인 { get { return Localization.GetString(Items.저장확인); } }
             public String 적용확인 { get { return Localization.GetString(Items.적용확인); } }
+            public String 마스터값로드 { get { return Localization.GetString(Items.마스터값로드); } }
+            public String 불러오기오류 { get { return Localization.GetString(Items.불러오기오류); } }
         }
     }
 }

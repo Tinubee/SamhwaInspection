@@ -70,6 +70,7 @@ namespace SamhwaInspection.UI.Control
             if (!Utils.Utils.Confirm(번역.마스터값로드)) return;
             List<IMVSGroup> tool = Global.비전마스터구동.GetItem(this.플로우).Slot20PointGroupMouduleTool;
             List<String> slot_n_1Value = new List<String>();
+
             for (int lop = 0; lop < tool.Count; lop++)
             {
                 foreach (var v in tool[lop].Outputs)
@@ -77,6 +78,12 @@ namespace SamhwaInspection.UI.Control
                     if (v.Value == null) continue;
                     if (v.Name.Contains("Slot") && v.Name.Contains("-5"))
                     {
+                        if (((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])v.Value).Count() == 1)
+                        {
+                            if(lop == tool.Count -1) MvUtils.Utils.SaveOK(번역.불러오기오류);
+                            continue;
+                        }
+
                         String resultString = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])v.Value)[4].strValue;
                         slot_n_1Value.Add(resultString);
                     }
@@ -124,6 +131,8 @@ namespace SamhwaInspection.UI.Control
                 보정값계산,
                 [Translation("Do you want to load master data values?", "마스터 데이터값을 불러오시겠습니까?")]
                 마스터값로드,
+                [Translation("No data", "해당 지그 & 플로우에 비전 데이터가 없습니다.")]
+                불러오기오류,
             }
 
             public String 설정저장 { get { return Localization.GetString(Items.설정저장); } }
@@ -132,6 +141,7 @@ namespace SamhwaInspection.UI.Control
             public String 적용확인 { get { return Localization.GetString(Items.적용확인); } }
             public String 보정값계산 { get { return Localization.GetString(Items.보정값계산); } }
             public String 마스터값로드 { get { return Localization.GetString(Items.마스터값로드); } }
+            public String 불러오기오류 { get { return Localization.GetString(Items.불러오기오류); } }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace SamhwaInspection.Schemas
             {
                 if (info.strValueType.ToLower() == typeof(float).Name.ToLower()) continue;
 
-                if (info.strValueName.Contains("master"))
+                if (info.strValueName.Contains("master") && info.strValueName.Contains("-5"))
                     masterValueList.Add(new VmVariable(info));
             }
 

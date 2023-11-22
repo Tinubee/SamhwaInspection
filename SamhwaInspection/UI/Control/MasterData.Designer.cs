@@ -49,20 +49,21 @@
             this.b설정적용 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.GridControl1 = new MvUtils.CustomGrid();
-            this.GridView1 = new MvUtils.CustomView();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.GridView1 = new MvUtils.CustomView();
             this.col검사명칭 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col최소값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col기준값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col최대값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col결과값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col판정 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.b마스터값로드 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -219,6 +220,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.b마스터값로드);
             this.panelControl1.Controls.Add(this.b설정적용);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 40);
@@ -239,6 +241,10 @@
             this.GridControl1.TabIndex = 34;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(SamhwaInspection.Schemas.마스터데이터);
             // 
             // GridView1
             // 
@@ -272,10 +278,6 @@
             this.GridView1.OptionsPrint.UsePrintStyles = false;
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView1.RowHeight = 20;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(SamhwaInspection.Schemas.마스터데이터);
             // 
             // col검사명칭
             // 
@@ -331,6 +333,18 @@
             this.col판정.Visible = true;
             this.col판정.VisibleIndex = 5;
             // 
+            // b마스터값로드
+            // 
+            this.b마스터값로드.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b마스터값로드.Appearance.Options.UseFont = true;
+            this.b마스터값로드.Dock = System.Windows.Forms.DockStyle.Right;
+            this.b마스터값로드.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.b마스터값로드.Location = new System.Drawing.Point(804, 5);
+            this.b마스터값로드.Name = "b마스터값로드";
+            this.b마스터값로드.Size = new System.Drawing.Size(277, 42);
+            this.b마스터값로드.TabIndex = 1;
+            this.b마스터값로드.Text = "마스터값 불러오기";
+            // 
             // MasterData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -355,8 +369,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,5 +404,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col최대값;
         private DevExpress.XtraGrid.Columns.GridColumn col결과값;
         private DevExpress.XtraGrid.Columns.GridColumn col판정;
+        private DevExpress.XtraEditors.SimpleButton b마스터값로드;
     }
 }
