@@ -119,7 +119,7 @@ namespace SamhwaInspection.UI.Control
 
             result = Global.비전마스터구동.GetItem(구분).치수검사(mat);
 
-            if (Global.신호제어.마스터모드여부 == 1)
+            if (Global.신호제어.마스터모드여부 == 1 && (구분 == Flow구분.Flow1 || 구분 == Flow구분.Flow2))
                 결과정보생성(mat, result, 구분);
 
             return mat;
@@ -181,22 +181,28 @@ namespace SamhwaInspection.UI.Control
                         roi[4] = new Rect(0, 56267, width_cam, 13000);
                         roi[5] = new Rect(0, 69909, width_cam, 13000);
 
-                        if (Global.신호제어.마스터모드여부 == 1)
+                        for (int i = 0; i < roi.Length; i++)
                         {
-                            splitImage[0] = new Mat(mergedImage, roi[0]);
-                            splitImage[1] = new Mat(mergedImage, roi[1]);
+                            splitImage[i] = new Mat(mergedImage, roi[i]);
+                            자동검사(splitImage[i], (Flow구분)i);
+                        }
 
-                            자동검사(splitImage[0], Flow구분.Flow1);
-                            자동검사(splitImage[1], Flow구분.Flow2);
-                        }
-                        else
-                        {
-                            for (int i = 0; i < roi.Length; i++)
-                            {
-                                splitImage[i] = new Mat(mergedImage, roi[i]);
-                                자동검사(splitImage[i], (Flow구분)i);
-                            }
-                        }
+                        //if (Global.신호제어.마스터모드여부 == 1)
+                        //{
+                        //    splitImage[0] = new Mat(mergedImage, roi[0]);
+                        //    splitImage[1] = new Mat(mergedImage, roi[1]);
+
+                        //    자동검사(splitImage[0], Flow구분.Flow1);
+                        //    자동검사(splitImage[1], Flow구분.Flow2);
+                        //}
+                        //else
+                        //{
+                        //    for (int i = 0; i < roi.Length; i++)
+                        //    {
+                        //        splitImage[i] = new Mat(mergedImage, roi[i]);
+                        //        자동검사(splitImage[i], (Flow구분)i);
+                        //    }
+                        //}
                         isCompleted_Camera1 = true;
                     }
                     if (isCompleted_Camera1)

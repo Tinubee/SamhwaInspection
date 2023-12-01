@@ -215,7 +215,10 @@ namespace SamhwaInspection.Schemas
             {
                 Debug.WriteLine($"{카메라} 이미지획득 {this.카메라4.MatImage.Count}개 완료");
                 Global.조명제어.TurnOff(조명구분.상면검사조명);
-                if (Global.비전마스터구동.Count == 0) return;
+
+                if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1) 
+                    return;
+
                 new Thread(() =>
                 {
                     for (int lop = 7; lop < 7 + this.카메라4.MatImage.Count; lop++)

@@ -358,7 +358,7 @@ namespace SamhwaInspection.Schemas
                 String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
                 this.치수검사결과 = resultString == "OK" ? true : false;
 
-                if (Global.신호제어.마스터모드여부 == 1)
+                if (Global.신호제어.마스터모드여부 == 1 && (this.구분 == Flow구분.Flow1 || this.구분 == Flow구분.Flow2))
                 {
                     if (this.치수검사결과) Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
                     else Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
