@@ -66,21 +66,21 @@ namespace SamhwaInspection.UI.Control
             //Viewer와 Tool 연결
             if (검사면 == 검사면.앞면)
             {
-                vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 0);
-                vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 1);
-                vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 2);
-                vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 3);
-                vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 4);
-                vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 5);
+                vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞1));
+                vmControl_Render2.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞2));
+                vmControl_Render3.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞3));
+                vmControl_Render4.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞4));
+                vmControl_Render5.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞5));
+                vmControl_Render6.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞6));
             }
             else
             {
-                vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 0);
-                vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 1);
-                vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 2);
-                vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 3);
-                vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
-                vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
+                //vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 0);
+                //vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 1);
+                //vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 2);
+                //vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 3);
+                //vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
+                //vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
             }
          
             #region 검사결과 설정
@@ -116,19 +116,13 @@ namespace SamhwaInspection.UI.Control
             Debug.WriteLine("데이터리프레시완료");
         }
 
-        private void 결과정보생성(Mat img1, bool result)
+        public void 최종결과정보생성(Mat img1, bool result)
         {
-            //검사결과 결과 = new 검사결과(Global.모델자료.선택모델.검사목록);
-            //Debug.WriteLine($"{결과.최종결과}", 결과.최종결과);
-            //Debug.WriteLine($"{결과.검사일시}", 결과.검사일시);
-            //Debug.WriteLine($"{결과.모델번호}", 결과.모델번호);
-
 
             if (result)
             {
                 Global.환경설정.현재결과상태 = 결과구분.OK;
                 Global.환경설정.양품갯수 += 1;
-                //Global.신호제어.SendResultSignal(true);
                 if (Global.환경설정.사진저장OK)
                 {
                     img1.SaveImage(Path.Combine(Global.환경설정.OK이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
@@ -138,23 +132,12 @@ namespace SamhwaInspection.UI.Control
             {
                 Global.환경설정.현재결과상태 = 결과구분.NG;
                 Global.환경설정.불량갯수 += 1;
-                //Global.신호제어.SendResultSignal(false);
                 if (Global.환경설정.사진저장NG)
                 {
                     img1.SaveImage(Path.Combine(Global.환경설정.NG이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
                 }
             }
-
-            // 검사자료 GridView DataSource에 추가(DB에서 읽어와서 표시하기에는 검사 -> 저장 -> select 하는 시간이 길어서 이전 검사결과까지만 읽어지므로 해당 코드 추가)
-
-
-            //여기 DB업로드
-            //결과.AddToDb();
-
-            //Global.검사자료.AddResult(결과);
             Global.환경설정.결과갱신요청();
-            //Global.검사자료.AddResult(결과);
-            //결과 = null;
         }
     }
 }

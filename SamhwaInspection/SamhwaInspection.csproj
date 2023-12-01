@@ -382,12 +382,6 @@
     <Compile Include="UI\Control\ResultList.Designer.cs">
       <DependentUpon>ResultList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Control\ResultViewer_표면검사2.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Control\ResultViewer_표면검사2.Designer.cs">
-      <DependentUpon>ResultViewer_표면검사2.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Control\ResultViewer_표면검사.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -535,9 +529,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultList.resx">
       <DependentUpon>ResultList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Control\ResultViewer_표면검사2.resx">
-      <DependentUpon>ResultViewer_표면검사2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultViewer_표면검사.resx">
       <DependentUpon>ResultViewer_표면검사.cs</DependentUpon>

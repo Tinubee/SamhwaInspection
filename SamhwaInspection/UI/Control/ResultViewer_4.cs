@@ -112,7 +112,7 @@ namespace SamhwaInspection.UI.Control
             Mat mat = image;
             bool result = false;
 
-            result = Global.비전마스터구동.GetItem(구분).Run(mat);
+            result = Global.비전마스터구동.GetItem(구분).치수검사(mat);
 
             결과정보생성(mat, result);
             return mat;

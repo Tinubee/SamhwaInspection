@@ -206,31 +206,6 @@ namespace SamhwaInspection.Schemas
                     Global.비전마스터구동.GetItem(Flow구분.유무검사).유무검사(이미지);
                 }).Start();
             }
-            //else if (카메라 == CameraType.Cam03)
-            //{
-
-            //}
-            else if (카메라 == CameraType.Cam04)
-            {
-                this.카메라4.MatImage.Add(이미지);
-                this.카메라4.ClearImageBuffer();
-                DateTime dt = DateTime.Now;
-                //Debug.WriteLine($"[ {dt:yyyyMMdd - HH:mm:ss:fff} ] {카메라} : Image그랩 {this.카메라4.MatImage.Count} 완료 및 List에 추가");
-                Task.Delay(120).Wait();
-                this.카메라4.TrigForce();
-                if (this.카메라4.MatImage.Count == 6)
-                {
-                    new Thread(() =>
-                    {
-                        Debug.WriteLine($"{카메라} : Flow Run");
-                        Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(this.카메라4.MatImage);
-                        //ImageSave(이미지, 카메라, 검사번호, 결과구분.OK);
-                        //this.카메라4.MatImage.Clear();
-                        Global.조명제어.TurnOff(조명구분.상면검사조명);
-                    }).Start();
-                }
-            }
-            //Debug.WriteLine($"{카메라} 그랩완료");
             this.그랩완료보고?.Invoke(카메라, 이미지);
         }
 
@@ -243,25 +218,23 @@ namespace SamhwaInspection.Schemas
                 if (Global.비전마스터구동.Count == 0) return;
                 new Thread(() =>
                 {
-                    Debug.WriteLine($"{카메라} : Flow Run");
-                    Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지);
-                    //ImageSave(이미지, 카메라, 0 ,결과구분.OK);
-                    //this.카메라4.MatImage.Clear();
+                    for (int lop = 7; lop < 7 + this.카메라4.MatImage.Count; lop++)
+                    {
+                        Global.비전마스터구동.GetItem((Flow구분)lop).표면검사(이미지[lop - 7]);
+                    }
                 }).Start();
             }
-            else if (카메라 == CameraType.Cam03)
-            {
-                Debug.WriteLine($"{카메라} 이미지획득 {this.카메라3.MatImage.Count}개 완료");
-                Global.조명제어.TurnOff(조명구분.후면검사조명);
-                if (Global.비전마스터구동.Count == 0) return;
-                new Thread(() =>
-                {
-                    Debug.WriteLine($"{카메라} : Flow Run");
-                    Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지);
-                    //ImageSave(이미지, 카메라, 0, 결과구분.OK);
-                    //this.카메라4.MatImage.Clear();
-                }).Start();
-            }
+            //else if (카메라 == CameraType.Cam03)
+            //{
+            //    Debug.WriteLine($"{카메라} 이미지획득 {this.카메라3.MatImage.Count}개 완료");
+            //    Global.조명제어.TurnOff(조명구분.후면검사조명);
+            //    if (Global.비전마스터구동.Count == 0) return;
+            //    new Thread(() =>
+            //    {
+            //        Debug.WriteLine($"{카메라} : Flow Run");
+            //        Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지);
+            //    }).Start();
+            //}
             this.그랩완료보고2?.Invoke(카메라, 이미지);
         }
 
@@ -365,7 +338,8 @@ namespace SamhwaInspection.Schemas
 
         [JsonIgnore, Description("카메라 초기화 상태"), Translation("Live", "상태")]
         public virtual Boolean 상태 { get; set; } = false;
-
+        [JsonIgnore]
+        public virtual Boolean 검사결과 { get; set; } = false;
         [JsonIgnore]
         public const String 로그영역 = "카메라장치";
 
@@ -528,8 +502,6 @@ namespace SamhwaInspection.Schemas
                 else if (this.구분 == CameraType.Cam04)
                 {
                     this.MatImage.Add(image);
-                    //Debug.WriteLine($"{MatImage.Count}");
-                    //Debug.WriteLine($"{image.Data}");
                     if (Global.그랩제어.카메라4.MatImage.Count == 6)
                     {
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);

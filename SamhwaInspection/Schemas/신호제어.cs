@@ -185,8 +185,6 @@ namespace SamhwaInspection.Schemas
         //private DotUtlType PLC2 = null;
         private BackgroundWorker cclink_thred;
         private BackgroundWorker cclink_echo;
-        private BackgroundWorker 상부표면검사bk;
-        private BackgroundWorker 하부표면검사bk;
         //private BackgroundWorker send_thred;
 
         int thred_roop_index = 0;
@@ -266,13 +264,6 @@ namespace SamhwaInspection.Schemas
             cclink_echo = new BackgroundWorker();
             cclink_echo.DoWork += cclink_echo_DoWork;
             cclink_echo.RunWorkerAsync(0);
-
-            상부표면검사bk = new BackgroundWorker();
-            상부표면검사bk.DoWork += 상부표면검사_DoWork;
-
-            하부표면검사bk = new BackgroundWorker();
-            하부표면검사bk.DoWork += 하부표면검사_DoWork;
-            //표면검사bk.RunWorkerAsync(0);
         }
 
         // 작업을 생성하고 통신 작업 실행
@@ -336,7 +327,6 @@ namespace SamhwaInspection.Schemas
                             Global.조명제어.TurnOn(조명구분.상면검사조명);
                             SendValueToPLC(정보.주소, 0);
                             Global.그랩제어.카메라4.Ready();
-                            상부표면검사bk.RunWorkerAsync(0);
                         }
                         // 치수검사 트리거 On일 경우( F지그, R지그 둘 중 하나라도 On이면 실행)
                         if (정보.주소 == "W0028" & 정보.값 == 1)
@@ -364,42 +354,6 @@ namespace SamhwaInspection.Schemas
                     OnCompleteReceive(EventArgs.Empty);
                     Thread.Sleep(2);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("[" + MethodBase.GetCurrentMethod().Name + "]" + ex.ToString());
-            }
-        }
-
-        private void 상부표면검사_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                while (true)
-                {
-                    if (Global.그랩제어.카메라4.MatImage.Count == 6) return;
-                    //if (Global.그랩제어.카메라4.MatImage.Count > 0) Task.Delay(300).Wait();
-                    Global.그랩제어.카메라4.TrigForce();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("[" + MethodBase.GetCurrentMethod().Name + "]" + ex.ToString());
-            }
-        }
-
-        private void 하부표면검사_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                while (true)
-                {
-                    if (Global.그랩제어.카메라3.MatImage.Count == 6) return;
-                    //if (Global.그랩제어.카메라4.MatImage.Count > 0) Task.Delay(300).Wait();
-                    Global.그랩제어.카메라3.TrigForce();
-                }
-
             }
             catch (Exception ex)
             {

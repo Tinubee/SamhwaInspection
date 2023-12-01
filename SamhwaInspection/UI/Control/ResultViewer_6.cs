@@ -61,7 +61,7 @@ namespace SamhwaInspection.UI.Control
         {
             if (cam1 == null)
             {
-                if(Global.그랩제어 != null) cam1 = (EuresysLink)Global.그랩제어.GetItem(카메라1);
+                if (Global.그랩제어 != null) cam1 = (EuresysLink)Global.그랩제어.GetItem(카메라1);
                 if (cam1 != null)
                 {
                     cam1.AcquisitionFinishedEvent += Paint_camImage;
@@ -117,9 +117,11 @@ namespace SamhwaInspection.UI.Control
             Mat mat = image;
             bool result = false;
 
-            result = Global.비전마스터구동.GetItem(구분).Run(mat);
+            result = Global.비전마스터구동.GetItem(구분).치수검사(mat);
 
-            결과정보생성(mat, result, 구분);
+            if (Global.신호제어.마스터모드여부 == 1)
+                결과정보생성(mat, result, 구분);
+
             return mat;
         }
 
@@ -134,7 +136,7 @@ namespace SamhwaInspection.UI.Control
             this.myGridControl1.RefreshDataSource();
             Debug.WriteLine("데이터리프레시완료");
         }
-        
+
         private void Paint_camImage(AcquisitionData Data)
         {
             try
@@ -154,8 +156,6 @@ namespace SamhwaInspection.UI.Control
                     {
                         Page1Image = Data.MatImage;
                         Debug.WriteLine(this.cam1.CurrentState(), "첫번째");
-
-                        //자동검사(Page1Image, Flow구분.Flow1);
                         isGrabCompleted_Page1 = true;
                     }
                     if (Data.PageIndex == 2)
@@ -163,8 +163,6 @@ namespace SamhwaInspection.UI.Control
                         Page2Image = Data.MatImage;
                         isGrabCompleted_Page2 = true;
                         Debug.WriteLine(this.cam1.CurrentState(), "두번쨰");
-
-                        //자동검사(Page2Image, Flow구분.Flow2);
                     }
                     Debug.WriteLine("자동검사 전");
                     if (isGrabCompleted_Page1 & isGrabCompleted_Page2)
@@ -186,7 +184,10 @@ namespace SamhwaInspection.UI.Control
                         if (Global.신호제어.마스터모드여부 == 1)
                         {
                             splitImage[0] = new Mat(mergedImage, roi[0]);
+                            splitImage[1] = new Mat(mergedImage, roi[1]);
+
                             자동검사(splitImage[0], Flow구분.Flow1);
+                            자동검사(splitImage[1], Flow구분.Flow2);
                         }
                         else
                         {
@@ -195,18 +196,12 @@ namespace SamhwaInspection.UI.Control
                                 splitImage[i] = new Mat(mergedImage, roi[i]);
                                 자동검사(splitImage[i], (Flow구분)i);
                             }
-                            //Task.Run(() =>
-                            //{
-                            //    for (int i = 0; i < splitImage.Count(); i++)
-                            //        자동검사(splitImage[i], (Flow구분)i);
-                            //});
                         }
                         isCompleted_Camera1 = true;
                     }
                     if (isCompleted_Camera1)
                     {
                         isCompleted_Camera1 = false;
-                        //this.cam1.Ready();
                     }
                 }
             }

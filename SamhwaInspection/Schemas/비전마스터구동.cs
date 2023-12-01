@@ -22,6 +22,7 @@ using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.CodeParser.Diagnostics;
 using SaveTextModuleCs;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic.Logging;
 
 namespace SamhwaInspection.Schemas
 {
@@ -34,8 +35,12 @@ namespace SamhwaInspection.Schemas
         Flow5,
         Flow6,
         유무검사,
-        표면검사앞,
-        표면검사뒤,
+        표면검사앞1,
+        표면검사앞2,
+        표면검사앞3,
+        표면검사앞4,
+        표면검사앞5,
+        표면검사앞6,
     }
 
     public class 비전마스터구동 : List<비전마스터플로우>
@@ -50,15 +55,15 @@ namespace SamhwaInspection.Schemas
             VmSolution.Load(lastModelSolutionPath, null); //VM Solution 불러오기
             글로벌변수제어.Init();
             VmSolution.Instance.DisableModulesCallback();
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 13; i++)
             {
-                if (i > 5) //7,8
+                if (i > 5) //6,7,8~~
                 {
                     string plcAddress = string.Empty;
                     if (i == 6) plcAddress = $"W0015";
                     base.Add(new 비전마스터플로우((Flow구분)i, plcAddress));
                 }
-                else //0,1,2,3,4,5, 6 
+                else //0,1,2,3,4,5
                 {
                     base.Add(new 비전마스터플로우((Flow구분)i, $"W000{i}"));
                 }
@@ -86,7 +91,9 @@ namespace SamhwaInspection.Schemas
 
     public class 비전마스터플로우
     {
-        public Boolean 결과;
+        public Boolean 치수검사결과;
+        public Boolean 표면검사결과;
+        public Boolean 유무검사결과;
         public Flow구분 구분;
         public Boolean 결과업데이트완료;
         public String PLC결과어드레스;
@@ -95,9 +102,9 @@ namespace SamhwaInspection.Schemas
         public ImageSourceModuleTool InputModuleTool;
         public GraphicsSetModuleTool graphicsSetModuleTool;
 
-        public List<GraphicsSetModuleTool> graphicsSetModuleTool_List = new List<GraphicsSetModuleTool>();
-        public List<ImageSourceModuleTool> InputModuleTool_List = new List<ImageSourceModuleTool>();
-        public List<ShellModuleTool> ShellModuleTool_List = new List<ShellModuleTool>();
+        //public List<GraphicsSetModuleTool> graphicsSetModuleTool_List = new List<GraphicsSetModuleTool>();
+        //public List<ImageSourceModuleTool> InputModuleTool_List = new List<ImageSourceModuleTool>();
+        //public List<ShellModuleTool> ShellModuleTool_List = new List<ShellModuleTool>();
 
         public delegate void InspectionFinished(GraphicsSetModuleTool graphicTool);
         public ShellModuleTool ShellModuleTool;
@@ -117,22 +124,18 @@ namespace SamhwaInspection.Schemas
             this.구분 = 구분;
             this.Init();
             if (this.graphicsSetModuleTool != null)
-            {
                 this.graphicsSetModuleTool.EnableResultCallback();
-            }
-            if (this.ShellModuleTool != null) this.ShellModuleTool.EnableResultCallback();
 
-            for (int lop = 0; lop < graphicsSetModuleTool_List.Count; lop++)
-                if (this.graphicsSetModuleTool_List[lop] != null) this.graphicsSetModuleTool_List[lop].EnableResultCallback();
+            if (this.ShellModuleTool != null)
+                this.ShellModuleTool.EnableResultCallback();
 
-            if(this.InputModuleTool != null)
-            {
+            if (this.InputModuleTool != null)
                 this.InputModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-            }
-            //슬롯부20Point검사설정();
-            //슬롯부200Point검사설정();
 
-            this.결과 = false;
+            this.치수검사결과 = false;
+            this.표면검사결과 = false;
+            this.유무검사결과 = false;
+
             this.결과업데이트완료 = false;
             if (plcAddress != string.Empty)
                 this.PLC결과어드레스 = plcAddress;
@@ -142,26 +145,13 @@ namespace SamhwaInspection.Schemas
             this.Procedure = VmSolution.Instance[this.구분.ToString()] as VmProcedure;
             if (Procedure != null)
             {
-                if (this.구분 == Flow구분.표면검사앞 || this.구분 == Flow구분.표면검사뒤)
+                this.InputModuleTool = this.Procedure["originImage"] as ImageSourceModuleTool;
+                this.graphicsSetModuleTool = this.Procedure["resultImage"] as GraphicsSetModuleTool;
+                this.ShellModuleTool = this.Procedure["AllResult"] as ShellModuleTool;
+                for (int lop = 1; lop < 5; lop++)
                 {
-                    for (int lop = 0; lop < Global.모델자료[Global.환경설정.선택모델].디스플레이개수; lop++)
-                    {
-                        this.graphicsSetModuleTool_List.Add(this.Procedure[$"resultImage{lop + 1}"] as GraphicsSetModuleTool);
-                        this.InputModuleTool_List.Add(this.Procedure[$"originImage{lop + 1}"] as ImageSourceModuleTool);
-                        this.ShellModuleTool_List.Add(this.Procedure[$"AllResult{lop + 1}"] as ShellModuleTool);
-                        this.PLC결과어드레스 = this.구분 == Flow구분.표면검사뒤 ? $"W009{lop}" : $"W00A{lop}";
-                    }
-                }
-                else
-                {
-                    this.InputModuleTool = this.Procedure["originImage"] as ImageSourceModuleTool;
-                    this.graphicsSetModuleTool = this.Procedure["resultImage"] as GraphicsSetModuleTool;
-                    this.ShellModuleTool = this.Procedure["AllResult"] as ShellModuleTool;
-                    for (int lop = 1; lop < 5; lop++)
-                    {
-                        this.Slot20PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_20Point"] as IMVSGroup);
-                        this.Slot200PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_200Point"] as IMVSGroup);
-                    }
+                    this.Slot20PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_20Point"] as IMVSGroup);
+                    this.Slot200PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_200Point"] as IMVSGroup);
                 }
 
                 this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
@@ -201,57 +191,75 @@ namespace SamhwaInspection.Schemas
                 bottomFlatnessData[i] = string.Join(",", chunkBottom);
             }
 
-            //Debug.WriteLine($"{구분}_상부 평탄도 데이터 : {topFlatnessData[(int)구분]}");
-            //Debug.WriteLine($"{구분}_하부 평탄도 데이터 : {bottomFlatnessData[(int)구분]}");
-
             if (GlobalVariableModuleTool != null)
             {
                 GlobalVariableModuleTool.SetGlobalVar("topFlatness_Value", topFlatnessData[(int)구분]);
                 GlobalVariableModuleTool.SetGlobalVar("bottomFlatness_Value", bottomFlatnessData[(int)구분]);
             }
         }
-
-        public Boolean 표면검사(List<Mat> matList)
+        public void 결과정보생성(bool result)
         {
-            this.결과 = false;
-            this.결과업데이트완료 = false;
-            try
+            if (result)
             {
-                if (this.InputModuleTool_List != null)
+                Global.환경설정.현재결과상태 = 결과구분.OK;
+                Global.환경설정.양품갯수 += 1;
+                //if (Global.환경설정.사진저장OK)
+                //{
+                //    img1.SaveImage(System.IO.Path.Combine(Global.환경설정.OK이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
+                //}
+            }
+            else
+            {
+                Global.환경설정.현재결과상태 = 결과구분.NG;
+                Global.환경설정.불량갯수 += 1;
+                //if (Global.환경설정.사진저장NG)
+                //{
+                //    img1.SaveImage(System.IO.Path.Combine(Global.환경설정.NG이미지Cam1폴더경로, DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")) + ".png");
+                //}
+            }
+            Global.환경설정.결과갱신요청();
+        }
+        public Boolean 표면검사(Mat mat)
+        {
+            this.표면검사결과 = false;
+            this.결과업데이트완료 = false;
+            if (this.InputModuleTool != null)
+            {
+                this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
+                this.Procedure.Run();
+                if ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value != null)
                 {
-                    for (int lop = 0; lop < matList.Count; lop++)
-                        this.InputModuleTool_List[lop].SetImageData(MatToImageBaseData(matList[lop]));
-                    //this.InputModuleTool_List[0].SetImageData(MatToImageBaseData(mat));
-                    this.Procedure.Run();
-
                     String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
-
-                    if (resultString == "NG")
-                    {
-                        this.결과 = false;
-                        Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
-                    }
-                    else
-                    {
-                        this.결과 = true;
-                        Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
-                    }
+                    this.표면검사결과 = resultString == "OK" ? true : false;
                 }
 
-                return this.결과;
-            }
-            catch (Exception ee)
-            {
-                Debug.WriteLine(ee.Message);
-                Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
-                return false;
-            }
+                int checkFlow = (int)this.구분 - 7;
 
+                string plcAdress = Global.비전마스터구동.GetItem((Flow구분)checkFlow).PLC결과어드레스;
+
+                if (Global.비전마스터구동.GetItem((Flow구분)checkFlow).치수검사결과 && this.표면검사결과) // 둘다 OK
+                {
+                    Global.신호제어.PLC.SetDevice2(plcAdress, 1);
+                    if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                        Global.신호제어.SendValueToPLC("W0020", 0);
+
+                    결과정보생성(true);
+                }
+                else
+                {
+                    Global.신호제어.PLC.SetDevice2(plcAdress, 2);
+                    if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                        Global.신호제어.SendValueToPLC("W0020", 0);
+
+                    결과정보생성(false);
+                }
+            }
+            return false;
         }
 
         public Boolean 유무검사(Mat mat)
         {
-            this.결과 = false;
+            this.유무검사결과 = false;
             this.결과업데이트완료 = false;
             try
             {
@@ -264,17 +272,19 @@ namespace SamhwaInspection.Schemas
 
                     if (resultString == "NG")
                     {
-                        this.결과 = false;
+                        this.유무검사결과 = false;
+                        //Global.그랩제어.GetItem(CameraType.Cam02).검사결과 = false;
                         Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
                     }
                     else
                     {
-                        this.결과 = true;
+                        this.유무검사결과 = true;
+                        //Global.그랩제어.GetItem(CameraType.Cam02).검사결과 = true;
                         Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
                     }
                 }
 
-                return this.결과;
+                return this.유무검사결과;
             }
             catch (Exception ee)
             {
@@ -334,9 +344,9 @@ namespace SamhwaInspection.Schemas
             }
         }
 
-        public Boolean Run(Mat mat)
+        public Boolean 치수검사(Mat mat)
         {
-            this.결과 = false;
+            this.치수검사결과 = false;
             this.결과업데이트완료 = false;
             if (this.InputModuleTool != null)
             {
@@ -346,56 +356,18 @@ namespace SamhwaInspection.Schemas
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();
                 String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
-                this.결과 = resultString == "OK" ? true : false;
+                this.치수검사결과 = resultString == "OK" ? true : false;
 
                 if (Global.신호제어.마스터모드여부 == 1)
                 {
-                    if (this.결과) Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
+                    if (this.치수검사결과) Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
                     else Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
 
                     Global.신호제어.SendValueToPLC("W0020", 0);
-                    return this.결과;
+                    return this.치수검사결과;
                 }
-
-                if (this.결과)
-                {
-                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 1);
-                    //if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
-                    //{
-                    //    if (this.PLC결과어드레스 == "W0003")
-                    //    {
-                    //        //Debug.WriteLine("트리거신호 초기화");
-                    //        Global.신호제어.SendValueToPLC("W0020", 0);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    if (this.PLC결과어드레스 == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
-                        Global.신호제어.SendValueToPLC("W0020", 0);
-                    //}
-                }
-                else
-                {
-                    Global.신호제어.PLC.SetDevice2(this.PLC결과어드레스, 2);
-                    //if (Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 4)
-                    //{
-                    //    if (this.PLC결과어드레스 == "W0003")
-                    //    {
-                    //        //Debug.WriteLine("트리거신호 초기화");
-                    //        Global.신호제어.SendValueToPLC("W0020", 0);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    if (this.PLC결과어드레스 == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
-                        Global.신호제어.SendValueToPLC("W0020", 0);
-                    //}
-                }
-                //Debug.WriteLine($"{this.PLC결과어드레스} 신호 날림");
-                //Debug.WriteLine("Process RUN", $"{this.구분}");
-                return this.결과;
+                return this.치수검사결과;
             }
-
             return false;
         }
 
