@@ -66,12 +66,12 @@ namespace SamhwaInspection.UI.Control
             //Viewer와 Tool 연결
             if (검사면 == 검사면.앞면)
             {
-                vmControl_Render1.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞1));
-                vmControl_Render2.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞2));
-                vmControl_Render3.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞3));
-                vmControl_Render4.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞4));
-                vmControl_Render5.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞5));
-                vmControl_Render6.Init(Global.비전마스터구동.GetItem(Flow구분.표면검사앞6));
+                vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 0);
+                vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 1);
+                vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 2);
+                vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 3);
+                vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 4);
+                vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사앞), 5);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace SamhwaInspection.UI.Control
                 //vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
                 //vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
             }
-         
+
             #region 검사결과 설정
             this.myGridView1.OptionsBehavior.Editable = false;
             this.myGridView1.OptionsView.ShowAutoFilterRow = false;

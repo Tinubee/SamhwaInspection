@@ -35,12 +35,8 @@ namespace SamhwaInspection.Schemas
         Flow5,
         Flow6,
         유무검사,
-        표면검사앞1,
-        표면검사앞2,
-        표면검사앞3,
-        표면검사앞4,
-        표면검사앞5,
-        표면검사앞6,
+        표면검사앞,
+        표면검사뒤,
     }
 
     public class 비전마스터구동 : List<비전마스터플로우>
@@ -102,9 +98,9 @@ namespace SamhwaInspection.Schemas
         public ImageSourceModuleTool InputModuleTool;
         public GraphicsSetModuleTool graphicsSetModuleTool;
 
-        //public List<GraphicsSetModuleTool> graphicsSetModuleTool_List = new List<GraphicsSetModuleTool>();
-        //public List<ImageSourceModuleTool> InputModuleTool_List = new List<ImageSourceModuleTool>();
-        //public List<ShellModuleTool> ShellModuleTool_List = new List<ShellModuleTool>();
+        public List<GraphicsSetModuleTool> graphicsSetModuleTool_List = new List<GraphicsSetModuleTool>();
+        public List<ImageSourceModuleTool> InputModuleTool_List = new List<ImageSourceModuleTool>();
+        public List<ShellModuleTool> ShellModuleTool_List = new List<ShellModuleTool>();
 
         public delegate void InspectionFinished(GraphicsSetModuleTool graphicTool);
         public ShellModuleTool ShellModuleTool;
@@ -125,6 +121,9 @@ namespace SamhwaInspection.Schemas
             this.Init();
             if (this.graphicsSetModuleTool != null)
                 this.graphicsSetModuleTool.EnableResultCallback();
+
+            for (int lop = 0; lop < graphicsSetModuleTool_List.Count; lop++)
+                if (this.graphicsSetModuleTool_List[lop] != null) this.graphicsSetModuleTool_List[lop].EnableResultCallback();
 
             if (this.ShellModuleTool != null)
                 this.ShellModuleTool.EnableResultCallback();
@@ -148,6 +147,19 @@ namespace SamhwaInspection.Schemas
                 this.InputModuleTool = this.Procedure["originImage"] as ImageSourceModuleTool;
                 this.graphicsSetModuleTool = this.Procedure["resultImage"] as GraphicsSetModuleTool;
                 this.ShellModuleTool = this.Procedure["AllResult"] as ShellModuleTool;
+
+                if (this.구분 == Flow구분.표면검사앞 || this.구분 == Flow구분.표면검사뒤)
+                {
+                    for (int lop = 0; lop < Global.모델자료[Global.환경설정.선택모델].디스플레이개수; lop++)
+                    {
+                        this.graphicsSetModuleTool_List.Add(this.Procedure[$"resultImage{lop + 1}"] as GraphicsSetModuleTool);
+                        this.InputModuleTool_List.Add(this.Procedure[$"originImage{lop + 1}"] as ImageSourceModuleTool);
+                        this.ShellModuleTool_List.Add(this.Procedure[$"AllResult{lop + 1}"] as ShellModuleTool);
+                        this.PLC결과어드레스 = this.구분 == Flow구분.표면검사뒤 ? $"W009{lop}" : $"W00A{lop}";
+                    }
+                }
+
+
                 for (int lop = 1; lop < 5; lop++)
                 {
                     this.Slot20PointGroupMouduleTool.Add(this.Procedure[$"Slot{lop}_20Point"] as IMVSGroup);
@@ -219,7 +231,7 @@ namespace SamhwaInspection.Schemas
             }
             Global.환경설정.결과갱신요청();
         }
-        public Boolean 표면검사(Mat mat)
+        public Boolean 표면검사(Mat mat, int Count)
         {
             this.표면검사결과 = false;
             this.결과업데이트완료 = false;
@@ -233,7 +245,7 @@ namespace SamhwaInspection.Schemas
                     this.표면검사결과 = resultString == "OK" ? true : false;
                 }
 
-                int checkFlow = (int)this.구분 - 7;
+                int checkFlow = (int)Count;
 
                 string plcAdress = Global.비전마스터구동.GetItem((Flow구분)checkFlow).PLC결과어드레스;
 

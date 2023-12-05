@@ -29,15 +29,15 @@ namespace SamhwaInspection.UI.Control
             InitializeComponent();
         }
 
-        //public void Init2(비전마스터플로우 Flow, int 순서)
-        //{
-        //    if (Flow == null || Flow.graphicsSetModuleTool_List.Count != 6) return;
+        public void Init2(비전마스터플로우 Flow, int 순서)
+        {
+            if (Flow == null || Flow.graphicsSetModuleTool_List.Count != 6) return;
 
-        //    this.vmRenderControl1.ModuleSource = Flow.graphicsSetModuleTool_List[순서];
+            this.vmRenderControl1.ModuleSource = Flow.graphicsSetModuleTool_List[순서];
 
-        //    this.vmRenderControl1.Update();
-        //    this.vmRenderControl1.Refresh();
-        //}
+            this.vmRenderControl1.Update();
+            this.vmRenderControl1.Refresh();
+        }
 
         public void Init(비전마스터플로우 Flow)
         {

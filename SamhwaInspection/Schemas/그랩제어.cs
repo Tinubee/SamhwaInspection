@@ -221,9 +221,9 @@ namespace SamhwaInspection.Schemas
 
                 new Thread(() =>
                 {
-                    for (int lop = 7; lop < 7 + this.카메라4.MatImage.Count; lop++)
+                    for (int lop = 0; lop < this.카메라4.MatImage.Count; lop++)
                     {
-                        Global.비전마스터구동.GetItem((Flow구분)lop).표면검사(이미지[lop - 7]);
+                        Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지[lop], lop);
                     }
                 }).Start();
             }
