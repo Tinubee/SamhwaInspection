@@ -75,12 +75,12 @@ namespace SamhwaInspection.UI.Control
             }
             else
             {
-                //vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 0);
-                //vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 1);
-                //vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 2);
-                //vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 3);
-                //vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
-                //vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
+                vmControl_Render1.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 0);
+                vmControl_Render2.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 1);
+                vmControl_Render3.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 2);
+                vmControl_Render4.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 3);
+                vmControl_Render5.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 4);
+                vmControl_Render6.Init2(Global.비전마스터구동.GetItem(Flow구분.표면검사뒤), 5);
             }
 
             #region 검사결과 설정

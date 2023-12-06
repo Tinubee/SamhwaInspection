@@ -211,33 +211,40 @@ namespace SamhwaInspection.Schemas
 
         public void 그랩완료(CameraType 카메라, List<Mat> 이미지)
         {
-            if (카메라 == CameraType.Cam04)
+            if (카메라 == CameraType.Cam04) //상부표면검사
             {
                 Debug.WriteLine($"{카메라} 이미지획득 {this.카메라4.MatImage.Count}개 완료");
                 Global.조명제어.TurnOff(조명구분.상면검사조명);
 
-                if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1) 
+                if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
                     return;
 
                 new Thread(() =>
                 {
                     for (int lop = 0; lop < this.카메라4.MatImage.Count; lop++)
                     {
+                        Global.비전마스터구동.글로벌변수제어.InspectUseSet("상면검사순서", lop.ToString());
                         Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지[lop], lop);
                     }
                 }).Start();
             }
-            //else if (카메라 == CameraType.Cam03)
-            //{
-            //    Debug.WriteLine($"{카메라} 이미지획득 {this.카메라3.MatImage.Count}개 완료");
-            //    Global.조명제어.TurnOff(조명구분.후면검사조명);
-            //    if (Global.비전마스터구동.Count == 0) return;
-            //    new Thread(() =>
-            //    {
-            //        Debug.WriteLine($"{카메라} : Flow Run");
-            //        Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지);
-            //    }).Start();
-            //}
+            else if (카메라 == CameraType.Cam03) //하부표면검사
+            {
+                Debug.WriteLine($"{카메라} 이미지획득 {this.카메라3.MatImage.Count}개 완료");
+                Global.조명제어.TurnOff(조명구분.후면검사조명);
+
+                if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
+                    return;
+
+                new Thread(() =>
+                {
+                    for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
+                    {
+                        Global.비전마스터구동.글로벌변수제어.InspectUseSet("후면검사순서", lop.ToString());
+                        Global.비전마스터구동.GetItem(Flow구분.표면검사뒤).표면검사(이미지[lop], lop);
+                    }
+                }).Start();
+            }
             this.그랩완료보고2?.Invoke(카메라, 이미지);
         }
 
@@ -514,8 +521,6 @@ namespace SamhwaInspection.Schemas
                 else if (this.구분 == CameraType.Cam03)
                 {
                     this.MatImage.Add(image);
-                    //Debug.WriteLine($"{MatImage.Count}");
-                    //Debug.WriteLine($"{image.Data}");
                     if (Global.그랩제어.카메라3.MatImage.Count == 6)
                     {
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);

@@ -23,6 +23,7 @@ using DevExpress.CodeParser.Diagnostics;
 using SaveTextModuleCs;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic.Logging;
+using ImageBufferModuleCs;
 
 namespace SamhwaInspection.Schemas
 {
@@ -51,12 +52,17 @@ namespace SamhwaInspection.Schemas
             VmSolution.Load(lastModelSolutionPath, null); //VM Solution 불러오기
             글로벌변수제어.Init();
             VmSolution.Instance.DisableModulesCallback();
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 9; i++)
             {
                 if (i > 5) //6,7,8~~
                 {
+                    //후면 : W0090,W0091,W0092,W0093,W0094,W0095
                     string plcAddress = string.Empty;
                     if (i == 6) plcAddress = $"W0015";
+                    //if(i == 8) // 후면
+                    //{
+                    //    plcAddress = $"W0090";
+                    //}
                     base.Add(new 비전마스터플로우((Flow구분)i, plcAddress));
                 }
                 else //0,1,2,3,4,5
@@ -115,6 +121,8 @@ namespace SamhwaInspection.Schemas
         public SaveTextModuleTool SaveTextModuleTool;
         public SaveTextModuleTool SaveTextMasterModuleTool;
 
+        public ImageBufferModuleTool ImageBufferModuleTool;
+
         public 비전마스터플로우(Flow구분 구분, String plcAddress)
         {
             this.구분 = 구분;
@@ -124,6 +132,9 @@ namespace SamhwaInspection.Schemas
 
             for (int lop = 0; lop < graphicsSetModuleTool_List.Count; lop++)
                 if (this.graphicsSetModuleTool_List[lop] != null) this.graphicsSetModuleTool_List[lop].EnableResultCallback();
+
+            for (int lop = 0; lop < ShellModuleTool_List.Count; lop++)
+                if (this.ShellModuleTool_List[lop] != null) this.ShellModuleTool_List[lop].EnableResultCallback();
 
             if (this.ShellModuleTool != null)
                 this.ShellModuleTool.EnableResultCallback();
@@ -150,6 +161,8 @@ namespace SamhwaInspection.Schemas
 
                 if (this.구분 == Flow구분.표면검사앞 || this.구분 == Flow구분.표면검사뒤)
                 {
+                    this.ImageBufferModuleTool = this.Procedure["imgBuffer"] as ImageBufferModuleTool;
+
                     for (int lop = 0; lop < Global.모델자료[Global.환경설정.선택모델].디스플레이개수; lop++)
                     {
                         this.graphicsSetModuleTool_List.Add(this.Procedure[$"resultImage{lop + 1}"] as GraphicsSetModuleTool);
@@ -239,31 +252,55 @@ namespace SamhwaInspection.Schemas
             {
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();
-                if ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value != null)
+                if ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool_List[Count].Outputs[6].Value != null)
                 {
-                    String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
+                    String resultString = this.ShellModuleTool_List[Count] == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool_List[Count].Outputs[6].Value)[0].strValue;
                     this.표면검사결과 = resultString == "OK" ? true : false;
                 }
 
-                int checkFlow = (int)Count;
-
-                string plcAdress = Global.비전마스터구동.GetItem((Flow구분)checkFlow).PLC결과어드레스;
-
-                if (Global.비전마스터구동.GetItem((Flow구분)checkFlow).치수검사결과 && this.표면검사결과) // 둘다 OK
+                if(this.구분 == Flow구분.표면검사뒤)
                 {
-                    Global.신호제어.PLC.SetDevice2(plcAdress, 1);
-                    if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
-                        Global.신호제어.SendValueToPLC("W0020", 0);
-
-                    결과정보생성(true);
+                    //this.PLC결과어드레스 = "W0090";
+                    if (this.표면검사결과)
+                    {
+                        Global.신호제어.PLC.SetDevice2($"W009{Count}", 1);
+                        if (Count == 5 && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                        {
+                            Debug.WriteLine("W0020 초기화");
+                            Global.신호제어.SendValueToPLC("W0022", 0);
+                        }
+                        //결과정보생성(true);
+                    }
+                    else
+                    {
+                        Global.신호제어.PLC.SetDevice2($"W009{Count}", 2);
+                        if (Count == 5 && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                        {
+                            Debug.WriteLine("W0020 초기화");
+                            Global.신호제어.SendValueToPLC("W0022", 0);
+                        }
+                    }
                 }
-                else
+                else if(this.구분 == Flow구분.표면검사앞)
                 {
-                    Global.신호제어.PLC.SetDevice2(plcAdress, 2);
-                    if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
-                        Global.신호제어.SendValueToPLC("W0020", 0);
+                    int checkFlow = (int)Count;
+                    string plcAdress = Global.비전마스터구동.GetItem((Flow구분)checkFlow).PLC결과어드레스;
+                    if (Global.비전마스터구동.GetItem((Flow구분)checkFlow).치수검사결과 && this.표면검사결과) // 둘다 OK
+                    {
+                        Global.신호제어.PLC.SetDevice2(plcAdress, 1);
+                        if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                            Global.신호제어.SendValueToPLC("W0020", 0);
 
-                    결과정보생성(false);
+                        결과정보생성(true);
+                    }
+                    else
+                    {
+                        Global.신호제어.PLC.SetDevice2(plcAdress, 2);
+                        if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
+                            Global.신호제어.SendValueToPLC("W0020", 0);
+
+                        결과정보생성(false);
+                    }
                 }
             }
             return false;

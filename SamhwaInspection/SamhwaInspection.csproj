@@ -233,6 +233,7 @@
     <Reference Include="GraphicsSetModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=969f13d2d78c3370, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
+    <Reference Include="ImageBufferModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=88dbcb3c86128e2d, processorArchitecture=MSIL" />
     <Reference Include="ImageSourceModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a03c4a48a6df5e6, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
