@@ -94,7 +94,8 @@ namespace SamhwaInspection.Schemas
     public class 비전마스터플로우
     {
         public Boolean 치수검사결과;
-        public Boolean 표면검사결과;
+        public Boolean 상면표면검사결과;
+        public Boolean 하부표면검사결과;
         public Boolean 유무검사결과;
         public Flow구분 구분;
         public Boolean 결과업데이트완료;
@@ -143,7 +144,8 @@ namespace SamhwaInspection.Schemas
                 this.InputModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
 
             this.치수검사결과 = false;
-            this.표면검사결과 = false;
+            this.상면표면검사결과 = false;
+            this.하부표면검사결과 = false;
             this.유무검사결과 = false;
 
             this.결과업데이트완료 = false;
@@ -246,7 +248,9 @@ namespace SamhwaInspection.Schemas
         }
         public Boolean 표면검사(Mat mat, int Count)
         {
-            this.표면검사결과 = false;
+            if (this.구분 == Flow구분.표면검사앞) this.상면표면검사결과 = false;
+            else if (this.구분 == Flow구분.표면검사뒤) this.하부표면검사결과 = false;
+
             this.결과업데이트완료 = false;
             if (this.InputModuleTool != null)
             {
@@ -255,13 +259,21 @@ namespace SamhwaInspection.Schemas
                 if ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool_List[Count].Outputs[6].Value != null)
                 {
                     String resultString = this.ShellModuleTool_List[Count] == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool_List[Count].Outputs[6].Value)[0].strValue;
-                    this.표면검사결과 = resultString == "OK" ? true : false;
+
+                    if (this.구분 == Flow구분.표면검사앞)
+                    {
+                        this.상면표면검사결과 = resultString == "OK" ? true : false;
+                    } else if(this.구분 == Flow구분.표면검사뒤)
+                    {
+                        this.하부표면검사결과 = resultString == "OK" ? true : false;
+                    }
+                    //Debug.WriteLine($"--------------상면표면검사 For문 들어옴.-------------");
                 }
 
                 if(this.구분 == Flow구분.표면검사뒤)
                 {
                     //this.PLC결과어드레스 = "W0090";
-                    if (this.표면검사결과)
+                    if (this.하부표면검사결과)
                     {
                         Global.신호제어.PLC.SetDevice2($"W009{Count}", 1);
                         if (Count == 5 && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
@@ -285,8 +297,9 @@ namespace SamhwaInspection.Schemas
                 {
                     int checkFlow = (int)Count;
                     string plcAdress = Global.비전마스터구동.GetItem((Flow구분)checkFlow).PLC결과어드레스;
-                    if (Global.비전마스터구동.GetItem((Flow구분)checkFlow).치수검사결과 && this.표면검사결과) // 둘다 OK
+                    if (this.치수검사결과 && this.상면표면검사결과) // 둘다 OK
                     {
+                        Debug.WriteLine($"send OK - {Count}");
                         Global.신호제어.PLC.SetDevice2(plcAdress, 1);
                         if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
                             Global.신호제어.SendValueToPLC("W0020", 0);
@@ -295,6 +308,7 @@ namespace SamhwaInspection.Schemas
                     }
                     else
                     {
+                        Debug.WriteLine($"send NG - {Count}");
                         Global.신호제어.PLC.SetDevice2(plcAdress, 2);
                         if (plcAdress == "W0005" && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
                             Global.신호제어.SendValueToPLC("W0020", 0);
@@ -400,12 +414,16 @@ namespace SamhwaInspection.Schemas
             if (this.InputModuleTool != null)
             {
                 지그위치체크();
-                마스터모드체크();
+                //마스터모드체크();
                 SetFlatnessData(); //평탄도 데이터 셋팅.
                 this.InputModuleTool.SetImageData(MatToImageBaseData(mat));
                 this.Procedure.Run();
-                String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
-                this.치수검사결과 = resultString == "OK" ? true : false;
+                if ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value != null)
+                {
+                    String resultString = this.ShellModuleTool == null ? "NG" : ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])this.ShellModuleTool.Outputs[6].Value)[0].strValue;
+                    this.치수검사결과 = resultString == "OK" ? true : false;
+                }
+                   
 
                 if (Global.신호제어.마스터모드여부 == 1 && (this.구분 == Flow구분.Flow1 || this.구분 == Flow구분.Flow2))
                 {

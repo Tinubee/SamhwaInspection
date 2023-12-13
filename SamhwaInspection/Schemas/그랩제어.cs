@@ -213,7 +213,7 @@ namespace SamhwaInspection.Schemas
         {
             if (카메라 == CameraType.Cam04) //상부표면검사
             {
-                Debug.WriteLine($"{카메라} 이미지획득 {this.카메라4.MatImage.Count}개 완료");
+                //Debug.WriteLine($"{카메라} 이미지획득 {this.카메라4.MatImage.Count}개 완료");
                 Global.조명제어.TurnOff(조명구분.상면검사조명);
 
                 if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
@@ -223,6 +223,7 @@ namespace SamhwaInspection.Schemas
                 {
                     for (int lop = 0; lop < this.카메라4.MatImage.Count; lop++)
                     {
+                        Debug.WriteLine($"--------------상면표면검사 For문 들어옴.-------------");
                         Global.비전마스터구동.글로벌변수제어.InspectUseSet("상면검사순서", lop.ToString());
                         Global.비전마스터구동.GetItem(Flow구분.표면검사앞).표면검사(이미지[lop], lop);
                     }
@@ -512,10 +513,12 @@ namespace SamhwaInspection.Schemas
                 else if (this.구분 == CameraType.Cam04)
                 {
                     this.MatImage.Add(image);
+                    Debug.WriteLine($"***************4번카메라 이미지 {this.MatImage.Count}개획득완료\"***************");
                     if (Global.그랩제어.카메라4.MatImage.Count == 6)
                     {
-                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
+                        Debug.WriteLine("\"***************4번카메라 이미지 6개획득완료\"***************");
                         this.Stop();
+                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }
                 else if (this.구분 == CameraType.Cam03)
@@ -523,8 +526,8 @@ namespace SamhwaInspection.Schemas
                     this.MatImage.Add(image);
                     if (Global.그랩제어.카메라3.MatImage.Count == 6)
                     {
-                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
                         this.Stop();
+                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }
             }
@@ -641,7 +644,7 @@ namespace SamhwaInspection.Schemas
         {
             if (this.CurrentState() != ChannelState.ACTIVE)
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
-            Debug.WriteLine("Set Active!");
+            Debug.WriteLine("Line Camera Set Active!");
             return true;
         }
         [Description("Software Trig")]
@@ -666,6 +669,7 @@ namespace SamhwaInspection.Schemas
         [Description("MultiCam CallBack Event")]
         private void MultiCamCallback(ref MC.SIGNALINFO signalInfo)
         {
+            Debug.WriteLine("멀티캠콜백 들어옴");
             switch (signalInfo.Signal)
             {
                 case MC.SIG_SURFACE_PROCESSING:
@@ -797,6 +801,7 @@ namespace SamhwaInspection.Schemas
         [Description("Acquisition Failed")]
         private void AcqFailureCallback(MC.SIGNALINFO signalInfo)
         {
+            Debug.WriteLine("유레시스영상획득 실패");
             //Utils.MessageBox("영상획득", "유레시스영상획득 실패", 2000);
         }
     }

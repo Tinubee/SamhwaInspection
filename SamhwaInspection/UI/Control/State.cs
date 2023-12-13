@@ -108,11 +108,15 @@ namespace SamhwaInspection.UI.Control
                 {
                     //this.버튼UI변경(this.b운전모드, currentValue_마스터모드, "MASTER", "MANUAL");
                     //Global.조명제어.TurnOn(조명구분.BACK);
+                    //this.GlobalVariableModuleTool.SetGlobalVar("마스터모드", "1");
+                    Global.비전마스터구동.글로벌변수제어.InspectUseSet("마스터모드", "1");
                     Debug.WriteLine("마스터모드 On");
                 }
                 else
                 {
                     //Global.조명제어.TurnOff(조명구분.BACK);
+                    //this.GlobalVariableModuleTool.SetGlobalVar("마스터모드", "1");
+                    Global.비전마스터구동.글로벌변수제어.InspectUseSet("마스터모드", "0");
                     Debug.WriteLine("마스터모드 Off");
                 }
                 preValue_마스터모드 = currentValue_마스터모드;

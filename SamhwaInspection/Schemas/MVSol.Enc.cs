@@ -257,11 +257,11 @@ namespace SamhwaInspection.Schemas
                 this.Open("COM8");
                 this.ClearEncoderPositionAll();
                 this.ClearTriggerAll();
-                Debug.WriteLine("트리거보드 초기화 완료", "트리거보드");
+                //Debug.WriteLine("트리거보드 초기화 완료", "트리거보드");
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.ToString(), "트리거보드 오류");
+                //Debug.WriteLine(e.ToString(), "트리거보드 오류");
                 MvUtils.Utils.MessageBox("트리거보드", e.ToString(), 2000);
                 return false;
             }

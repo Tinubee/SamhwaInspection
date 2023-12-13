@@ -331,6 +331,7 @@ namespace SamhwaInspection.Schemas
                         if (정보.주소 == "W0028" & 정보.값 == 1)
                         {
                             //조명키고
+                            Debug.WriteLine("치수검사 트리거신호 들어옴");
                             Global.조명제어.TurnOn(조명구분.BACK);
                             Global.그랩제어.GetItem(CameraType.Cam01).Ready();
                             SendValueToPLC(정보.주소, 0);
