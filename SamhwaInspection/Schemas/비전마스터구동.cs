@@ -297,6 +297,7 @@ namespace SamhwaInspection.Schemas
                 {
                     int checkFlow = (int)Count;
                     string plcAdress = Global.비전마스터구동.GetItem((Flow구분)checkFlow).PLC결과어드레스;
+                    this.치수검사결과 = Global.비전마스터구동.GetItem((Flow구분)checkFlow).치수검사결과;
                     if (this.치수검사결과 && this.상면표면검사결과) // 둘다 OK
                     {
                         Debug.WriteLine($"send OK - {Count}");
