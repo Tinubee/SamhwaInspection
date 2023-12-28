@@ -278,7 +278,7 @@ namespace SamhwaInspection.Schemas
                         Global.신호제어.PLC.SetDevice2($"W009{Count}", 1);
                         if (Count == 5 && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
                         {
-                            Debug.WriteLine("W0020 초기화");
+                            Debug.WriteLine("W0022 초기화");
                             Global.신호제어.SendValueToPLC("W0022", 0);
                         }
                         //결과정보생성(true);
@@ -288,7 +288,7 @@ namespace SamhwaInspection.Schemas
                         Global.신호제어.PLC.SetDevice2($"W009{Count}", 2);
                         if (Count == 5 && Global.모델자료[Global.환경설정.선택모델].디스플레이개수 == 6)
                         {
-                            Debug.WriteLine("W0020 초기화");
+                            Debug.WriteLine("W0022 초기화");
                             Global.신호제어.SendValueToPLC("W0022", 0);
                         }
                     }
