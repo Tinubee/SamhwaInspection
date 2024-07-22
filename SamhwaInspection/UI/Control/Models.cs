@@ -1,6 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using IvmUtils;
-using IvLibs.Graphics;
+//using IvLibs.Graphics;
 using SamhwaInspection.Schemas;
 using OpenCvSharp;
 using System;
@@ -142,15 +142,15 @@ namespace SamhwaInspection.UI.Control
                 return;
             }
 
-            Object region = null;
-            GraphicCollections graphics = Global.모델자료.선택모델.GetRegions(this.카메라);
-            //this.e뷰어.Canvas.AddGraphics(graphics, true);
-            //this.e뷰어.RefreshImage();
-            if (graphics.Count > 0)
-                region = graphics[0];
-            GridView1.ActiveFilterString = $"[카메라구분] = '{this.카메라}'";
-            this.GridControl1.DataSource = Global.모델자료.선택모델.검사목록;
-            this.propertyGridControl1.SelectedObject = region;
+            //Object region = null;
+            //GraphicCollections graphics = Global.모델자료.선택모델.GetRegions(this.카메라);
+            ////this.e뷰어.Canvas.AddGraphics(graphics, true);
+            ////this.e뷰어.RefreshImage();
+            //if (graphics.Count > 0)
+            //    region = graphics[0];
+            //GridView1.ActiveFilterString = $"[카메라구분] = '{this.카메라}'";
+            //this.GridControl1.DataSource = Global.모델자료.선택모델.검사목록;
+            //this.propertyGridControl1.SelectedObject = region;
         }
 
         private 검사정보 SelectedRegion = null;

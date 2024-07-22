@@ -132,16 +132,16 @@ namespace SamhwaInspection.Schemas
             });
         }
 
-        public IvLibs.Graphics.GraphicCollections GetRegions(CameraType type)
-        {
-            IvLibs.Graphics.GraphicCollections list = new IvLibs.Graphics.GraphicCollections();
-            this.검사목록.ForEach(x =>
-            {
-                if (x.카메라구분 == type)
-                    list.Add(x.rectangle);
-            });
-            return list;
-        }
+        //public IvLibs.Graphics.GraphicCollections GetRegions(CameraType type)
+        //{
+        //    IvLibs.Graphics.GraphicCollections list = new IvLibs.Graphics.GraphicCollections();
+        //    this.검사목록.ForEach(x =>
+        //    {
+        //        if (x.카메라구분 == type)
+        //            list.Add(x.rectangle);
+        //    });
+        //    return list;
+        //}
     }
 
     public class 모델자료 : BindingList<모델정보>

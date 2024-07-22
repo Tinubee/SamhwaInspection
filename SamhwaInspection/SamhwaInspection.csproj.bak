@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\OpenCvSharp4.runtime.win.4.7.0.20230115\build\net48\OpenCvSharp4.runtime.win.props" Condition="Exists('..\packages\OpenCvSharp4.runtime.win.4.7.0.20230115\build\net48\OpenCvSharp4.runtime.win.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SamhwaInspection</RootNamespace>
     <AssemblyName>SamhwaInspection</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -30,6 +29,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -114,147 +114,161 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'remoteR|x64' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>\\192.168.111.1\ivm\SamhwaENP\Execute\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="DevExpress.Data.Desktop.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Dialogs.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Images.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
+    <Reference Include="Apps.UIHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=74fbc55729e22a3e, processorArchitecture=MSIL">
+      <Private>False</Private>
     </Reference>
-    <Reference Include="DevExpress.Printing.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraBars.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraDialogs.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGrid.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraNavBar.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraTreeList.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraVerticalGrid.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="DataSetModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c4b4ade4437b1703, processorArchitecture=MSIL">
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    <Reference Include="DevExpress.Charts.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Data.Desktop.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.3.1.18\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    <Reference Include="DevExpress.Data.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Data.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Abstractions.3.1.18\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
+    <Reference Include="DevExpress.DataAccess.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v22.2.UI, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Dialogs.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Dialogs.v22.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.3.1.18\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Drawing.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    <Reference Include="DevExpress.Images.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Images.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    <Reference Include="DevExpress.Office.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v22.2.Drawing, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Printing.v22.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    <Reference Include="DevExpress.RichEdit.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Sparkline.v22.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    <Reference Include="DevExpress.Utils.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.Utils.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    <Reference Include="DevExpress.Utils.v22.2.UI, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraBars.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.3.1.18\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    <Reference Include="DevExpress.XtraCharts.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v22.2.Extensions, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v22.2.Wizard, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraDialogs.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraDialogs.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.18\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    <Reference Include="DevExpress.XtraEditors.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraEditors.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    <Reference Include="DevExpress.XtraGauges.v22.2.Core, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraGrid.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraLayout.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    <Reference Include="DevExpress.XtraNavBar.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraNavBar.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.18.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.18\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="DevExpress.XtraPivotGrid.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraPrinting.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="DevExpress.XtraReports.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v22.2.Extensions, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraTreeList.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=4.1.9.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.4.1.9\lib\net461\Npgsql.dll</HintPath>
+    <Reference Include="DevExpress.XtraVerticalGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\192.168.111.1\ivm\SamhwaENP\Execute\DevExpress.XtraVerticalGrid.v22.2.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql.EntityFrameworkCore.PostgreSQL, Version=3.1.18.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.EntityFrameworkCore.PostgreSQL.3.1.18\lib\netstandard2.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll</HintPath>
+    <Reference Include="FrontendUI.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4df814adf3f91828, processorArchitecture=MSIL">
+      <Private>False</Private>
     </Reference>
-    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp4.4.7.0.20230115\lib\net48\OpenCvSharp.dll</HintPath>
+    <Reference Include="GlobalScriptUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e823fa1154066cf0, processorArchitecture=AMD64">
+      <Private>False</Private>
     </Reference>
-    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp4.Extensions.4.7.0.20230115\lib\net48\OpenCvSharp.Extensions.dll</HintPath>
+    <Reference Include="GlobalVariableModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=df9beaf7c020f858, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GraphicsSetModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=969f13d2d78c3370, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ImageBufferModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=88dbcb3c86128e2d, processorArchitecture=MSIL" />
+    <Reference Include="ImageSourceModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a03c4a48a6df5e6, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="IMVSGroupCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93c2eed79fa68a0a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0bd662cffb986ca7, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3256f6ee9712a2e5, processorArchitecture=MSIL" />
+    <Reference Include="MvCamCtrl.Net">
+      <HintPath>..\..\..\..\Program Files (x86)\MVS\Development\DotNet\AnyCpu\MvCamCtrl.Net.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReadDatasModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2a989deb766dd29c, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SaveTextModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a3cde6a94e7998ed, processorArchitecture=MSIL" />
+    <Reference Include="ShellModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a88b3f19f0240810, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.7.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -266,25 +280,73 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VM.CodeBuild, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c962d29269e23901, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=48472957e1d7b05f, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=61600122bc9264b9, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.ModuleControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6903f2164b1b4178, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.PlatformSDKCS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c1484a72052ee3d4, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMBaseControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71707d2e549a163e, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.BaseInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=14444b8df74b6e6a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3a6b40f3e34b5af, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cb41614600cf774b, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.RenderInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bcfc50547abbb24, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.Winform.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2efa940dfee4dc7e, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fef8a9e4baab915f, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.WPF.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fdd2c8be7291c30c, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Schemas\Cam.cs" />
-    <Compile Include="Schemas\CamConfig.cs" />
-    <Compile Include="Schemas\CameraControl.cs" />
     <Compile Include="Schemas\Data\BaseTable.cs" />
     <Compile Include="Schemas\LightController.cs" />
-    <Compile Include="Schemas\PLC통신.cs" />
+    <Compile Include="Schemas\MVSol.Enc.cs" />
+    <Compile Include="Schemas\VmGlobals.cs" />
     <Compile Include="Schemas\검사도구모음.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사정보.cs" />
+    <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
+    <Compile Include="Schemas\마스터데이터.cs" />
+    <Compile Include="Schemas\보정값설정.cs" />
     <Compile Include="Schemas\모델정보.cs" />
+    <Compile Include="Schemas\비전마스터구동.cs" />
     <Compile Include="Schemas\신호제어.cs" />
     <Compile Include="Schemas\유저정보.cs" />
     <Compile Include="Schemas\LightControl.cs" />
+    <Compile Include="UI\Control\AreaResultViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\AreaResultViewer.Designer.cs">
+      <DependentUpon>AreaResultViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\BaseConfig.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -303,6 +365,12 @@
     <Compile Include="UI\Control\IOControl.Designer.cs">
       <DependentUpon>IOControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Control\MasterData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\MasterData.Designer.cs">
+      <DependentUpon>MasterData.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\Models.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -315,11 +383,23 @@
     <Compile Include="UI\Control\ResultList.Designer.cs">
       <DependentUpon>ResultList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Control\ResultViewer.cs">
+    <Compile Include="UI\Control\ResultViewer_표면검사.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Control\ResultViewer.Designer.cs">
-      <DependentUpon>ResultViewer.cs</DependentUpon>
+    <Compile Include="UI\Control\ResultViewer_표면검사.Designer.cs">
+      <DependentUpon>ResultViewer_표면검사.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\ResultViewer_유무검사.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\ResultViewer_유무검사.Designer.cs">
+      <DependentUpon>ResultViewer_유무검사.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\ResultViewer_6.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\ResultViewer_6.Designer.cs">
+      <DependentUpon>ResultViewer_6.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\ResultViewer_4.cs">
       <SubType>UserControl</SubType>
@@ -333,11 +413,59 @@
     <Compile Include="UI\Control\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Control\SetVariables.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\SetVariables.Designer.cs">
+      <DependentUpon>SetVariables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\SolutionConfigView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\SolutionConfigView.Designer.cs">
+      <DependentUpon>SolutionConfigView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\User.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Control\User.Designer.cs">
       <DependentUpon>User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\VMControl_Render.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\VMControl_Render.Designer.cs">
+      <DependentUpon>VMControl_Render.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\VMMainViewControl_Render.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\VMMainViewControl_Render.Designer.cs">
+      <DependentUpon>VMMainViewControl_Render.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\MasterSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\MasterSetting.Designer.cs">
+      <DependentUpon>MasterSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form\Teaching.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\Teaching.Designer.cs">
+      <DependentUpon>Teaching.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\CCLink.cs" />
     <Compile Include="Utils\Localization.cs" />
@@ -350,12 +478,6 @@
     </Compile>
     <Compile Include="UI\Control\CountViewer.Designer.cs">
       <DependentUpon>CountViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Control\ResultCam.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Control\ResultCam.Designer.cs">
-      <DependentUpon>ResultCam.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\State.cs">
       <SubType>UserControl</SubType>
@@ -382,7 +504,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Common.cs" />
+    <Compile Include="Utils\MVCamera.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="UI\Control\AreaResultViewer.resx">
+      <DependentUpon>AreaResultViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\BaseConfig.resx">
       <DependentUpon>BaseConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -395,20 +522,32 @@
     <EmbeddedResource Include="UI\Control\IOControl.resx">
       <DependentUpon>IOControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\MasterData.resx">
+      <DependentUpon>MasterData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\Models.resx">
       <DependentUpon>Models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Control\ResultCam.resx">
-      <DependentUpon>ResultCam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultList.resx">
       <DependentUpon>ResultList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Control\ResultViewer.resx">
-      <DependentUpon>ResultViewer.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Control\ResultViewer_표면검사.resx">
+      <DependentUpon>ResultViewer_표면검사.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\ResultViewer_유무검사.resx">
+      <DependentUpon>ResultViewer_유무검사.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\ResultViewer_6.resx">
+      <DependentUpon>ResultViewer_6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultViewer_4.resx">
       <DependentUpon>ResultViewer_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\SetVariables.resx">
+      <DependentUpon>SetVariables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\SolutionConfigView.resx">
+      <DependentUpon>SolutionConfigView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\State.resx">
       <DependentUpon>State.cs</DependentUpon>
@@ -421,6 +560,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\User.resx">
       <DependentUpon>User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\VMControl_Render.resx">
+      <DependentUpon>VMControl_Render.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\MasterSetting.resx">
+      <DependentUpon>MasterSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -438,24 +586,24 @@
     <EmbeddedResource Include="UI\Control\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\VMMainViewControl_Render.resx">
+      <DependentUpon>VMMainViewControl_Render.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form\Teaching.resx">
+      <DependentUpon>Teaching.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form\WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="packages.config" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.CameraControl.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.LightControl.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.Tool.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.검사결과.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.검사자료1.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.검사정보일시.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.모델자료.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.모델정보.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.유저자료.datasource" />
-    <None Include="Properties\DataSources\KirinInspection2.Schemas.환경설정.datasource" />
-    <None Include="Properties\DataSources\SamhwaInspection.Schemas.검사결과테이블.datasource" />
-    <None Include="Properties\DataSources\SamhwaInspection.Schemas.검사자료.datasource" />
-    <None Include="Properties\DataSources\SamhwaInspection.Schemas.모델자료.datasource" />
-    <None Include="Properties\DataSources\SamhwaInspection.Schemas.모델정보.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.VmGlobals.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.검사정보.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터데이터.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터변수.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.마스터설정.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspection.Schemas.유저자료.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -485,16 +633,6 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Librarys\IvLibs\IvLibs\IvLibs.csproj">
-      <Project>{689eae82-d012-4d82-86b9-a65c007ce53e}</Project>
-      <Name>IvLibs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\IvmUtils\IvmUtils\IvmUtils.vbproj">
-      <Project>{4ff0dcfe-cde3-44d5-b674-f3f7e007f57f}</Project>
-      <Name>IvmUtils</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="ActUtlType64Lib">
       <Guid>{719A5FAB-EB1C-4B52-98BC-F8C9F6912D04}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -505,11 +643,131 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dijkstra.NET">
+      <Version>1.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Bcl.HashCode">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Options">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Primitives">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Npgsql">
+      <Version>8.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL">
+      <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="OpenCvSharp4">
+      <Version>4.8.0.20230708</Version>
+    </PackageReference>
+    <PackageReference Include="OpenCvSharp4.Extensions">
+      <Version>4.8.0.20230708</Version>
+    </PackageReference>
+    <PackageReference Include="OpenCvSharp4.runtime.win">
+      <Version>4.7.0.20230115</Version>
+    </PackageReference>
+    <PackageReference Include="System.Buffers">
+      <Version>4.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.ComponentModel.Annotations">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Diagnostics.DiagnosticSource">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>7.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Memory">
+      <Version>4.5.5</Version>
+    </PackageReference>
+    <PackageReference Include="System.Numerics.Vectors">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+      <Version>7.0.0-preview.2.22152.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Encodings.Web">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Threading.Channels">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Threading.Tasks.Extensions">
+      <Version>4.5.4</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\IvLibs\IvLibs\IvLibs.csproj">
+      <Project>{689eae82-d012-4d82-86b9-a65c007ce53e}</Project>
+      <Name>IvLibs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IvmUtils\IvmUtils\IvmUtils.vbproj">
+      <Project>{4ff0dcfe-cde3-44d5-b674-f3f7e007f57f}</Project>
+      <Name>IvmUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\OpenCvSharp4.runtime.win.4.7.0.20230115\build\net48\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp4.runtime.win.4.7.0.20230115\build\net48\OpenCvSharp4.runtime.win.props'))" />
-  </Target>
 </Project>

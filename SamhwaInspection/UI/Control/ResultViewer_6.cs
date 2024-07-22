@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharp;
-using IvLibs.Graphics;
+//using IvLibs.Graphics;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Windows.Media.Media3D;
 using System.ComponentModel.Design;
@@ -65,7 +65,7 @@ namespace SamhwaInspection.UI.Control
                 if (cam1 != null)
                 {
                     cam1.AcquisitionFinishedEvent += Paint_camImage;
-                    this.cam1.Ready();
+                    //this.cam1.Ready();
                 }
             }
 
@@ -187,22 +187,6 @@ namespace SamhwaInspection.UI.Control
                             자동검사(splitImage[i], (Flow구분)i);
                         }
 
-                        //if (Global.신호제어.마스터모드여부 == 1)
-                        //{
-                        //    splitImage[0] = new Mat(mergedImage, roi[0]);
-                        //    splitImage[1] = new Mat(mergedImage, roi[1]);
-
-                        //    자동검사(splitImage[0], Flow구분.Flow1);
-                        //    자동검사(splitImage[1], Flow구분.Flow2);
-                        //}
-                        //else
-                        //{
-                        //    for (int i = 0; i < roi.Length; i++)
-                        //    {
-                        //        splitImage[i] = new Mat(mergedImage, roi[i]);
-                        //        자동검사(splitImage[i], (Flow구분)i);
-                        //    }
-                        //}
                         isCompleted_Camera1 = true;
                     }
                     if (isCompleted_Camera1)

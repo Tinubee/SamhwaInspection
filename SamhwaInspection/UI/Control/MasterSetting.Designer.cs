@@ -247,9 +247,9 @@
             this.GridView1.AllowCustomMenu = true;
             this.GridView1.AllowExport = true;
             this.GridView1.AllowPrint = true;
-            this.GridView1.AllowSettingsMenu = false;
+            //this.GridView1.AllowSettingsMenu = false;
             this.GridView1.AllowSummaryMenu = true;
-            this.GridView1.ApplyFocusedRow = true;
+            //this.GridView1.ApplyFocusedRow = true;
             this.GridView1.Caption = "";
             this.GridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.col검사명칭,

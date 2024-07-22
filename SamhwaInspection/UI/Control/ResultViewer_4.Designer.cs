@@ -73,9 +73,9 @@
             this.myGridView1.AllowCustomMenu = true;
             this.myGridView1.AllowExport = true;
             this.myGridView1.AllowPrint = true;
-            this.myGridView1.AllowSettingsMenu = false;
+           //this.myGridView1.AllowSettingsMenu = false;
             this.myGridView1.AllowSummaryMenu = true;
-            this.myGridView1.ApplyFocusedRow = true;
+            //this.myGridView1.ApplyFocusedRow = true;
             this.myGridView1.Caption = "";
             this.myGridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.col검사일시,

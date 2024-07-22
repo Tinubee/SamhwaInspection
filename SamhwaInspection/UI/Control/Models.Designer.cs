@@ -320,9 +320,9 @@
             this.GridView1.AllowCustomMenu = true;
             this.GridView1.AllowExport = true;
             this.GridView1.AllowPrint = true;
-            this.GridView1.AllowSettingsMenu = false;
+            //this.GridView1.AllowSettingsMenu = false;
             this.GridView1.AllowSummaryMenu = true;
-            this.GridView1.ApplyFocusedRow = true;
+            //this.GridView1.ApplyFocusedRow = true;
             this.GridView1.Caption = "";
             this.GridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.col카메라구분,
@@ -772,9 +772,9 @@
             this.GridView2.AllowCustomMenu = true;
             this.GridView2.AllowExport = true;
             this.GridView2.AllowPrint = true;
-            this.GridView2.AllowSettingsMenu = false;
+            //this.GridView2.AllowSettingsMenu = false;
             this.GridView2.AllowSummaryMenu = true;
-            this.GridView2.ApplyFocusedRow = true;
+            //this.GridView2.ApplyFocusedRow = true;
             this.GridView2.Caption = "";
             this.GridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.col모델번호,

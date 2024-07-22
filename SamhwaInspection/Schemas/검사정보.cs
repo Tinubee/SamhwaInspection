@@ -1,6 +1,6 @@
 ﻿using IvmUtils;
 using IvLibs;
-using IVMRectangle = IvLibs.Regions.Rectangle;
+using IVMRectangle = IvLibs.Shapes.Rectangle;
 using SamhwaInspection.Utils;
 using Newtonsoft.Json;
 using System;
