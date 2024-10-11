@@ -345,11 +345,19 @@ namespace SamhwaInspection.Schemas
                         }
                         if ((정보.주소 == "W0041") && 정보.값 == 1) //하부 평탄도 검사 데이터 트리거
                         {
+                            //B1040
                             //\0062~W0072 하부 평탄도 데이터
                             GetFlatnessData(0x62);
                             SendValueToPLC(정보.주소, 0);
                             Global.bFlatnessData = false;
                         }
+                        //if ((정보.주소 == "B1040") && 정보.값 == 1) 
+                        //{ㄴㄴ
+                        //    Global.조명제어.TurnOff(조명구분.BACK);
+                        //    Global.조명제어.TurnOff(조명구분.후면검사조명);
+                        //    Global.조명제어.TurnOff(조명구분.상면검사조명);
+                        //    //Debug.WriteLine($"B1040 => {정보.값}");
+                        //}
                     }
                     OnCompleteReceive(EventArgs.Empty);
                     Thread.Sleep(2);

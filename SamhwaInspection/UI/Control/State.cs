@@ -82,6 +82,20 @@ namespace SamhwaInspection.UI.Control
             {
                 this.버튼UI변경(this.b운전모드, currentValue_자동모드, "AUTO", "MANUAL");
                 preValue_자동모드 = currentValue_자동모드;
+
+                if (currentValue_자동모드 > 0)
+                {
+                    //Global.조명제어.TurnOn(조명구분.BACK);
+                    Debug.WriteLine("조명켬");
+                }
+                else
+                {
+                    //Global.조명제어.TurnOff(조명구분.후면검사조명);
+                    //Global.조명제어.TurnOff(조명구분.상면검사조명);
+                    Global.조명제어.TurnOff(조명구분.BACK);
+                    Debug.WriteLine("조명끔");
+                }
+
                 Debug.WriteLine("운전모드 변경!");
             }
             if (preValue_자동운전시작 != currentValue_자동운전시작)
@@ -93,6 +107,8 @@ namespace SamhwaInspection.UI.Control
                 }
                 else
                 {
+                    //Global.조명제어.TurnOff(조명구분.후면검사조명);
+                    //Global.조명제어.TurnOff(조명구분.상면검사조명);
                     //Global.조명제어.TurnOff(조명구분.BACK);
                     Debug.WriteLine("조명끔");
                 }

@@ -182,10 +182,10 @@ namespace SamhwaInspection.UI.Control
                         roi[5] = new Rect(0, 69909, width_cam, 13000);
 
                         for (int i = 0; i < roi.Length; i++)
-                        {
                             splitImage[i] = new Mat(mergedImage, roi[i]);
+
+                        for (int i = 0; i < roi.Length; i++)
                             자동검사(splitImage[i], (Flow구분)i);
-                        }
 
                         isCompleted_Camera1 = true;
                     }
